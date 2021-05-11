@@ -1,0 +1,11 @@
+.about_us{padding: 1rem 0rem; text-align: center; width: 75%; margin: 0 auto;
+    h3{color: $color-black; font-weight: 300; font-size: 2rem; line-height: 1;}
+    h4{color: $color-blue; font-weight: 600; font-size: 2.25rem; line-height: 1;}
+    p{color: $color-gray6; font-weight: 300;}
+
+}
+
+@media (max-width:900px){
+    .about_us{width: 96%;}
+    .carousel {width: 100%!important; overflow: hidden!important;}
+}

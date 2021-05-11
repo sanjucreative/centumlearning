@@ -1,0 +1,168 @@
+.carousel {
+  position : relative;
+  margin : 10px auto 0px;
+  width : 900px;
+  height : auto;
+  border : none;
+  overflow : visible;
+}
+
+.carousel .slides {
+  margin : 0;
+  padding : 0;
+  border : none;
+  list-style : none;
+  position : relative;
+  overflow : visible;
+}
+
+/* slide item */
+
+.carousel .slides .slideItem {
+  position : absolute;
+  cursor : pointer;
+  /* overflow : hidden; */
+  padding : 0;
+  margin : 0;
+  border : none;
+}
+
+.carousel .slides .slideItem a {
+  display: block;
+  text-decoration : none;
+  margin : 0;
+  padding : 0;
+  border : none;
+  outline : none;
+}
+
+.carousel .slides .slideItem img {
+  margin : 0;
+  padding : 0;
+  border : none;
+  width : 100%;
+  height : 100%;
+  position: relative;
+  z-index: 1;
+}
+
+
+.carousel .nextButton {
+  position : absolute;
+  right : -50px;
+  top : 28%;
+  width : 30px;
+  height : 30px;
+  background : url("../images/arrow-black.svg") no-repeat center;
+  cursor : pointer;
+  z-index : 9;
+  background-size: cover;
+  opacity: 0.6;
+}
+.carousel .nextButton:hover {opacity: 1;}
+
+.carousel .prevButton {
+  position : absolute;
+  left : -50px;
+  top : 28%;
+  width : 30px;
+  height: 30px;
+  background : url("../images/arrow-black.svg") no-repeat center;
+  cursor : pointer;
+  z-index : 9;
+  background-size: cover;
+  transform: rotate(180deg);
+  opacity: 0.6;
+}
+.carousel .prevButton:hover {opacity: 1;}
+
+.carousel .buttonNav {
+  position : relative;
+  margin : 0 auto;
+  z-index : 999;
+}
+
+.carousel .buttonNav .numbers {
+  position : relative;
+  float : left;
+  margin : 5px;
+  color : #828282;
+  cursor : pointer;
+  font-weight : bold;
+  text-decoration : none;
+  font-size : 1em;
+  font-family : Arial, Verdana;
+}
+
+.carousel .buttonNav .numbers:hover {
+  color: #000;
+  text-decoration : underline;
+}
+
+.carousel .buttonNav .numberActive {
+  background : none;
+  color : #000;
+  cursor : default;
+}
+
+/* bullets */
+
+.carousel .buttonNav .bullet {
+  position : relative;
+  float : left;
+  width : 16px;
+  height : 16px;
+  background : url(../images/Bullet-White.png) no-repeat center;
+  margin : 5px;
+  float : left;
+  cursor : pointer;
+}
+
+.carousel .buttonNav .bullet:hover { background : url(../images/Bullet-Black.png) no-repeat center; }
+
+.carousel .buttonNav .bulletActive {
+  background : url(../images/Bullet-Black.png) no-repeat center;
+  cursor : default;
+}
+
+.carousel .shadow {
+  width : 100%;
+  height : 82px;
+}
+
+.carousel .shadow .shadowLeft {
+  background : url("../images/shadowLeft.png") no-repeat;
+  width : 100px;
+  height : 82px;
+  /* fix png problems in ie */
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/shadowLeft.png, sizingmethod=scale)"; /* IE8 */
+ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/shadowLeft.png, sizingmethod=scale);   /* IE6 & 7 */
+}
+
+.carousel .shadow .shadowMiddle {
+  height : 82px;
+  background: url("../images/shadowTile.png") repeat-x;
+  /* fix png problems in ie */
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/shadowTile.png, sizingmethod=scale)"; /* IE8 */
+ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/shadowTile.png, sizingmethod=scale);   /* IE6 & 7 */
+}
+
+.carousel .shadow .shadowRight {
+  width : 100px;
+  height : 82px;
+  background: url("../images/shadowRight.png") no-repeat;
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/shadowRight.png, sizingmethod=scale)";
+ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/shadowRight.png, sizingmethod=scale);  
+}
+
+
+.carousel .slides .slideItem figure{position: relative;}
+.carousel .slides .slideItem figure  .video_play{position: absolute; width: 72px; height: 42px; background: #f00; z-index: 5; border-radius: 12px; opacity: 0.75; 
+  top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer;}
+.carousel .slides .slideItem figure .video_play:after{width: 0;  height: 0;  border-style: solid;  border-width: 10px 0 10px 16px;
+      border-color: transparent transparent transparent #fff; content: ''; display: block; left: 30px; top:12px; position: relative;}
+.carousel .slides .slideItem figure .video_play:hover{opacity: 1;}
+.carousel .slides .slideItem div{position: relative; text-align: center;}
+.carousel .slides .slideItem div p{font-size: 0.925rem; color: #888; line-height: 1.35; font-style: italic; margin-bottom: 5px;}
+.carousel .slides .slideItem div h5{font-size: 0.9rem; color: #333; line-height: 1.35; margin-bottom: 0px; font-weight: 600;}
+.carousel .slides .slideItem div h6{font-size: 0.9rem; color: #333; line-height: 1.35; margin-bottom: 0px;}

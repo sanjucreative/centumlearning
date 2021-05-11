@@ -1,0 +1,53 @@
+/* CSS reset */
+body{font-family: $font-poppins; font-style: normal; font-size: 1rem; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;}
+html {height:100%; margin: 0px; padding: 0px;}
+body {min-height:100%; margin: 0px; padding: 0px;}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: $font-poppins;}
+h1, .h1{font-size: 2.75rem; line-height: 4rem; margin-bottom:1.5rem;}
+h2, .h2{font-size: 2.25rem; line-height: 3.75rem; margin-bottom:1rem;}
+h3, .h3{font-size: 1.6rem; line-height: 2.175rem; margin-bottom:1rem;}
+h4, .h4{font-size: 1.275rem; line-height: 2.625rem; margin-bottom:1rem;}
+h5, .h5{font-size: 1rem; line-height: 2.125rem; margin-bottom:1rem;}
+h6, .h6{font-size: 0.8125rem; line-height: 1.125rem; margin-bottom:1rem;}
+p, li, td, th, dl,dt,dd{font-size:1.0125rem; line-height:1.75rem; font-family:$font-poppins; color: $color-black;}
+p:not(:last-child), li:not(:last-child) {margin-bottom:1.5rem;}
+body.on{overflow: hidden;}
+.breadcrumbs{margin: 1rem 0;}
+
+@media (min-width:1500px){.container{max-width:1400px;}}
+.py-5{padding-top: 4rem!important; padding-bottom: 4rem!important;}
+.page-section{padding: 4rem 0;}
+.readmore{background: $color-blue; color: $color-white; display: inline-block; padding: 6px 12px; text-decoration: none; font-size: 0.825rem; line-height: 1.5; font-weight: 300;
+    text-transform: uppercase; border-radius: 9px;
+    i{font-style: normal; width: 14px; height: 10px; background: url(../images/arrow-white.svg) no-repeat center center; display: inline-block; background-size: cover;}
+
+    &:hover{text-decoration: none; color: $color-white; background-color: $color-blue-hover;}
+}
+.more_content{display: none;}
+.animation_wrap{position: relative;
+    .left_aninamtion{position: absolute; top: 0px; left: 0px; width: 250px; height: 100%; z-index: -1; opacity: 0.1; overflow: hidden;}
+    .right_aninamtion{position: absolute; top:0px; right: 0px; width: 250px; height: 100%; z-index: -1; opacity: 0.1; overflow: hidden;}
+}
+.video_modal{width: 100%; height: 100%; position: fixed; left: 0px; top: 0px; z-index: 9999; background: rgba(0, 0, 0, 0.9); display: none;
+    .closed{width: 36px; height: 36px; z-index: 9; top: 25px; right: 5px; position: absolute; cursor: pointer; opacity: 0.85;
+        &::before, &::after{width: 100%; height: 2px; background: #fff; content: ''; display: block; z-index: 1; position: relative;}
+        &::before{transform: rotate(45deg); top: 2px;}
+        &::after{transform: rotate(-45deg);}
+        &:hover{opacity: 1;}
+    }
+    .modal_container{width: 100%; height: calc(100% - 60px); position: relative; margin-top: 50px;
+        .videoWrapper {padding-bottom: 56.25%; /* 16:9 */ height: 0;}
+          .videoWrapper iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+    }
+}
+
+@media (max-width:1024px){
+    .container, .container-sm {max-width: 100%;}
+}
+
+@media (max-width:900px){
+    .animation_wrap{position: relative;
+        .left_aninamtion{display: none;}
+        .right_aninamtion{display: none;}
+    }
+}

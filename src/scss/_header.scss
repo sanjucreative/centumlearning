@@ -1,0 +1,189 @@
+header{float:left; width:100%; position:absolute; top:0px; left:0px; z-index:99;  @include transition(0.1s);
+    padding-top: 10px; min-height: 88px;
+    background: rgb(7,51,123);
+	background: -moz-linear-gradient(rgba(0,0,0,0.7) 30%, rgba(9,9,121, 0.25)75%,  rgba(9,9,121, 0) 100%);
+	background: -webkit-linear-gradient(rgba(0,0,0,0.7) 30%, rgba(9,9,121, 0.25)75%,  rgba(9,9,121, 0) 100%);
+	background: linear-gradient(rgba(0,0,0,0.7) 30%, rgba(9,9,121, 0.25)75%,  rgba(9,9,121, 0) 100%);
+
+
+	.container{display: -webkit-box; display: -ms-flexbox; display: flex; 
+		.logo{width:130px; display:table-cell; text-align:left; vertical-align: top; 
+			img{width:100%; height:auto}
+		}
+		nav{display:flex; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left:40px; text-align: right;
+			ul{list-style:none; margin:0; padding:0; width: 100%; @include transition(0.2s);
+				li{display:inline-block; line-height:1; margin:0; position: relative; 
+                    a{padding: 25px 14px 35px; display: block; font-size: 14px; color: #fff; outline: none; text-decoration: none; font-weight: 400;
+                        &:hover{color:$color-skyblue;}
+                    }
+
+					&.menu-item-has-children{
+						&> a{
+							&::after{content: ''; display: inline-block; width: 20px; height: 15px; position: relative; top: 2px; @include chevron('fff'); transform: rotate(90deg);}
+						}
+
+						&:hover{
+							&> a{color:$color-skyblue;}
+							&> a::after{@include chevron('00aeef')}
+
+							& > ul{
+								&::before{content: ''; position: absolute; top: -14px; left: 12px; width: 0; height: 0;
+									border-style: solid;
+									border-width: 0 12px 14px 12px;
+									border-color: transparent transparent #ffffff transparent;
+								}
+							}
+						}
+					}
+
+					ul{display: none; position: absolute; left: 12px; top: 78px; background: #fff; width: 268px; margin: 0px; padding: 0px 0px 0px; text-align: left;
+						@include box-shadow(0px,3px,6px,0px,0.15);
+						li{margin: 0px; padding: 0px; display: block; position: relative; border-bottom: solid 1px rgba(0,0,0,0.05);
+							&:last-child{border-bottom: none;}
+							a{color: $color-black; padding: 10px 12px; margin: 0px; line-height: 1.35;
+								&::after{transform: rotate(45deg);}
+							}
+
+							&.menu-item-has-children > a{
+								&::after{top: 15px; right: 4px; width: 12px; height: 12px; @include chevron('000'); transform: rotate(0deg); position: absolute;
+								}
+		
+								&:hover{
+									&::after{@include chevron('00aeef')}
+								}
+							}
+
+
+							ul{left: calc(100% + 1px); top: 0px;
+								&::before{display: none;}
+							}
+
+							&:hover{background-color: rgba($color-blue, 0.02);}
+						}
+						
+						
+					}
+
+					&:hover > .sub-menu{display: block;}
+
+					.submenu_show{display: none; position: absolute; width: 30px; height: 28px; top:5px; right: 5px; text-align: center; font-size: 26px; font-weight: 200; line-height: 28px; color:rgba(255, 255, 255, 0.6); z-index: 999;}
+					
+				}
+
+				.current-menu-item a{color: $color-skyblue;}
+			}
+		}
+	}
+
+	&.is_sticky{
+		position: fixed;
+		top:0px;
+		background: #fff;
+		@include box-shadow(0px,1px,6px,0px,0.075);
+
+		nav{
+			ul li{
+			 a{color: $color-black;}
+			 &.menu-item-has-children > a{
+				&::after{@include chevron('000')}
+			 }
+				
+			}
+		}
+	}
+
+.menu-toggle{display: none; font-size: 0; border: none; width: 32px; cursor: pointer; position: absolute; right: 12px; top: 14px; z-index: 11; @include transition(0.2s);
+	.line-one, .line-two, .line-three {backface-visibility: hidden; display: block; height: 3px; margin: 5px auto; width: 100%; @include transition(0.2s)}
+	.line-one, .line-two, .line-three {background-color: $color-white}
+
+	&.menu-toggle.on {width: 26px;
+		.line-one, .line-two, .line-three {background-color: $color-white}
+			.line-one {
+				-moz-transform: rotate(-45deg) translate(-5px, 5px);
+				-o-transform: rotate(-45deg) translate(-5px, 5px);
+				-webkit-transform: rotate(-45deg) translate(-5px, 5px);
+				transform: rotate(-45deg) translate(-5px, 5px)
+			}
+			.line-two {
+				opacity: 0;
+				-moz-opacity: 0;
+				filter: alpha(opacity=0)
+			}
+			.line-three {
+				-moz-transform: rotate(45deg) translate(-6px, -6px);
+				-o-transform: rotate(45deg) translate(-6px, -6px);
+				-webkit-transform: rotate(45deg) translate(-6px, -6px);
+				transform: rotate(45deg) translate(-6px, -6px)
+			}
+	}
+
+}
+
+
+
+}
+@media (max-width:1440px){
+	header .container nav ul li a{font-size: 13px; padding: 25px 10px 35px;}
+}
+@media (max-width:1280px){
+	header .container .logo{width: 110px;}
+	header .container nav ul li a{font-size: 12px; padding: 25px 6px 35px;}
+}
+
+@media (max-width:1024px){
+	header{background: #000; padding-top:5px; min-height: 58px;
+		.container{ max-width: 100%; padding-left: 15px; padding-right: 15px;
+			.logo {width: 90px;
+				img{content: url('//localhost:8080/myres/centumlearning/wp-content/uploads/2021/05/logo.svg');}
+			}
+			.menu-toggle{display: block;}
+			nav.main-navigation{width: 100%; height: calc(100% - 58px); top: 58px; position: fixed; left: unset; right: -1000px; z-index: 999; opacity: 0;
+				overflow-y: scroll; padding: 0px; border-top: solid 1px rgba(255, 255, 255, 0.1);
+				background: rgba(0,0,0,0.95); @include transition(0.5s);
+				&.on{right: 0px; opacity: 1;}
+
+				ul{text-align: left;
+					li{display: block;  border-top: solid 1px rgba(255, 255, 255, 0.1);
+						&:first-child{border-bottom: none;}
+						a{padding: 12px 15px; font-weight: 200;
+							&:hover{background-color: #131313;}
+						}
+						&:hover ul{display: none;}
+
+						&.menu-item-has-children {
+							a::after{display: none;}
+							&:hover a{color: $color-white;}
+						}
+						.submenu_show{display: block;}
+						ul.sub-menu{width: 100%; background: rgba(30,30,30,0.9); left: 0px; top: 0px; position: relative;
+							&::before{display: none;}
+							&.show{display: block;}
+							li{
+								a{color: $color-white; padding-left: 14px;
+									&::before{content: ''; display: inline-block; width: 10px; height: 10px; margin-right:4px; @include chevron('fff'); background-size: cover;}
+								}
+								li {
+									a{padding-left: 28px;}
+									li a{padding-left: 40px;}
+								}
+							}
+
+							// &.on{display: block;}
+						}
+					}
+				}
+
+				& > ul li:last-child{border-bottom: solid 1px rgba(255, 255, 255, 0.1);}
+			}
+		}
+		&.is_sticky{background-color: #000;
+
+			nav{
+				ul li{
+				 a{color: $color-white;}
+				}
+			}
+
+		}
+	}
+}

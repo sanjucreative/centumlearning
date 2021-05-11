@@ -1,0 +1,40 @@
+.centumlearning-form{
+    ::-webkit-input-placeholder {color: transparent;}
+    :-ms-input-placeholder {color: transparent;}
+    ::-ms-input-placeholder {color: transparent;}
+    ::-moz-placeholder {color: transparent;}
+    ::placeholder  {color: transparent;} 
+    .form-label-group, .form-group {position: relative;}
+
+    .form-label-group>label, .form-group>label {
+      -moz-transition:all .1s ease-in-out; -webkit-transition: all .1s ease-in-out; -ms-transition: all .1s ease-in-out;
+      -o-transition: all .1s ease-in-out; transition: all .1s ease-in-out; top: 10px; left: 15px; position: absolute; display: block; outline: none;
+      z-index: 99; margin: 0px;  font-size:1rem;
+      &.required span{color: $color-red;}
+    }
+ 
+     
+    .form-control:disabled, .form-control[readonly] { background-color: #fff; }
+
+    select.form-control { -webkit-appearance: none;  -moz-appearance: none;  appearance: none;
+      background: url(../images/ic-arrow-down.svg) right/30px 16px no-repeat!important;  padding-right: 25px;
+  }
+
+    .form-group{margin-bottom: 2.25rem;}
+    .form-control{box-shadow: none!important; border: none; border-bottom: solid 2px #eee; border-radius: 0px; height: calc(2.25em + .75rem + 2px);
+        padding: .5rem 0rem;}
+
+
+    .form-label-group.hasdata > label, .form-group.hasdata > label{color: $color-blue; top: -15px; display: inline-block;}
+    
+     input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill, 
+    input:-webkit-autofill:hover, textarea:-webkit-autofill:hover, select:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, textarea:-webkit-autofill:focus, select:-webkit-autofill:focus, 
+    input:-webkit-autofill:active, textarea:-webkit-autofill:active , select:-webkit-autofill:active   {
+        -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+         box-shadow: 0 0 0px 1000px white inset !important; background: transparent;
+    }
+
+
+  
+}
