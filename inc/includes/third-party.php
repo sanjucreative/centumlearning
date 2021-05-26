@@ -202,7 +202,7 @@ class acf_third_party {
 	*/
 	
 	function doing_dark_mode() {
-		wp_enqueue_style('acf-dark', get_theme_file_uri('inc/assets/css/acf-dark.css'), array(), ACF_VERSION );
+		wp_enqueue_style('acf-dark', acf_get_url('assets/css/acf-dark.css'), array(), ACF_VERSION );
 	}
 	
 }

@@ -73,7 +73,7 @@ class acf_field_date_picker extends acf_field {
 		wp_enqueue_script('jquery-ui-datepicker');
 		
 		// style
-		wp_enqueue_style('acf-datepicker', get_theme_file_uri('inc/assets/inc/datepicker/jquery-ui.min.css'), array(), '1.11.4' );
+		wp_enqueue_style('acf-datepicker', acf_get_url('assets/inc/datepicker/jquery-ui.min.css'), array(), '1.11.4' );
 	}
 	
 	

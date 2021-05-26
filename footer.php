@@ -10,13 +10,13 @@
                 <?php if (is_active_sidebar('footer_get_in_touch' )) dynamic_sidebar( 'footer_get_in_touch' ); ?>
                 <ul class="socialmedia">
                     <?php 
-                    if (get_theme_option('linkedin')) echo '<li><a class="linkedin" href="'. get_theme_option('linkedin'). '" target="_blank"><i class="c_icon linkedIn"></i></a>';
+                    if (get_theme_option('linkedin')) echo '<li><a href="'. get_theme_option('linkedin'). '" target="_blank"><i class="c_icon linkedIn"></i></a>';
 
-                    if (get_theme_option('facebook')) echo '<li><a class="facebook" href="'. get_theme_option('facebook'). '" target="_blank"><i class="c_icon facebook"></i></a></li>'; 
+                    if (get_theme_option('facebook')) echo '<li><a href="'. get_theme_option('facebook'). '" target="_blank"><i class="c_icon facebook"></i></a></li>'; 
 
-                    if (get_theme_option('twitter')) echo '<li><a class="twitter" href="'. get_theme_option('twitter'). '" target="_blank"><i class="c_icon twitter"></i></a>';                    
+                    if (get_theme_option('twitter')) echo '<li><a href="'. get_theme_option('twitter'). '" target="_blank"><i class="c_icon twitter"></i></a>';                    
 
-                    if (get_theme_option('youtube')) echo '<li><a class="youtube" href="'. get_theme_option('youtube'). '" target="_blank"><i class="c_icon youtube"></i></a>';
+                    if (get_theme_option('youtube')) echo '<li><a href="'. get_theme_option('youtube'). '" target="_blank"><i class="c_icon youtube"></i></a>';
                     ?>
                 </ul>
             </div>           
@@ -30,7 +30,7 @@
             <div class="container">
             <div class="row">    
                 <div class="col-12">
-                    Copyright &copy <?php echo date('Y'); ?> Centum Learning Limited. All rights reserved. <ul class="copyrights_nav"> <?php copyrights_nav(); ?></ul>
+                    &copy <?php echo date('Y'); ?> Centum Learning Limited. All rights reserved. <ul class="copyrights_nav"> <?php copyrights_nav(); ?></ul>
                 </div>
             </div>
             </div>

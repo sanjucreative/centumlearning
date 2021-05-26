@@ -1,0 +1,48 @@
+.post-content{padding-bottom: 50px;
+    img.alignleft, img.aligncenter, img.alignright{@include box-shadow(0px,3px,5px,2px,0.3); border-radius: 20px; border:solid 1px #1f77df}
+}
+
+/* ######################### Template Webinars Post ########################## */
+.speakers_slider{padding: 0px 0px 50px;
+    .slick-track{display: flex !important;
+        .slick-slide{padding: 60px 25px 0; position: relative; height: inherit !important;
+            &> div{display: flex; min-height: 100%; position: relative;}
+            .speakers_wrap{border: solid 1px $color-lightblue; padding: 15px; position: relative; background: #fff;
+                .speakers_info{width: calc(100% - 140px); 
+                    h4{font-size: 1.1rem; line-height: 1.25; margin-bottom:0px;}
+                    p{margin: 0px; line-height: 1.25; font-size: 1rem;
+                        strong{font-weight: 500;}
+                    }
+                }
+
+                figure{ position: absolute; width: 120px; height: 120px; border: solid 1px $color-lightblue; border-radius: 50%; top:-60px; right: 25px;
+                    background:#fff;
+                    img{width: 100%; height: auto;}
+                }
+                .about_speakers{margin-top: 20px;
+                    p{font-size: 1rem; margin-bottom: 15px; line-height: 1.5;}
+
+                    .readmore{display: block; background: transparent; padding: 0px;
+                        a{display: inline-block; background: #09367d; padding: 6px 12px; border-radius: 10px; color: #fff; text-decoration: none;
+                            &:hover{background-color: #052861;}
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
+
+.card.key_features_wrap{border:solid 1px $color-lightblue;  min-height: 100%; border-radius: 0px;
+    .card-heading{background: $color-lightblue; margin-left: -1px;
+        h3{color: #fff; padding: 8px 15px; line-height: 1.2; font-size: 1.25rem; margin: 0px;}
+    }
+    .card-body{
+        ul{margin: 0px;
+            li{margin-bottom: 8px;}
+        }
+    }
+}
+.reg_closed_msg{background: #1f77df; padding: 5px 15px; color: #fff;}

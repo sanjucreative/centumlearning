@@ -7,7 +7,7 @@ $pageid =  get_page_id('home');
 
 <!-- #############################   About Us Section    ###########################  -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<div class="animation_wrap">
+<div class="animation_wrap" id="about_us">
     <div class="container">
         <div class="about_us" data-aos="fade-up" data-aos-delay="100">
             <h3><?php echo get_field("heading_first");?></h3>
@@ -16,7 +16,7 @@ $pageid =  get_page_id('home');
             <div class="more_content"><p><?php echo get_field("content_excerpt_read_more");?></p></div>
             <a class="readmore" href="#">Read More <i></i></a>
         </div>
-        <div class="carousel" data-aos="fade-up" data-aos-delay="100">
+        <div class="carousel pb-5" data-aos="fade-up" data-aos-delay="100">
             <div class="slides"> 
             <?php
                 if( have_rows('video_gallery') ): 
@@ -46,10 +46,10 @@ jQuery(document).ready(function($){
     $('.carousel').carousel({
         carouselWidth:900,
         carouselHeight:280,
-        directionNav:true,
+        // directionNav:true,
         // reflection: true,
         // shadow:true,
-        // buttonNav:'bullets',
+        buttonNav:'bullets',
         frontWidth:320,
         frontHeight: 180,
         hMargin: 1.1,

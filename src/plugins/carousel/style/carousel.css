@@ -78,14 +78,14 @@
 
 .carousel .buttonNav {
   position : relative;
-  margin : 0 auto;
+  margin : 10px auto 0px;
   z-index : 999;
 }
 
 .carousel .buttonNav .numbers {
   position : relative;
   float : left;
-  margin : 5px;
+  margin : 7px;
   color : #828282;
   cursor : pointer;
   font-weight : bold;
@@ -110,21 +110,16 @@
 .carousel .buttonNav .bullet {
   position : relative;
   float : left;
-  width : 16px;
-  height : 16px;
-  background : url(../images/Bullet-White.png) no-repeat center;
-  margin : 5px;
+  width : 22px;
+  height : 22px;
+  border: solid 2px #1f77df ;
+  border-radius: 50%;
+  margin : 7px;
   float : left;
   cursor : pointer;
 }
 
-.carousel .buttonNav .bullet:hover { background : url(../images/Bullet-Black.png) no-repeat center; }
-
-.carousel .buttonNav .bulletActive {
-  background : url(../images/Bullet-Black.png) no-repeat center;
-  cursor : default;
-}
-
+.carousel .buttonNav .bullet:hover, .carousel .buttonNav .bulletActive  { background : #1f77df; }
 .carousel .shadow {
   width : 100%;
   height : 82px;

@@ -1,18 +1,102 @@
 /* CSS reset */
-body{font-family: $font-poppins; font-style: normal; font-size: 1rem; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;}
+body{font-family: $font-poppins; font-style: normal; font-size: 1rem; color: $text-color; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;}
 html {height:100%; margin: 0px; padding: 0px;}
 body {min-height:100%; margin: 0px; padding: 0px;}
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: $font-poppins;}
-h1, .h1{font-size: 2.75rem; line-height: 4rem; margin-bottom:1.5rem;}
-h2, .h2{font-size: 2.25rem; line-height: 3.75rem; margin-bottom:1rem;}
-h3, .h3{font-size: 1.6rem; line-height: 2.175rem; margin-bottom:1rem;}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: $font-poppins; color: $text-heading;}
+h1, .h1{font-size: 2.5rem; line-height: 3.5rem; margin-bottom:1rem;}
+h2, .h2{font-size: 2rem; line-height: 3rem; margin-bottom:1rem;}
+h3, .h3{font-size: 1.5rem; line-height: 2rem; margin-bottom:1rem;}
 h4, .h4{font-size: 1.275rem; line-height: 2.625rem; margin-bottom:1rem;}
 h5, .h5{font-size: 1rem; line-height: 2.125rem; margin-bottom:1rem;}
 h6, .h6{font-size: 0.8125rem; line-height: 1.125rem; margin-bottom:1rem;}
-p, li, td, th, dl,dt,dd{font-size:1.0125rem; line-height:1.75rem; font-family:$font-poppins; color: $color-black;}
+p, li, td, th, dl,dt,dd{font-size:1.115rem; line-height:1.5rem; font-family:$font-poppins; color: $text-color;
+    strong{color: $text-heading;}
+}
+ol, ul, dl{margin-left: 0px; padding-left: 18px;}
 p:not(:last-child), li:not(:last-child) {margin-bottom:1.5rem;}
 body.on{overflow: hidden;}
 .breadcrumbs{margin: 1rem 0;}
+.section-heading{font-size: 1.5rem; font-weight: 600; color:$text-heading}
+
+.trustedBy{padding: 0 30px; position: relative;
+    .slick-slide{padding: 0 15px;
+        figure{margin: 0px; padding: 0px 20px; text-align: center; border: solid 2px #ccc; background: #fff;
+            img{width: 100%; height: auto;}
+        }
+    }
+
+    .slick-arrow{position: absolute; top:50%; text-indent: -1000000px; height: 50px; width: 30px; margin-top: -25px; border: none; background: none; opacity: 0.2; 
+        &::before, &::after{content: ''; display: block; width: 25px; height:0.110rem; background:#000; position: absolute; left: 0px;}
+        &::before{transform: rotate(135deg); top:12px}
+        &::after{transform: rotate(45deg); top:29px}
+
+        &.slick-prev{left: 0px;}
+        &.slick-next{right: 0px;
+            &::before{transform: rotate(45deg); top:12px}
+            &::after{transform: rotate(135deg); top:29px}
+        }
+
+        &:hover{opacity: 0.4;}
+    }
+}
+
+.awards{padding: 0 30px; position: relative;
+    .slick-slide{padding: 0 15px;
+        figure{margin: 0px; padding: 0px; text-align: center; 
+            //  background: #fff;
+            img{width: 100%; height: auto;}
+        }
+    }
+
+    .slick-arrow{position: absolute; top:50%; text-indent: -1000000px; height: 50px; width: 30px; margin-top: -25px; border: none; background: none; opacity: 0.2; 
+        &::before, &::after{content: ''; display: block; width: 25px; height:0.110rem; background:#000; position: absolute; left: 0px;}
+        &::before{transform: rotate(135deg); top:12px}
+        &::after{transform: rotate(45deg); top:29px}
+
+        &.slick-prev{left: 0px;}
+        &.slick-next{right: 0px;
+            &::before{transform: rotate(45deg); top:12px}
+            &::after{transform: rotate(135deg); top:29px}
+        }
+
+        &:hover{opacity: 0.4;}
+    }
+}
+.loader{display: block;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.section_content{padding: 3rem 0rem;
+    &:first-child{padding-top: 2rem;}
+    &:nth-child(even){background: #f2f2f2;}
+    .section-title{font-size: 2rem; margin-bottom: 2rem;}
+}
+.know_more_btn{border: solid 1px #3266cc; text-align: center; padding: 0px 0px 0px 10px; line-height: 30px; position: relative; border-radius: 5px;
+    font-size: 0.85rem; text-transform: uppercase; display: inline-block;
+    span{float: left; color: #111; border-right: solid 1px #3266cc; padding-right: 10px;}
+    &::after{content: ''; width: 30px; height: 16px; position: relative; top: 6px; float: left; @include arrow('3266cc') }
+
+    &:hover{background: #3266cc; 
+        span{color: #fff; border-right-color: #5f95ff;}
+        &::after{@include arrow('fff') }
+    }
+}
+
+img.alignright, a img.alignright {float:right; margin:0.5em 0 1em 1em}
+img.alignleft, a img.alignleft {float:left; margin:0 1em 1em 0}
+img.aligncenter, a img.aligncenter {display: block; margin-left: auto; margin-right: auto; margin-bottom: 25px;}
+
+
+.flip-box {width: 100%; height: auto; perspective: 1000px; 
+  
+    .flip-box-inner {position: relative; width: 100%; height: 100%; text-align: center; @include transition(1s); transform-style: preserve-3d;}
+
+    &:hover .flip-box-inner {transform: rotateY(180deg); }
+  
+    .flip-box-front, .flip-box-back {position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden;  backface-visibility: hidden;}
+  
+    .flip-box-front {background-color: #bbb; color: black; z-index: 1;}
+    .flip-box-back {background-color: dodgerblue; color: white; transform: rotateY(180deg); z-index: 2;}
+}
+
+
 
 @media (min-width:1500px){.container{max-width:1400px;}}
 .py-5{padding-top: 4rem!important; padding-bottom: 4rem!important;}

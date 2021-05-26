@@ -13,6 +13,33 @@
 <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
 <link rel="profile" href="https://gmpg.org/xfn/11" />	
 <?php wp_head(); ?>
+<script>
+jQuery(document).ready(function($){
+	<?php if (is_home() || is_front_page() || is_page_template('index.php')) { ?>
+		$(document).on('click', '#primary-menu li.menuScroll a[href^="#"]', function (event) {
+			var hash = this.hash;
+			$('html, body').animate({
+			scrollTop: $(hash).offset().top - 90
+			}, 800);
+
+		})
+
+
+		if (window.location.hash) {
+			var hash = window.location.hash;
+			if ($(hash).length) {
+				$('html, body').animate({
+					scrollTop: $(hash).offset().top - 90
+				}, 800);
+			}
+		}
+
+
+	<?php }else{ ?>
+			$("#primary-menu li.menuScroll a").attr("href", "<?php echo get_home_url(); ?>#about_us");
+	<?php } ?>
+})
+</script>
 </head>
 <body <?php body_class(); ?>>
 <?php
@@ -52,37 +79,29 @@
         </nav>
 </header>
 <?php 
-
-
 if (is_home() || is_front_page() || is_page_template('index.php')) {  ?>
 	<div class="HomeCarousel">
             <?php echo carouselLoop('home', 'home_hero'); ?>
     </div>
 <?php } else{
 	if($show_page_banner[0] == 'Yes'){
-?>
 
-	<?php
 	if($CarouselActive[0] != 'Yes'){
 		echo '<div class="InnerCarousel">';
         echo '<div class="banner_content">';
-                    if($category_banner_text){
-                        echo $category_banner_text;
-                    } else{
-                        echo '<h1>'. get_the_title() .'</h1>';
-                    }
+				if($category_banner_text){
+					echo $category_banner_text;
+				} else{
+					echo '<h1>'. get_the_title() .'</h1>';
+				}
         echo '</div>';
         echo '<figure style="background-image:url('. $category_image_url.')"> </figure>';
 		echo '</div>';
 	} else { 
-			 echo '<div class="HomeCarousel">';
-	         echo carouselLoop($CarouselSlug, 'home_hero'); 
-			 echo '</div>';
-	 } ?>
-
-    <?php } } 
-    
-  if( (!is_home() && !is_front_page())  &&  function_exists('bcn_display')) { 
-    //   echo '<div class="breadcrumbs"><div class="container" data-aos="fade-right" data-aos-delay="50">'. bcn_display(true) .'</div></div>';
-     }
-    ?>
+		echo '<div class="HomeCarousel">';
+		echo carouselLoop($CarouselSlug, 'home_hero'); 
+		echo '</div>';
+	 }
+	} 
+}  
+?>

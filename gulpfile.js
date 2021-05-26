@@ -19,7 +19,7 @@ gulp.task('clean', function (cb) {
 
 gulp.task('sass', function () {
     return gulp.src([
-        //    'node_modules/bootstrap/scss/bootstrap.scss',
+            'node_modules/bootstrap/scss/bootstrap.scss',
         //    'src/plugins/font-awesome/font-awesome.css',
             'src/scss/*.scss'
         ])

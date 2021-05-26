@@ -17,7 +17,7 @@ if( !acf_get_setting('pro') ) {
 	
 	<div class="col-content">
 		
-		<img src="<?php echo get_theme_file_uri('inc/assets/images/acf-logo.png'); ?>" />
+		<img src="<?php echo acf_get_url('assets/images/acf-logo.png'); ?>" />
 		<h2><?php _e("Database Upgrade Required",'acf'); ?></h2>
 		<p><?php printf(__("Thank you for updating to %s v%s!", 'acf'), acf_get_setting('name'), acf_get_setting('version') ); ?><br /><?php _e("This version contains improvements to your database and requires an upgrade.", 'acf'); ?></p>
 		<?php if( !empty($plugins) ): ?>

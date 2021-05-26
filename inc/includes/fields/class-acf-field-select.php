@@ -87,15 +87,15 @@ class acf_field_select extends acf_field {
 		if( $major == 4 ) {
 			
 			$version = '4.0';
-			$script = get_theme_file_uri("inc/assets/inc/select2/4/select2.full{$min}.js");
-			$style = get_theme_file_uri("inc/assets/inc/select2/4/select2{$min}.css");
+			$script = acf_get_url("assets/inc/select2/4/select2.full{$min}.js");
+			$style = acf_get_url("assets/inc/select2/4/select2{$min}.css");
 		
 		// v3
 		} else {
 			
 			$version = '3.5.2';
-			$script = get_theme_file_uri("inc/assets/inc/select2/3/select2{$min}.js");
-			$style = get_theme_file_uri("inc/assets/inc/select2/3/select2.css");
+			$script = acf_get_url("assets/inc/select2/3/select2{$min}.js");
+			$style = acf_get_url("assets/inc/select2/3/select2.css");
 			
 		}
 		

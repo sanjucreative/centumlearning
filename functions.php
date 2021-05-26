@@ -143,9 +143,6 @@ $excerpt = $excerpt.'...';
 return $excerpt;
 }
 
-
-
-
 function centumlearning_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
@@ -210,6 +207,16 @@ require get_template_directory() . '/inc/theme-options.php';
 require get_template_directory() . '/inc/acf-custom.php';
 
 
+add_filter('site_transient_update_plugins', 'remove_auto_update_link');
+function remove_auto_update_link($value) {
+ unset($value->response[ 'advanced-custom-fields-pro/acf.php' ]);
+ return $value;
+}
+
+// add_filter('acf/settings/show_admin', 'acf_menu_show_admin');
+function acf_menu_show_admin( $show_admin ) {
+    return false;
+}
 
 // ################################################### Theme Options ############################################## 
 $themename = "Themes";
@@ -449,76 +456,18 @@ add_action('admin_menu', 'mytheme_add_admin');
 
 
 
-// #################################### For load-post-type-tab #############################3
-
-add_action('wp_ajax_load_post_type_tab', 'ajax_load_post_type_tab');
-add_action('wp_ajax_nopriv_load_post_type_tab', 'ajax_load_post_type_tab');
-function ajax_load_post_type_tab(){
- 	$post_type = $_POST['post_type'];
-	$taxonomy_name = $_POST['taxonomy_name'];
-	$term_id = $_POST['term_id'];
-    $args = array (
-		'post_type' => $post_type,
-		'numberposts' => -1,
-		'order' => 'ASC',
-		'tax_query' => array(
-		array(
-			'taxonomy' => $taxonomy_name,
-			'field' => 'term_id',
-			'terms' => $term_id
-			)
-		)
-    );
-
-	$posts = get_posts($args);
-    ob_start ();
-    foreach ($posts as $post ) {
-	 setup_postdata( $post );
-		//echo $post->ID;
-		//echo $post->post_title;
-		$postType =  $post->post_type;
-		$portfolio_thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'')[0];
-		$mediaurl = get_post_meta( $post->ID, 'mediaurl', true);
-		$post_media_attached = get_post_meta( $post->ID, 'post_media_attached', true);
-		$attached_image = wp_get_attachment_image_src( $post_media_attached, 'full')[0];
-		$post_media_type = get_post_meta( $post->ID, 'post_media_type', true);
-		
-		if($attached_image ==''){
-		 	$attached_image = $portfolio_thumb;
-		}
 
 
-		if(($mediaurl !='') && ($post_media_type == 'media_type_name_web')){
-				$url = 'href="'. $mediaurl .'" target="_blank"';
-			}
-		else if(($mediaurl !='') && ($post_media_type == 'media_type_name_videos')){    
-				$url = 'class="videomodal" href="'. $mediaurl .'"';
-				preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $mediaurl, $match);
-				$youtube_id = $match[1];
-				if($portfolio_thumb ==''){
-					$portfolio_thumb = 'https://i.ytimg.com/vi/'.$youtube_id.'/maxresdefault.jpg';
-				}
-		}else{
-			   // $url = 'href="javascript:void(0)"'; 
-			   $url = 'class="imgmodal" href="'. $attached_image .'"';
-			}	
-			
-		
-		echo '<div class="col-12 col-sm-6 col-md-4 post_type_item">';
-		if($postType == 'media'){
-			echo '<figure  id="'. $post->ID .'"><a '. $url .'><img src="'. $portfolio_thumb .'" alt="'. $post->post_title .'" width="" height="" /></a></figure>';
-			echo '<h3><a '. $url .'>'. $post->post_title .'</a></h3>';
-		}else{
-			echo '<figure><img src="'. $portfolio_thumb .'" alt="'. $post->post_title .'" width="" height="" /></figure>';
-			echo '<h3>'. $post->post_title .'</h3>';			
-		}
-		echo '</div>';
-
-   } 
-   wp_reset_postdata();
- //  ob_end_clean();
- die();
+/* ###################### Get Location Map Data  ####################################### */
+add_action('wp_ajax_get_location_map', 'ajax_get_location_map');
+add_action('wp_ajax_nopriv_get_location_map', 'ajax_get_location_map');
+function ajax_get_location_map(){
+	$post_Id = $_POST['Post_id'];
+	$metakey = $_POST['Map_meta'];
+	echo get_post_meta( $post_Id, $metakey, true );
+	die();
 }
+
 
 /* ###################### Get Meta Data  ####################################### */
 add_action('wp_ajax_get_metakey_data', 'ajax_get_metakey_data');
@@ -530,12 +479,98 @@ function ajax_get_metakey_data(){
 	die();
 }
 
-
 /* ###################### Get Page Id   ########################################### */
 function get_page_id($page_name){
 	global $wpdb;
 	 $page_name = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE post_type ='page' && post_name = '".$page_name."'");
 	 return $page_name;
+}
+
+/* ###################### Get Archive Year   ########################################### */
+function get_posts_years_array($post_type, $y) {
+    global $wpdb;
+    $result = array();
+	$post_type = $post_type;
+	$y = $y;
+
+    $query_prepare = $wpdb->prepare("SELECT YEAR(post_date) FROM ($wpdb->posts) WHERE post_status = 'publish' AND post_type = %s GROUP BY YEAR(post_date) DESC", $post_type);
+
+    $years = $wpdb->get_results($query_prepare);
+
+    if ( is_array( $years ) && count( $years ) > 0 ) {
+        foreach ( $years as $i => $year ) {
+			if($i == $y) break;
+			$obj =  json_decode(json_encode($year), true);			
+			$result[] =  $obj['YEAR(post_date)'];
+        }
+    }
+	return $result;
+}
+
+// #################################### For load post Media  #############################3
+
+add_action('wp_ajax_load_post_type_media', 'ajax_load_post_type_media');
+add_action('wp_ajax_nopriv_load_post_type_media', 'ajax_load_post_type_media');
+function ajax_load_post_type_media(){
+ 	$post_type = $_POST['post_type'];
+ 	$post_year = $_POST['post_year'];
+	$archive_before_year = $_POST['archive_before_year'];	
+	$arch_year = '';
+
+
+	if($post_type.'_'.$post_year == $post_type.'_Archived'){
+		$post_year = '';
+		$arch_year = ['before' => 'December 31st, ' . $archive_before_year];
+	}
+
+    $args = array (
+		'post_type' => $post_type,
+		'numberposts' => -1,
+		'order' => 'DESE',
+		'year' => $post_year,
+		'date_query' => array($arch_year)
+    );
+
+	$posts = get_posts($args);
+    ob_start ();
+	echo '<div class="media" data-aos="fade-left" data-aos-delay="50">';
+    foreach ($posts as $post ) {
+	 setup_postdata( $post );
+		// echo $post->ID;
+		// echo $post->post_title;
+		$publication = get_post_meta( $post->ID, 'media_publication_name', true );
+		$media_check_for_web = get_post_meta( $post->ID, 'media_check_for_web', true )[0];
+		$publication_url = get_post_meta( $post->ID, 'media_web_url', true );
+		$publication_pdf = get_the_guid(get_post_meta( $post->ID, 'media_upload_published_pdf', true ));
+		$newsDate = $post->post_date;
+		
+		echo '<div class="media_box">';
+
+		echo '<h4>'. $post->post_title .'</h4>';
+			if($publication!=''){
+			echo '<p><strong>Publication</strong>: ' . $publication . '</p>';
+			}
+		echo '<p><strong>Date</strong>: ' . $newsDate . '</p>';
+	
+		if($media_check_for_web =='Yes' &&  $publication_url !=''){
+			echo '<div class="view_btn"><a class="know_more_btn" href="'. $publication_url .'" target="_blank"><span>VIEW ARTICLE</span></a></div>';			
+		}
+		
+		if($media_check_for_web !='Yes' && $publication_pdf!=''){
+			// $ext = 	substr(strrchr($publication_pdf, "."), 1); 	
+			// if($ext == 'pdf'){
+				// echo '<div class="view_btn"><a class="know_more_btn" href="'. $publication_pdf .'" target="_blank"><span>VIEW ARTICLE</span></a></div>';
+			// }else{
+				echo '<div class="view_btn"><a class="know_more_btn view_featured" href="'. $publication_pdf .'"><span>VIEW ARTICLE</span></a></div>';
+			// }
+		}
+		echo '</div>';
+
+   } 
+   echo '</div>';
+   wp_reset_postdata();
+ //  ob_end_clean();
+ die();
 }
 
 
@@ -608,5 +643,4 @@ endif;
 return $content;
 wp_reset_query();
 }
-
 

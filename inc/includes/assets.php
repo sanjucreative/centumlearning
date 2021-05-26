@@ -89,13 +89,13 @@ class ACF_Assets {
 		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		
 		// scripts
-		wp_register_script('acf-input', get_theme_file_uri("inc/assets/js/acf-input{$min}.js"), array('jquery', 'jquery-ui-sortable', 'jquery-ui-resizable'), $version );
-		wp_register_script('acf-field-group', get_theme_file_uri("inc/assets/js/acf-field-group{$min}.js"), array('acf-input'), $version );
+		wp_register_script('acf-input', acf_get_url("assets/js/acf-input{$min}.js"), array('jquery', 'jquery-ui-sortable', 'jquery-ui-resizable'), $version );
+		wp_register_script('acf-field-group', acf_get_url("assets/js/acf-field-group{$min}.js"), array('acf-input'), $version );
 		
 		// styles
-		wp_register_style('acf-global', get_theme_file_uri('inc/assets/css/acf-global.css'), array(), $version );
-		wp_register_style('acf-input', get_theme_file_uri('inc/assets/css/acf-input.css'), array('acf-global'), $version );
-		wp_register_style('acf-field-group', get_theme_file_uri('inc/assets/css/acf-field-group.css'), array('acf-input'), $version );
+		wp_register_style('acf-global', acf_get_url('assets/css/acf-global.css'), array(), $version );
+		wp_register_style('acf-input', acf_get_url('assets/css/acf-input.css'), array('acf-global'), $version );
+		wp_register_style('acf-field-group', acf_get_url('assets/css/acf-field-group.css'), array('acf-input'), $version );
 		
 		// action
 		do_action('acf/register_scripts', $version, $min);

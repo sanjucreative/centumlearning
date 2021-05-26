@@ -10,10 +10,11 @@ jQuery(document).ready(function($){
     $(window).scroll(function () {
 		var scrollDistance = $(window).scrollTop();
 		if(scrollDistance > 0){
-			$("header").addClass('is_sticky').find('.container .logo img').attr('src', hlogo.replace(/\.svg$/, '-b.svg'));
+			$("header").addClass('is_sticky');
+            // $("header").find('.container .logo img').attr('src', hlogo.replace(/\.svg$/, '-b.svg'));
 		} else{
 			$("header").removeClass('is_sticky');
-			$("header:not(nobanner)").find('.container .logo img').attr('src', hlogo.replace(/\.svg$/, '.svg'));
+			// $("header:not(nobanner)").find('.container .logo img').attr('src', hlogo.replace(/\.svg$/, '.svg'));
 		}        
 		
         var scrollonscreen = $(window).scrollTop() + $(window).height();
@@ -82,6 +83,18 @@ $(document).on('click', '.video_modal .closed', function () {
     $(".video_modal").hide();
 })
 
+$(document).on('click', '.scrollspy[href^="#"], .scrollspy a[href^="#"]', function (event) {
+    event.preventDefault();
+	var hash = this.hash;
+    // var offsetTop = $(this).data('offset-top');
+     var offsetTop = 200;
+
+    $('html, body').animate({
+       scrollTop: $(hash).offset().top - offsetTop
+    }, 800);
+});	
+
+
 
 
 $('#home_hero').slick({
@@ -102,7 +115,7 @@ $('#home_hero').slick({
 })
 
 
-$('.recognition').slick({
+$('.trustedBy').slick({
     slidesToShow: 6,
     slidesToScroll: 1,
     infinite: true,
@@ -110,8 +123,6 @@ $('.recognition').slick({
     autoplay: true,
     autoplaySpeed: 4500,
     speed: 1000,
-//   prevArrow: $('.arrowleft'),
-//    nextArrow: $('.arrowright'),
     responsive: [{
         breakpoint: 992,
         settings: {
@@ -131,16 +142,14 @@ $('.recognition').slick({
 })
 
 
-$('.testimonials').slick({
-    slidesToShow: 3,
+$('.awards').slick({
+    slidesToShow: 4,
     slidesToScroll: 1,
     infinite: true,
     arrows: true,
     autoplay: true,
-    autoplaySpeed: 4500,
+    autoplaySpeed: 6000,
     speed: 1000,
-//    prevArrow: $('.arrowleft3'),
-//    nextArrow: $('.arrowright3'),
     responsive: [{
         breakpoint: 992,
         settings: {
@@ -157,17 +166,25 @@ $('.testimonials').slick({
             slidesToShow: 1,
             }
         }]
-}).on('setPosition', function (event, slick) {
-      //  var Height = $(".testimonials .slick-track").height();
-      //  $(".testimonials .slick-track .testi_items").height(Height);
-         slick.$slides.css('height', slick.$slideTrack.height() + 'px');
-});
+})
 
 
-
-
-
-
+$('.speakers_slider').slick({
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    infinite: false,
+    arrows: false,
+    dots: true,
+    autoplay: false,
+    autoplaySpeed: 6000,
+    speed: 1000,
+    responsive: [{
+        breakpoint: 640,
+        settings: {
+            slidesToShow: 1,
+        }
+        }]
+})
 
     
 })

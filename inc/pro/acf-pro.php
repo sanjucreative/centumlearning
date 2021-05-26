@@ -116,8 +116,8 @@ class acf_pro {
 		
 		
 		// register scripts
-		wp_register_script( 'acf-pro-input', get_theme_file_uri("inc/pro/assets/js/acf-pro-input{$min}.js" ), array('acf-input'), $version );
-		wp_register_script( 'acf-pro-field-group', get_theme_file_uri("inc/pro/assets/js/acf-pro-field-group{$min}.js" ), array('acf-field-group'), $version );
+		wp_register_script( 'acf-pro-input', acf_get_url( "pro/assets/js/acf-pro-input{$min}.js" ), array('acf-input'), $version );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( "pro/assets/js/acf-pro-field-group{$min}.js" ), array('acf-field-group'), $version );
 		
 		
 		// register styles

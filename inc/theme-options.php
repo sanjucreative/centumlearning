@@ -88,7 +88,7 @@ function banner_register() {
 		'capability_type' => 'post',
 		'has_archive' => true, 
 		'hierarchical' => true,
-		'menu_position' => true,
+		'menu_position' => 20,
 		'menu_icon' => 'dashicons-format-gallery',
 		'supports' => array('title', 'thumbnail', 'editor')				
   ); 
@@ -127,7 +127,8 @@ function banner_posts_custom_columns($column_name, $post_id){
         if ($SlideImgUrl !='')
            echo '<img src="' .$SlideImgUrl.' " width="80" height="45" alt="" />';
         else
-           echo "N/A";
+        //    echo "N/A";
+		   echo '<img src="' . get_theme_file_uri( "/assets/images/ic-video.svg") . '" width="50" height="" />';
     }
 	
     if($column_name === 'category_group'){		
@@ -140,9 +141,84 @@ function banner_posts_custom_columns($column_name, $post_id){
 
 }
 
-// Company 
-add_action('init', 'company_logo_register');
-function company_logo_register() {
+
+// Trusted By 
+add_action('init', 'trusted_company_register');
+function trusted_company_register() {
+	$labels = array(
+		'name' => _x('Trusted Company', 'post type general name'),
+		'singular_name' => _x('Trusted Company', 'post type singular name'),
+		'add_new' => _x('Add New Company', 'Company'),
+		'add_new_item' => __('Add New Company'),
+		'edit_item' => __('Edit Company'),
+		'new_item' => __('New Company'),
+		'view_item' => __('View Company'),
+		'search_items' => __('Search Company'),
+		'all_items' => __( 'All Company' ),
+		'not_found' =>  __('Nothing found'),
+		'not_found_in_trash' => __('Nothing found in Trash'),
+		'parent_item_colon' => '',
+//	    'menu_name' => 'Media Center'
+);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'show_ui' => true, 
+		'show_in_menu' => true, 
+		'query_var' => true,
+		'rewrite' => array('with_front' => false),
+		'capability_type' => 'post',
+		'has_archive' => true, 
+		'hierarchical' => true,
+		'menu_position' => 21,
+		'menu_icon' => 'dashicons-shield',
+		'supports' => array( 'title', 'thumbnail')	
+); 
+
+register_post_type("trusted_company" , $args);
+
+
+add_filter('manage_trusted_company_posts_columns', 'trusted_company_posts_columns');
+function trusted_company_posts_columns($defaults){
+	$defaults['post_thumbs'] = __('Logo');
+    return $defaults;
+}
+
+add_filter('manage_trusted_company_posts_columns', 'trusted_company_head');  
+
+function trusted_company_head($defaults){  
+    $new = array();
+    $tags = $defaults['category_group'];  
+    foreach($defaults as $key=>$value){
+        if($key=='date') {  
+		   $new['post_thumbs'] = $tags;		   
+        }    
+       $new[$key]=$value;
+    }  
+   return $new;  
+} 
+
+add_action('manage_trusted_company_posts_custom_column', 'trusted_company_posts_custom_columns', 10, 2);
+function trusted_company_posts_custom_columns($column_name, $post_id){
+	if($column_name === 'post_thumbs'){		
+		$SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));	
+        if ($SlideImgUrl !='')
+           echo '<img src="' .$SlideImgUrl.' " width="" height="45" alt="" />';
+        else
+           echo "N/A";
+    }
+}
+
+
+
+}
+
+
+// Awards Support 
+add_action('init', 'awards_support_register');
+function awards_support_register() {
 	$labels = array(
 		'name' => _x('Awards Support', 'post type general name'),
 		'singular_name' => _x('Awards Support', 'post type singular name'),
@@ -170,21 +246,21 @@ function company_logo_register() {
 		'capability_type' => 'post',
 		'has_archive' => true, 
 		'hierarchical' => true,
-		'menu_position' => true,
-		'menu_icon' => 'dashicons-shield',
+		'menu_position' => 22,
+		'menu_icon' => 'dashicons-awards',
 		'supports' => array( 'title', 'thumbnail')	
 ); 
 
-register_post_type("company_logo" , $args);
+register_post_type("awards_support" , $args);
 
 
-add_filter('manage_company_logo_posts_columns', 'company_logo_posts_columns');
-function company_logo_posts_columns($defaults){
+add_filter('manage_awards_support_posts_columns', 'awards_support_posts_columns');
+function awards_support_posts_columns($defaults){
 	$defaults['post_thumbs'] = __('Logo');
     return $defaults;
 }
 
-add_filter('manage_company_logo_posts_columns', 'award_columns_head');  
+add_filter('manage_awards_support_posts_columns', 'award_columns_head');  
 
 function award_columns_head($defaults){  
     $new = array();
@@ -198,8 +274,8 @@ function award_columns_head($defaults){
    return $new;  
 } 
 
-add_action('manage_company_logo_posts_custom_column', 'company_logo_posts_custom_columns', 10, 2);
-function company_logo_posts_custom_columns($column_name, $post_id){
+add_action('manage_awards_support_posts_custom_column', 'awards_support_posts_custom_columns', 10, 2);
+function awards_support_posts_custom_columns($column_name, $post_id){
 	if($column_name === 'post_thumbs'){		
 		$SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));	
         if ($SlideImgUrl !='')
@@ -209,24 +285,22 @@ function company_logo_posts_custom_columns($column_name, $post_id){
     }
 }
 
-
-
 }
 
 
-// Employes Testimonials
-add_action('init', 'testimonials_register');
-function testimonials_register() {
+// Client Speak 
+add_action('init', 'client_speak_register');
+function client_speak_register() {
 	$labels = array(
-		'name' => _x('Testimonials', 'post type general name'),
-		'singular_name' => _x('Testimonials', 'post type singular name'),
-		'add_new' => _x('Add New Testimonial', 'Testimonials'),
-		'add_new_item' => __('Add New Testimonials'),
-		'edit_item' => __('Edit Testimonials'),
-		'new_item' => __('New Testimonials'),
-		'view_item' => __('View Testimonials'),
-		'search_items' => __('Search Testimonials'),
-		'all_items' => __( 'All Testimonials' ),
+		'name' => _x('Client Speak', 'post type general name'),
+		'singular_name' => _x('Client Speak', 'post type singular name'),
+		'add_new' => _x('Add New Client', 'Client'),
+		'add_new_item' => __('Add New Client '),
+		'edit_item' => __('Edit Client Speak'),
+		'new_item' => __('New Client'),
+		'view_item' => __('View Client'),
+		'search_items' => __('Search Client'),
+		'all_items' => __( 'All Clients' ),
 		'not_found' =>  __('Nothing found'),
 		'not_found_in_trash' => __('Nothing found in Trash'),
 		'parent_item_colon' => '',
@@ -244,22 +318,132 @@ function testimonials_register() {
 		'capability_type' => 'post',
 		'has_archive' => true, 
 		'hierarchical' => true,
-		'menu_position' => true,
+		'menu_position' => 23,
 		'menu_icon' => 'dashicons-testimonial',
-		'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt')	
+		'supports' => array( 'title', 'thumbnail')	
 ); 
 
-register_post_type("testimonials" , $args);
+register_post_type("client" , $args);
 
-add_filter('manage_testimonials_posts_columns', 'testimonials_posts_columns');
-function testimonials_posts_columns($defaults){
+
+
+add_filter('manage_client_posts_columns', 'client_posts_columns');
+function client_posts_columns($defaults){
+	$defaults['title'] = __('Client Name');
+	$defaults['post_thumbs'] = __('Profile Picture');
+	$defaults['designation'] = __('Designation');
+	$defaults['company'] = __('Company');
+    return $defaults;
+}
+
+add_filter('manage_client_posts_columns', 'client_columns_head');  
+
+function client_columns_head($defaults){  
+    $new = array();
+    $tags = $defaults['category_group'];  
+    foreach($defaults as $key=>$value){
+        if($key=='date') {  
+		   $new['post_thumbs'] = $tags;	
+		   $new['designation'] = $tags;	
+		   $new['company'] = $tags;		   
+        }    
+       $new[$key]=$value;
+    }  
+   return $new;  
+} 
+
+add_action('manage_client_posts_custom_column', 'client_posts_custom_columns', 10, 2);
+function client_posts_custom_columns($column_name, $post_id){
+	if($column_name === 'post_thumbs'){		
+		$SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));	
+        if ($SlideImgUrl !='')
+           echo '<img src="' .$SlideImgUrl.' " width="40" height="40" alt="" />';
+        else
+           echo "N/A";
+    }
+	if($column_name === 'designation'){
+           echo get_post_meta( $post_id, 'designation', true );
+    }
+
+	if($column_name === 'company'){
+		echo get_post_meta( $post_id, 'company_name', true );
+ 	}
+}
+
+
+add_action("admin_init", "client_data"); 
+	function client_data(){
+	  add_meta_box("client_meta", "Client Info:", "client_meta", "client", "title", "low");
+	}
+	function client_meta() {
+	  global $post;
+	  $custom = get_post_custom($post->ID);
+	  $designation = $custom["designation"][0];
+	  $company_name = $custom["company_name"][0];
+	  ?>
+<p><label>Client Designation:-</label>
+  <input type="text" name="designation" value="<?php echo $designation; ?>" style="width:100%;" />
+</p>
+<p><label>Company Name:-</label>
+  <input type="text" name="company_name" value="<?php echo $company_name; ?>" style="width:100%;" />
+</p>
+<?php
+	}
+add_action('save_post', 'save_client_meta');
+function save_client_meta(){
+  global $post;
+  update_post_meta($post->ID, "designation", $_POST["designation"]);
+  update_post_meta($post->ID, "company_name", $_POST["company_name"]);
+}
+}
+
+
+// Speakers
+add_action('init', 'speakers_register');
+function speakers_register() {
+	$labels = array(
+		'name' => _x('Speakers', 'post type general name'),
+		'singular_name' => _x('Speakers', 'post type singular name'),
+		'add_new' => _x('Add New Speaker', 'Speaker'),
+		'add_new_item' => __('Add New Speaker'),
+		'edit_item' => __('Edit Speaker'),
+		'new_item' => __('New Speaker'),
+		'view_item' => __('View Speaker'),
+		'search_items' => __('Search Speaker'),
+		'all_items' => __( 'All Speakers' ),
+		'not_found' =>  __('Nothing found'),
+		'not_found_in_trash' => __('Nothing found in Trash'),
+		'parent_item_colon' => '',
+//	    'menu_name' => 'Media Center'
+);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'show_ui' => true, 
+		'show_in_menu' => true, 
+		'query_var' => true,
+		'rewrite' => array('with_front' => false),
+		'capability_type' => 'post',
+		'has_archive' => true, 
+		'hierarchical' => true,
+		'menu_position' => 24,
+		'menu_icon' => 'dashicons-businessman',
+		'supports' => array( 'title', 'editor', 'thumbnail')	
+); 
+
+register_post_type("speakers" , $args);
+
+add_filter('manage_speakers_posts_columns', 'speakers_posts_columns');
+function speakers_posts_columns($defaults){
 	$defaults['post_thumbs'] = __('Picture');
     return $defaults;
 }
 
-add_filter('manage_testimonials_posts_columns', 'testimonials_columns_head');  
+add_filter('manage_speakers_posts_columns', 'speakers_columns_head');  
 
-function testimonials_columns_head($defaults){  
+function speakers_columns_head($defaults){  
     $new = array();
     $tags = $defaults['category_group'];  
     foreach($defaults as $key=>$value){
@@ -271,8 +455,8 @@ function testimonials_columns_head($defaults){
    return $new;  
 } 
 
-add_action('manage_testimonials_posts_custom_column', 'testimonials_posts_custom_columns', 10, 2);
-function testimonials_posts_custom_columns($column_name, $post_id){
+add_action('manage_speakers_posts_custom_column', 'speakers_posts_custom_columns', 10, 2);
+function speakers_posts_custom_columns($column_name, $post_id){
 	if($column_name === 'post_thumbs'){		
 		$SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));	
         if ($SlideImgUrl !='')
@@ -282,6 +466,31 @@ function testimonials_posts_custom_columns($column_name, $post_id){
     }
 }
 
+
+add_action("edit_form_after_title", "speakers_data"); 
+	function speakers_data(){
+	  add_meta_box("speakers_meta", "Speaker Info:", "speakers_meta", "speakers", "normal", "low");
+	}
+	function speakers_meta() {
+	  global $post;
+	  $custom = get_post_custom($post->ID);
+	  $designation = $custom["designation"][0];
+	  $company_name = $custom["company_name"][0];
+	  ?>
+<p><label>Speaker Designation:-</label>
+  <input type="text" name="designation" value="<?php echo $designation; ?>" style="width:100%;" />
+</p>
+<p><label>Company Name:-</label>
+  <input type="text" name="company_name" value="<?php echo $company_name; ?>" style="width:100%;" />
+</p>
+<?php
+	}
+add_action('save_post', 'save_speakers_meta');
+function save_speakers_meta(){
+  global $post;
+  update_post_meta($post->ID, "designation", $_POST["designation"]);
+  update_post_meta($post->ID, "company_name", $_POST["company_name"]);
+}
 
 }
 
@@ -315,9 +524,9 @@ function news_register() {
 		'capability_type' => 'post',
 		'has_archive' => true, 
 		'hierarchical' => true,
-		'menu_position' => true,
+		'menu_position' => 25,
 		'menu_icon' => 'dashicons-lightbulb',
-		'supports' => array( 'title', 'editor', 'thumbnail')		
+		'supports' => array( 'title')		
 ); 
 
 register_post_type("news" , $args);
@@ -346,13 +555,23 @@ function news_columns_head($defaults){
 add_action('manage_news_posts_custom_column', 'news_posts_custom_columns', 10, 2);
 function news_posts_custom_columns($column_name, $post_id){
 	if($column_name === 'post_thumbs'){		
-		$SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));	
-        if ($SlideImgUrl !='')
-           echo '<img src="' .$SlideImgUrl.' " width="" height="45" alt="" />';
-        else
-           echo "N/A";
+		// $SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));
+		$published_pdf = get_post_meta( $post_id, 'media_upload_published_pdf', true );
+        if ($published_pdf !=''){
+			$ImgUrl = get_the_guid(get_post_meta( $post_id, 'media_upload_published_pdf', true ));
+			$ext = 	substr(strrchr($ImgUrl, "."), 1); 	
+			if($ext == 'pdf'){
+				echo '<img src="' . get_theme_file_uri( "/assets/images/ic-pdf.svg") . '" width="" height="45" />';
+			}else{
+				echo '<img src="' .$ImgUrl.' " width="" height="45" alt="" />';
+			}
+		   
+		}else{
+			echo 'Web Link';
+		}
     }
 }
+
 
 
 }
@@ -387,117 +606,11 @@ function press_releases_register() {
 		'capability_type' => 'post',
 		'has_archive' => true, 
 		'hierarchical' => true,
-		'menu_position' => true,
+		'menu_position' => 26,
 		'menu_icon' => 'dashicons-megaphone',
-		'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt')	
+		'supports' => array( 'title')	
 ); 
 
 register_post_type("press-releases" , $args);
 }
 
-// Leadership Team 
-add_action('init', 'leadership_register');
-function leadership_register() {
-	$labels = array(
-		'name' => _x('Leadership Team', 'post type general name'),
-		'singular_name' => _x('Leadership Team', 'post type singular name'),
-		'add_new' => _x('Add New Leadership', 'Leadership'),
-		'add_new_item' => __('Add New Leadership'),
-		'edit_item' => __('Edit Leadership Team'),
-		'new_item' => __('New Leadership'),
-		'view_item' => __('View Leadership'),
-		'search_items' => __('Search Leadership'),
-		'all_items' => __( 'All Leadership Team' ),
-		'not_found' =>  __('Nothing found'),
-		'not_found_in_trash' => __('Nothing found in Trash'),
-		'parent_item_colon' => '',
-//	    'menu_name' => 'Media Center'
-);
-
-	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true, 
-		'show_in_menu' => true, 
-		'query_var' => true,
-		'rewrite' => array('with_front' => false),
-		'capability_type' => 'post',
-		'has_archive' => true, 
-		'hierarchical' => true,
-		'menu_position' => true,
-		'menu_icon' => 'dashicons-businessman',
-		'supports' => array( 'title', 'thumbnail')	
-); 
-
-register_post_type("leadership" , $args);
-
-
-
-add_filter('manage_leadership_posts_columns', 'leadership_posts_columns');
-function leadership_posts_columns($defaults){
-	$defaults['post_thumbs'] = __('Logo');
-    return $defaults;
-}
-
-add_filter('manage_leadership_posts_columns', 'leadership_columns_head');  
-
-function leadership_columns_head($defaults){  
-    $new = array();
-    $tags = $defaults['category_group'];  
-    foreach($defaults as $key=>$value){
-        if($key=='date') {  
-		   $new['post_thumbs'] = $tags;		   
-        }    
-       $new[$key]=$value;
-    }  
-   return $new;  
-} 
-
-add_action('manage_leadership_posts_custom_column', 'leadership_posts_custom_columns', 10, 2);
-function leadership_posts_custom_columns($column_name, $post_id){
-	if($column_name === 'post_thumbs'){		
-		$SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));	
-        if ($SlideImgUrl !='')
-           echo '<img src="' .$SlideImgUrl.' " width="40" height="40" alt="" />';
-        else
-           echo "N/A";
-    }
-}
-
-
-add_action("admin_init", "leadership_data"); 
-	function leadership_data(){
-	  add_meta_box("leadership_meta", "Leader Info:", "leadership_meta", "leadership", "normal", "low");
-	}
-	function leadership_meta() {
-	  global $post;
-	  $custom = get_post_custom($post->ID);
-	  $designation = $custom["designation"][0];
-	  $linkedin = $custom["linkedin"][0];
-	  $twitter = $custom["twitter"][0];
-	  $facebook = $custom["facebook"][0];
-	  ?>
-<p><label>Leader Designation:-</label>
-  <input type="text" name="designation" value="<?php echo $designation; ?>" style="width:100%;" />
-</p>
-<p><label>LinkedIn:-</label>
-  <input type="text" name="linkedin" value="<?php echo $linkedin; ?>" style="width:100%;" />
-</p>
-<p><label>Twitter:-</label>
-  <input type="text" name="twitter" value="<?php echo $twitter; ?>" style="width:100%;" />
-</p>
-<p><label>Facebook:-</label>
-  <input type="text" name="facebook" value="<?php echo $facebook; ?>" style="width:100%;" />
-</p>
-<?php
-	}
-add_action('save_post', 'save_leadership_meta');
-function save_leadership_meta(){
-  global $post;
-  update_post_meta($post->ID, "designation", $_POST["designation"]);
-  update_post_meta($post->ID, "linkedin", $_POST["linkedin"]);
-  update_post_meta($post->ID, "twitter", $_POST["twitter"]);
-  update_post_meta($post->ID, "facebook", $_POST["facebook"]);
-}
-}
