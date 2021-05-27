@@ -1,5 +1,5 @@
 /* CSS reset */
-body{font-family: $font-poppins; font-style: normal; font-size: 1rem; color: $text-color; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;}
+body{font-family: $font-poppins; font-style: normal; font-size: 1.115rem; line-height: 1.75rem; color: $text-color; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;}
 html {height:100%; margin: 0px; padding: 0px;}
 body {min-height:100%; margin: 0px; padding: 0px;}
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: $font-poppins; color: $text-heading;}
@@ -9,7 +9,7 @@ h3, .h3{font-size: 1.5rem; line-height: 2rem; margin-bottom:1rem;}
 h4, .h4{font-size: 1.275rem; line-height: 2.625rem; margin-bottom:1rem;}
 h5, .h5{font-size: 1rem; line-height: 2.125rem; margin-bottom:1rem;}
 h6, .h6{font-size: 0.8125rem; line-height: 1.125rem; margin-bottom:1rem;}
-p, li, td, th, dl,dt,dd{font-size:1.115rem; line-height:1.5rem; font-family:$font-poppins; color: $text-color;
+p, li, td, th, dl,dt,dd{font-size:1.115rem; line-height:1.75rem; font-family:$font-poppins; color: $text-color;
     strong{color: $text-heading;}
 }
 ol, ul, dl{margin-left: 0px; padding-left: 18px;}
@@ -63,7 +63,7 @@ body.on{overflow: hidden;}
     }
 }
 .loader{display: block;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
-.section_content{padding: 3rem 0rem;
+.section_content{padding: 3.5rem 0rem;
     &:first-child{padding-top: 2rem;}
     &:nth-child(even){background: #f2f2f2;}
     .section-title{font-size: 2rem; margin-bottom: 2rem;}

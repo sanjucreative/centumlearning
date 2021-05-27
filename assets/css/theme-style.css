@@ -7254,7 +7254,8 @@ a.text-dark:hover, a.text-dark:focus {
 body {
   font-family: "Poppins", sans-serif;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 1.115rem;
+  line-height: 1.75rem;
   color: #5a5a5a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -7306,7 +7307,7 @@ h6, .h6 {
 
 p, li, td, th, dl, dt, dd {
   font-size: 1.115rem;
-  line-height: 1.5rem;
+  line-height: 1.75rem;
   font-family: "Poppins", sans-serif;
   color: #5a5a5a; }
   p strong, li strong, td strong, th strong, dl strong, dt strong, dd strong {
@@ -7438,7 +7439,7 @@ body.on {
   transform: translate(-50%, -50%); }
 
 .section_content {
-  padding: 3rem 0rem; }
+  padding: 3.5rem 0rem; }
   .section_content:first-child {
     padding-top: 2rem; }
   .section_content:nth-child(even) {
@@ -8075,7 +8076,8 @@ header {
           .HomeCarousel .slick-slider .slick-slide div .item .banner_content h1 {
             color: #ffc20e;
             font-weight: 600;
-            font-size: 3.5rem; }
+            font-size: 3.5rem;
+            line-height: 4.6rem; }
           .HomeCarousel .slick-slider .slick-slide div .item .banner_content p {
             color: #fff;
             font-size: 1.6rem;
@@ -9483,7 +9485,7 @@ ul.careers_infographics_list {
         position: relative;
         background: #fff; }
         .speakers_slider .slick-track .slick-slide .speakers_wrap .speakers_info {
-          width: calc(100% - 140px); }
+          width: calc(100% - 150px); }
           .speakers_slider .slick-track .slick-slide .speakers_wrap .speakers_info h4 {
             font-size: 1.1rem;
             line-height: 1.25;

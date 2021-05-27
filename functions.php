@@ -200,6 +200,29 @@ function centumlearning_widget_tag_cloud_args( $args ) {
 add_filter( 'widget_tag_cloud_args', 'centumlearning_widget_tag_cloud_args' );
 
 
+function remove_dashboard_meta() {
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+}
+add_action( 'admin_init', 'remove_dashboard_meta' );
+
+
+add_action('init', 'create_cf7editor_role');
+function create_cf7editor_role(){
+  add_role('cf7_editor', 'Form Editor',
+    array('wpcf7_edit_contact_forms'=>1,
+    'wpcf7_edit_others_contact_forms'=>1,
+    'wpcf7_edit_published_contact_forms'=>1,
+    'wpcf7_read_contact_forms'=>1,
+    'wpcf7_publish_contact_forms'=>1,
+    'wpcf7_delete_contact_forms'=>1,
+    'wpcf7_delete_published_contact_forms'=>1,
+    'wpcf7_delete_others_contact_forms'=>1)
+    );
+}
+
+
+
 require get_template_directory() . '/inc/sanitize-functions.php';
 require get_template_directory() . '/inc/theme-options.php';
 // require get_template_directory() . '/inc/acf.php';

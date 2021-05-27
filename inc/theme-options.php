@@ -430,7 +430,7 @@ function speakers_register() {
 		'hierarchical' => true,
 		'menu_position' => 24,
 		'menu_icon' => 'dashicons-businessman',
-		'supports' => array( 'title', 'editor', 'thumbnail')	
+		'supports' => array( 'title', 'thumbnail')	
 ); 
 
 register_post_type("speakers" , $args);
