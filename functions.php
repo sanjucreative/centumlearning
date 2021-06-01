@@ -2,8 +2,8 @@
 function centumlearning_setup() {
 	load_theme_textdomain('centumlearning');
 		update_option( 'large_size_w', 1280 );
-		update_option( 'large_size_h', 853 );
-		update_option( 'medium_size_w', 900 );
+		update_option( 'large_size_h', 1080 );
+		update_option( 'medium_size_w', 800 );
 		update_option( 'medium_size_h', 600 );	
 
 	$GLOBALS['content_width'] = 525;
@@ -667,3 +667,35 @@ return $content;
 wp_reset_query();
 }
 
+
+
+function bartag_func( $atts ) {
+	$message = '<div id="infographics"></div>';
+	return $message;
+}
+add_shortcode( 'infographics', 'bartag_func' );
+add_filter('acf/format_value/type=textarea', 'do_shortcode');
+
+
+add_filter('acf/fields/post_object/result', 'my_acf_fields_post_object_result', 10, 4);
+function my_acf_fields_post_object_result( $text, $post, $field, $post_id ) {
+	if($post->post_type == "client"){
+		$format =  get_post_meta( $post->ID, 'client_video_format', true );
+		$profilePic = wp_get_attachment_url( get_post_thumbnail_id($post->ID));	
+			if($format[0] == 'Yes'){
+				$text .= ' (Video)';
+			}else{
+				if($profilePic !=''){ 
+					$text .= ' (Text - With Profile Image)';
+				} else{
+					$text .= ' (Text)';
+				}
+			}
+	}
+	if($post->post_type == "case-studies"){
+		$term_list = wp_get_post_terms( $post->ID, 'case', array( 'fields' => 'names' ) );
+		$text .= ' ('. $term_list[0] .')';
+
+	}
+	return $text;
+}

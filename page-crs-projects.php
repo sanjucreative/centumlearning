@@ -4,6 +4,7 @@ get_header();
 ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); 
 $template_banner_image = get_field('template_banner_image');
+$template_banner_content = get_field('template_banner_content');
 $page_video_cover_image = get_field('page_video_cover_image');
 $page_video_url = get_field('page_video_url');
 $page_url = get_field('page_url');
@@ -15,7 +16,7 @@ $check_for_page_url = get_field('check_for_page_url');
 		<div class="row">
 			<div class="col-12 col-md-7 pr-0 pr-md-5" data-aos="fade-up" data-aos-delay="50">
 				<h1><?php the_title();?></h1>
-				<?php the_content();?>
+				<?php echo $template_banner_content ?>
 			</div>
 			<div class="col-12 col-md-5" data-aos="fade-up" data-aos-delay="50">
 				<div class="video_cont">
@@ -106,11 +107,9 @@ $check_for_page_url = get_field('check_for_page_url');
 	</div>
 </div>
 
-<div class="section_content" data-aos="fade-up" data-aos-delay="50">
+<div class="section_content py-3" data-aos="fade-up" data-aos-delay="50">
 	<div class="container">
-		<div class="row justify-content-center">
-			<h3 class="col-12 text-center section-title font-weight-bold">Client Speak</h3>
-		</div>
+		<?php include('client-speak.php'); ?>
 	</div>
 </div>
 

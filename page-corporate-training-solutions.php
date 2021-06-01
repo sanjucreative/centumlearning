@@ -4,14 +4,14 @@ get_header();
 ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); 
 $template_banner_image = get_field('template_banner_image');
-
+$template_banner_content = get_field('template_banner_content');
 ?>
 <div class="TemplateBanner temp_CTS" style="background-image: url('<?php echo $template_banner_image; ?>')">
 	<div class="container banner_content" data-aos="fade-up" data-aos-delay="50">
 		<div class="row">
 			<div class="col-12 col-md-6 pt-0 pt-md-3 pr-0 pr-md-3">
 				<h1><?php the_title();?></h1>
-				<?php the_content();?>
+				<?php echo $template_banner_content ?>
 			</div>
 			<div class="col-12 col-md-6">
 				<div class="CTS_page_list_wrap row">

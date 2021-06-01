@@ -13,39 +13,36 @@ $banner_content = get_field('dialogues_banner_content');
 				<?php echo $banner_content; ?>
 			</div>
 			<div class="col-12 page_banner_content" data-aos="fade-up" data-aos-delay="50">
-				<div class="row">
+				<div class="row justify-content-center">
+					<?php
+
+					//$todays_date = date('Y-m-d H:i:s');	
+					$stdate = current_time('mysql');
+					$todays_date =  date("Ymd", strtotime($stdate));
+					//$todays_date = date('d/m/Y', strtotime('-1 day', strtotime($stdate)));
+
+
+					$web_upcoming_args = array(
+					'posts_per_page' => 5, 'category_name' => 'webinars', 'orderby' => 'post_date',
+					'order' => 'DESC', 'post_status' => 'publish', 	'meta_key' => 'schedule_date',
+					'meta_query' => array(
+										array('key' => 'schedule_date', 'value' => $todays_date, 'compare' => '>')
+							)
+					);
+					$web_upcoming_query = new WP_Query( $web_upcoming_args );
+					$count = $web_upcoming_query->found_posts;
+					// echo '<pre>';
+					// print_r($web_upcoming_query);
+					// echo $count;
+					// echo '</pre>';
+					
+					if($count > 0){
+					?>
 						<div class="col-12 col-md-3">
 							<h2>Upcoming Discussions</h2>
 							<div class="block_scrollbar1">
 								<ul class="upcoming_discussions">
 									<?php
-
-									//$todays_date = date('Y-m-d H:i:s');	
-									$stdate = current_time('mysql');
-									$todays_date =  date("Ymd", strtotime($stdate));
-									//$todays_date = date('d/m/Y', strtotime('-1 day', strtotime($stdate)));
-
-
-										$web_upcoming_args = array(
-											'posts_per_page' => 5,
-											'category_name' => 'webinars',
-											'orderby' => 'post_date',
-											'order' => 'DESC',
-											'post_status' => 'publish',
-											'meta_key' => 'schedule_date',
-											'meta_query' => array(
-												array(
-													'key' => 'schedule_date',
-													'value' => $todays_date,
-													'compare' => '>'
-												)
-											)
-									);
-
-										// echo '<pre>';
-										// print_r($web_upcoming_args);
-										// echo '</pre>';
-										$web_upcoming_query = new WP_Query( $web_upcoming_args );
 										if ($web_upcoming_query->have_posts()) : while ($web_upcoming_query->have_posts()) : $web_upcoming_query->the_post();
 											$schedule_date = get_post_meta(get_the_ID(), 'schedule_date', true );
 											$schedule_time = get_post_meta(get_the_ID(), 'schedule_time', true );
@@ -76,6 +73,7 @@ $banner_content = get_field('dialogues_banner_content');
 								</ul>
 							</div>
 						</div>
+						<?php } ?>
 						<div class="col-12 col-md-5">
 							<h2>Recent Discussions</h2>
 							<div class="block_scrollbar">

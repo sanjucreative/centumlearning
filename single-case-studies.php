@@ -1,7 +1,4 @@
-<?php 
-/* Template Name: Skill Development */
-get_header(); 
-?>
+<?php get_header(); ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); 
 $template_banner_image = get_field('template_banner_image');
 $template_banner_content = get_field('template_banner_content');
@@ -14,11 +11,10 @@ $check_for_page_url = get_field('check_for_page_url');
 <div class="TemplateBanner temp_CTS" style="background-image: url('<?php echo $template_banner_image; ?>')">
 	<div class="container banner_content pt-0 pt-md-5">
 		<div class="row">
-			<div class="col-12 col-md-5 pr-0 pr-md-5" data-aos="fade-up" data-aos-delay="50">
-				<h1><?php the_title();?></h1>
+			<div class="col-12 col-md-7 pr-0 pr-md-5" data-aos="fade-up" data-aos-delay="50">
 				<?php echo $template_banner_content ?>
 			</div>
-			<div class="col-12 col-md-7" data-aos="fade-up" data-aos-delay="50">
+			<div class="col-12 col-md-5" data-aos="fade-up" data-aos-delay="50">
 				<div class="video_cont">
 					<figure>
 						<?php if($page_video_url !='' && $check_for_page_url[0] != 'Yes'){ 
@@ -35,34 +31,28 @@ $check_for_page_url = get_field('check_for_page_url');
 		</div>
 	</div>
 </div>
-
-
-<?php
-	if( have_rows('sd_content_section_row') ): 
-	foreach ( get_field("sd_content_section_row") as $i => $item  ) {
-?>
-<div class="section_content" data-aos="fade-up" data-aos-delay="50">
-	<div class="container">
-		<div class="row justify-content-center">
-			<?php if($item['sd_section_heading'] !=''){
-				echo '<h3 class="col-12 col-md-10 text-center section-title font-weight-bold">'. $item['sd_section_heading'] .'</h3>';
-			}?>
-			<div class="col-12 col-md-10 text-center"><?php echo $item['sk_section_content']; ?></div>
+<div class="animation_wrap">
+<div class="container">
+	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">
+		<div class="post-content col-12 col-md-10 pt-5">
+			<h1 class="text-center"><?php the_title(); ?></h1>
+				<?php if (has_excerpt()){ ?>
+					<article class="text-center"><?php the_excerpt();?></article>
+				<?php } ?>
+			
+			<?php $featured_image_display = get_field('show_featured_image_in_post');
+					if($featured_image_display[0] == 'Yes'):
+						if( has_post_thumbnail() ) { ?>
+							<figure class="post-featured-image"><?php the_post_thumbnail(); ?></figure>
+						<?php }
+					endif;
+			?>
+			<article><?php the_content(); ?></article>
 		</div>
 	</div>
-</div>
-<?php
-		}
-	endif;
-?>
 
-<div class="video_modal">
-    <div class="closed"></div>
-    <div class="modal_container">
-        <div class="videoWrapper">
-                <iframe id="iframe_video" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen"></iframe>
-        </div>
-    </div>
+</div>
+<?php include('polygonizr-animation-left.php'); ?>
 </div>
 <?php endwhile; endif; ?>
 <?php get_footer(); ?>

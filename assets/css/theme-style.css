@@ -7444,6 +7444,8 @@ body.on {
     padding-top: 2rem; }
   .section_content:nth-child(even) {
     background: #f2f2f2; }
+    .section_content:nth-child(even) .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure::before {
+      background: url(../images/client_wrap_mask_gray.png) left top/cover no-repeat; }
   .section_content .section-title {
     font-size: 2rem;
     margin-bottom: 2rem; }
@@ -8693,10 +8695,12 @@ ul.project_follow {
         left: -21px;
         vertical-align: bottom;
         min-height: 200px;
-        width: calc(100% + 42px); }
+        width: calc(100% + 42px);
+        font-size: 0.95rem;
+        line-height: 1.45; }
         ul.project_follow li .follow_circle .follow_excerpt p {
           font-size: 0.95rem;
-          line-height: 1.35;
+          line-height: 1.45;
           margin: 0 0 5px 0;
           padding: 0 0 0 12px;
           position: relative; }
@@ -9448,6 +9452,126 @@ ul.careers_infographics_list {
           .temp_dialogues .page_banner_content .more_post_btn a:hover i {
             background-image: url(../images/arrow-white.svg); }
 
+/* ######################### Template Solutions Page ########################## */
+.client_slider.slick-slider .slick-track {
+  display: flex !important; }
+  .client_slider.slick-slider .slick-track .slick-slide {
+    padding: 0px 15px;
+    height: inherit !important; }
+    .client_slider.slick-slider .slick-track .slick-slide > div {
+      height: 100%; }
+    .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap {
+      width: 100%;
+      max-width: 375px;
+      height: 100%;
+      position: relative;
+      text-align: center; }
+      .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure {
+        width: 100%;
+        max-width: 375px;
+        height: auto;
+        position: relative;
+        margin: 0;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: cover; }
+        .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure img {
+          width: 100%;
+          height: auto; }
+        .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure::before {
+          content: '';
+          display: block;
+          width: calc(100% + 2px);
+          height: calc(100% + 2px);
+          left: -1px;
+          top: 0px;
+          position: absolute;
+          z-index: 1;
+          background: url(../images/client_wrap_mask_white.png) no-repeat top left;
+          background-size: cover; }
+        .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure.video .show_btn {
+          position: absolute;
+          width: 80px;
+          height: 50px;
+          background: #f00;
+          z-index: 5;
+          border-radius: 12px;
+          opacity: 0.75;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -60%);
+          cursor: pointer; }
+          .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure.video .show_btn::after {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 12px 0 12px 20px;
+            border-color: transparent transparent transparent #fff;
+            content: '';
+            display: block;
+            left: 30px;
+            top: 14px;
+            position: relative; }
+          .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure.video .show_btn:hover {
+            opacity: 1; }
+        .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure.text .read_btn {
+          position: absolute;
+          width: 100px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          background: #f00;
+          z-index: 5;
+          color: #fff;
+          border-radius: 12px;
+          opacity: 0.75;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -60%);
+          cursor: pointer; }
+          .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap figure.text .read_btn:hover {
+            opacity: 1; }
+      .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap .client_meta {
+        padding: 1rem 10%; }
+        .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap .client_meta h5 {
+          font-size: 1.2rem;
+          line-height: 1.4;
+          margin: 0;
+          font-weight: 500; }
+        .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap .client_meta p {
+          font-size: 1rem;
+          line-height: 1.4;
+          margin: 0px; }
+          .client_slider.slick-slider .slick-track .slick-slide .client_box_wrap .client_meta p strong {
+            font-weight: 500; }
+
+.case_slider.slick-slider .slick-track {
+  display: flex !important; }
+  .case_slider.slick-slider .slick-track .slick-slide {
+    padding: 0px 40px;
+    height: inherit !important; }
+    .case_slider.slick-slider .slick-track .slick-slide > div {
+      height: 100%; }
+    .case_slider.slick-slider .slick-track .slick-slide .case_box_wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      text-align: center; }
+      .case_slider.slick-slider .slick-track .slick-slide .case_box_wrap figure {
+        width: 100%;
+        height: auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 25px; }
+        .case_slider.slick-slider .slick-track .slick-slide .case_box_wrap figure img {
+          transition: all 2s ease;
+          -webkit-transition: all 2s ease;
+          -moz-transition: all 2s ease;
+          -o-transition: all 2s ease;
+          -ms-transition: all 2s ease; }
+        .case_slider.slick-slider .slick-track .slick-slide .case_box_wrap figure:hover img {
+          transform: scale(1.125); }
+
 @media (max-width: 900px) {
   .about_us {
     width: 96%; }
@@ -9550,6 +9674,97 @@ ul.careers_infographics_list {
   background: #1f77df;
   padding: 5px 15px;
   color: #fff; }
+
+.cat_wrap {
+  border: solid 1px #1f77df;
+  padding: 10px 10px 60px;
+  height: 100%;
+  position: relative; }
+  .cat_wrap h4 {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #242526; }
+  .cat_wrap .cat-featured-image {
+    width: 100%;
+    min-height: 152px;
+    margin-bottom: 12px;
+    transition: all 0.8s ease;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    -ms-transition: all 0.8s ease;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative; }
+    .cat_wrap .cat-featured-image.webinarThumb {
+      background-image: url(../images/webinar-listing-thumb.jpg); }
+  .cat_wrap:hover .cat-featured-image {
+    transform: scale(1.07, 1.125); }
+  .cat_wrap p {
+    margin: 0;
+    font-size: 0.95rem; }
+  .cat_wrap .know_more {
+    position: absolute;
+    bottom: 6px;
+    left: 10px; }
+    .cat_wrap .know_more a {
+      font-size: 0.775rem; }
+
+.banner_upcoming_webinars {
+  background: rgba(5, 40, 97, 0.85);
+  padding: 10px 15px;
+  height: auto !important;
+  margin: 0 auto;
+  max-width: 400px; }
+  .banner_upcoming_webinars h6 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin: 0 0 8px;
+    color: #ffc20e;
+    text-align: center; }
+  .banner_upcoming_webinars h2 {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin: 0 0 5px;
+    color: #ffc20e;
+    text-align: left; }
+  .banner_upcoming_webinars .featured-image {
+    width: 100%;
+    min-height: 190px !important;
+    margin-bottom: 12px;
+    transition: all 0.8s ease;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    -ms-transition: all 0.8s ease;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative; }
+    .banner_upcoming_webinars .featured-image.webinarThumb {
+      background-image: url(../images/webinar-listing-thumb.jpg); }
+  .banner_upcoming_webinars .date_time {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 300;
+    height: auto !important;
+    margin-bottom: 10px; }
+    .banner_upcoming_webinars .date_time span {
+      color: #ffc20e;
+      font-weight: 400; }
+  .banner_upcoming_webinars .know_more {
+    height: auto !important; }
+    .banner_upcoming_webinars .know_more a {
+      background: #fff; }
+      .banner_upcoming_webinars .know_more a:hover {
+        background-color: #052861; }
+
+body.category-webinars .banner_content .banner_right .video_cont {
+  max-width: 400px; }
+
+body.category-insights .banner_content .banner_right .video_cont {
+  max-width: 400px; }
 
 .centumlearning-form :-ms-input-placeholder {
   color: transparent; }

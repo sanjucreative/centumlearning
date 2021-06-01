@@ -46,3 +46,36 @@
     }
 }
 .reg_closed_msg{background: #1f77df; padding: 5px 15px; color: #fff;}
+
+
+.cat_wrap{ border: solid 1px #1f77df; padding: 10px 10px 60px; height: 100%; position: relative;
+    h4{font-size: 1.1rem; line-height: 1.4; color: $text-heading;}
+    .cat-featured-image{width: 100%; min-height: 152px; margin-bottom: 12px; @include transition(0.8s);  background-repeat: no-repeat; background-position: center; background-size: cover; position: relative;
+        &.webinarThumb{background-image: url(../images/webinar-listing-thumb.jpg);}
+    }
+
+    &:hover{
+        .cat-featured-image{transform: scale(1.07, 1.125);}
+    }
+    p{margin: 0; font-size: 0.95rem;}
+    .know_more{position: absolute; bottom: 6px; left: 10px;
+        a{font-size: 0.775rem;}
+    }
+}
+.banner_upcoming_webinars{background: rgba(#052861, 0.85); padding: 10px 15px; height: auto!important; margin: 0 auto; max-width: 400px;
+    h6{font-size: 1.25rem; line-height: 1.4; margin: 0 0 8px; color: $color-orange; text-align: center;}
+    h2{font-size: 1.3rem; line-height: 1.4; margin: 0 0 5px; color: $color-orange; text-align: left;}
+    .featured-image{width: 100%; min-height: 190px!important; margin-bottom: 12px; @include transition(0.8s);  background-repeat: no-repeat; background-position: center; background-size: cover; position: relative;
+        &.webinarThumb{background-image: url(../images/webinar-listing-thumb.jpg);}
+    }
+    .date_time{color: $color-white; font-size: 1rem; font-weight: 300; height: auto!important; margin-bottom: 10px;
+        span{color: $color-orange; font-weight: 400;}
+    }
+    .know_more{height: auto!important;
+        a{background: #fff;
+            &:hover{background-color: #052861;}
+        }
+    }
+}
+body.category-webinars .banner_content .banner_right .video_cont{max-width: 400px;}
+body.category-insights .banner_content .banner_right .video_cont{max-width: 400px;}

@@ -44,6 +44,7 @@ gulp.task('css:build', gulp.series('sass', function () {
 gulp.task('vendor:js', function () {
     return gulp.src([
 //            'node_modules/jquery/dist/jquery.min.js',
+//			  'src/plugins/bootstrap/bootstrap.min.js',
               'src/js/*.js'
         ])
         .pipe(concat('theme-function.js'))
