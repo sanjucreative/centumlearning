@@ -48,7 +48,7 @@ $memeber .='</div></div></div>';
 return $memeber;
 }
 ?>
-<div class="TemplateBanner temp_out_team" style="background-image: url('<?php echo $our_team_banner_image; ?>')">
+<div class="TemplateBanner temp_our_team" style="background-image: url('<?php echo $our_team_banner_image; ?>')">
 	<div class="container banner_content">
 		<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">
 			<div class="col-12 col-md-10 text-center"><?php echo $banner_content;?></div>
@@ -65,7 +65,7 @@ return $memeber;
 		</div>
 	</div>
 </div>
-
+<div class="animation_wrap">
 <div class="container">
 	<div class="row justify-content-center py-5" data-aos="fade-up" data-aos-delay="50">
 		<?php
@@ -81,6 +81,8 @@ return $memeber;
 			endif;
 		?>
 	</div>
+	<?php include('polygonizr-animation-left.php'); ?>
+</div>
 </div>
 <?php endwhile; endif; ?>
 

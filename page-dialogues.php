@@ -38,7 +38,7 @@ $banner_content = get_field('dialogues_banner_content');
 					
 					if($count > 0){
 					?>
-						<div class="col-12 col-md-3">
+						<div class="col-12 col-lg-3">
 							<h2>Upcoming Discussions</h2>
 							<div class="block_scrollbar1">
 								<ul class="upcoming_discussions">
@@ -74,7 +74,7 @@ $banner_content = get_field('dialogues_banner_content');
 							</div>
 						</div>
 						<?php } ?>
-						<div class="col-12 col-md-5">
+						<div class="col-12 col-lg-5">
 							<h2>Recent Discussions</h2>
 							<div class="block_scrollbar">
 							<ul class="recent_discussions">
@@ -119,7 +119,7 @@ $banner_content = get_field('dialogues_banner_content');
 							</div>
 							<div class="more_post_btn"><a href="<?php echo get_bloginfo('url');?>/webinars">More Discussions <i></i></a></div>
 						</div>
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-lg-4">
 							<h2>Insights</h2>
 							<div class="block_scrollbar">
 							<ul class="insights">

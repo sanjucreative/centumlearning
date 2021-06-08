@@ -2,6 +2,8 @@
 body{font-family: $font-poppins; font-style: normal; font-size: 1.115rem; line-height: 1.75rem; color: $text-color; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;}
 html {height:100%; margin: 0px; padding: 0px;}
 body {min-height:100%; margin: 0px; padding: 0px;}
+.row-cols-4>* {-ms-flex: 0 0 25%; flex: 0 0 25%; max-width: 25%;}
+.row-cols-5>* {-ms-flex: 0 0 20%; flex: 0 0 20%; max-width: 20%;}
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: $font-poppins; color: $text-heading;}
 h1, .h1{font-size: 2.5rem; line-height: 3.5rem; margin-bottom:1rem;}
 h2, .h2{font-size: 2rem; line-height: 3rem; margin-bottom:1rem;}
@@ -14,9 +16,13 @@ p, li, td, th, dl,dt,dd{font-size:1.115rem; line-height:1.75rem; font-family:$fo
 }
 ol, ul, dl{margin-left: 0px; padding-left: 18px;}
 p:not(:last-child), li:not(:last-child) {margin-bottom:1.5rem;}
+hr{box-sizing: border-box;}
+
+
 body.on{overflow: hidden;}
 .breadcrumbs{margin: 1rem 0;}
 .section-heading{font-size: 1.5rem; font-weight: 600; color:$text-heading}
+
 
 .trustedBy{padding: 0 30px; position: relative;
     .slick-slide{padding: 0 15px;
@@ -72,7 +78,7 @@ body.on{overflow: hidden;}
     .section-title{font-size: 2rem; margin-bottom: 2rem;}
 }
 .know_more_btn{border: solid 1px #3266cc; text-align: center; padding: 0px 0px 0px 10px; line-height: 30px; position: relative; border-radius: 5px;
-    font-size: 0.85rem; text-transform: uppercase; display: inline-block;
+    font-size: 0.85rem; text-transform: uppercase; display: inline-block; min-width: 145px;
     span{float: left; color: #111; border-right: solid 1px #3266cc; padding-right: 10px;}
     &::after{content: ''; width: 30px; height: 16px; position: relative; top: 6px; float: left; @include arrow('3266cc') }
 
@@ -128,6 +134,8 @@ img.aligncenter, a img.aligncenter {display: block; margin-left: auto; margin-ri
     }
 }
 
+
+
 @media (max-width:1024px){
     .container, .container-sm {max-width: 100%;}
 }
@@ -137,4 +145,8 @@ img.aligncenter, a img.aligncenter {display: block; margin-left: auto; margin-ri
         .left_aninamtion{display: none;}
         .right_aninamtion{display: none;}
     }
+
+    .table_responsive{overflow-x: auto;
+        table{width: max-content;}
+   }
 }

@@ -10,8 +10,8 @@ $media_banner_right_side = get_field('media_banner_right_side');
 ?>
 <div class="TemplateBanner temp_media" style="background-image: url('<?php echo $media_banner_image; ?>')">
 	<div class="container">
-		<div class="row banner_content pt-0 pt-md-5">
-			<div class="col-12 col-md-5 pr-0 pr-md-5" data-aos="fade-up" data-aos-delay="50">
+		<div class="row banner_content pt-0 pt-md-4">
+			<div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="50">
 				<?php echo $media_banner_left_side ?>
 
 				<ul class="scrollspy_location">
@@ -20,7 +20,7 @@ $media_banner_right_side = get_field('media_banner_right_side');
 
 				</ul>
 			</div>
-			<div class="col-12 col-md-7" data-aos="fade-up" data-aos-delay="50">
+			<div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="50">
 				<div class="contact_info">
 				<?php echo $media_banner_right_side ?>
 				</div>

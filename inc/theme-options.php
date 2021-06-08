@@ -19,7 +19,7 @@ body{background:#fff!important}
 .login #login_error { background: rgba(220, 50, 50, 0.15)!important;}
 .login form input[type="submit"]{ background:#156ac4!important; border-color:#0d477b !important; box-shadow: 0 1px 0 rgba(20, 81, 196, 0.5) inset!important; font-size:15px!important}
 .login form input[type="submit"]:hover{ background:#0b4196!important; border-color:#082b58!important; box-shadow: 0 1px 0 rgba(20, 81, 196, 0.8) inset!important}
-#backtoblog{display:none!important}
+#backtoblog, .privacy-policy-page-link{display:none!important}
 .wp-core-ui .button-primary{text-shadow: 0 1px 1px #333!important}
 </style>
 <?php }
@@ -55,6 +55,53 @@ function my_login_redirect( $redirect_to, $request, $user ) {
 }
 
 add_filter( 'login_redirect', 'my_login_redirect', 10, 3 );
+
+function hr_role() {
+    add_role('hr_role', 'HR',
+        array(
+            'read'         => true,
+            'edit_posts'   => true,
+            'upload_files' => true,
+        ),
+    );
+}
+add_action( 'init', 'hr_role' );
+
+
+
+
+if( current_user_can('hr_role')) {
+	// For Menu Hide editor Role
+	function remove_hr_role_menus(){
+	//   remove_menu_page( 'index.php' );                    		//Dashboard
+	  remove_menu_page( 'edit.php' );                     			//Posts
+	  remove_menu_page( 'upload.php' );                 			//Media
+	  remove_menu_page( 'edit.php?post_type=page' );    			//Pages
+	  remove_menu_page( 'edit-comments.php' );            			//Comments
+	  remove_menu_page( 'themes.php' );                  			//Appearance
+	  remove_menu_page( 'plugins.php' );                  			//Plugins
+	  remove_menu_page( 'users.php' );                    			//Users
+	  remove_menu_page( 'tools.php' );                   			//Tools
+	  remove_menu_page( 'options-general.php' );         			//Settings
+	  remove_menu_page( 'edit.php?post_type=banner' );    			//Slider
+	  remove_menu_page( 'edit.php?post_type=case-studies' );  		//Case Studies
+	  remove_menu_page( 'edit.php?post_type=press-releases' );    	//Press Releases
+	  remove_menu_page( 'edit.php?post_type=news' );    			//News
+	  remove_menu_page( 'edit.php?post_type=speakers' );    		//Speakers
+	  remove_menu_page( 'edit.php?post_type=client' );    			//Client
+	  remove_menu_page( 'edit.php?post_type=trusted_company' );    	//Trusted Company
+	  remove_menu_page( 'edit.php?post_type=awards_support' );    	//Awards Support
+	  remove_menu_page( 'wpcf7' );									//Contact Form
+	}
+	add_action( 'admin_menu', 'remove_hr_role_menus' );
+	
+
+		$role = get_role("hr_role");
+		if(!$role->has_cap('cfdb7_access')){
+			$role->add_cap('cfdb7_access');
+		}
+	
+	}
 
 
 
@@ -173,7 +220,7 @@ function case_studies_register() {
 		'hierarchical' => true,
 		'menu_position' => 21,
 		'menu_icon' => 'dashicons-book-alt',
-		'supports' => array( 'title', 'thumbnail', 'editor')		
+		'supports' => array( 'title', 'thumbnail')		
 ); 
 
 register_post_type("case-studies" , $args);
@@ -489,6 +536,161 @@ function save_speakers_meta(){
 }
 
 
+// Job Details 
+add_action('init', 'job_register');
+function job_register() {
+	$labels = array(
+		'name' => _x('Job', 'post type general name'),
+		'singular_name' => _x('Job', 'post type singular name'),
+		'add_new' => _x('Add New Job', 'Job'),
+		'add_new_item' => __('Add New Job'),
+		'edit_item' => __('Edit Job'),
+		'new_item' => __('New Job'),
+		'view_item' => __('View Job'),
+		'search_items' => __('Search Job'),
+		'all_items' => __( 'All Jobs' ),
+		'not_found' =>  __('Nothing found'),
+		'not_found_in_trash' => __('Nothing found in Trash'),
+		'parent_item_colon' => '',
+//	    'menu_name' => 'Media Center'
+);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'show_ui' => true, 
+		'show_in_menu' => true, 
+		'query_var' => true,
+		'rewrite' => array('with_front' => false),
+		'capability_type' => 'post',
+		'has_archive' => true, 
+		'hierarchical' => true,
+		'menu_position' => 26,
+		'menu_icon' => 'dashicons-groups',
+		'supports' => array( 'title', 'thumbnail')	
+); 
+
+register_post_type("job" , $args);
+register_taxonomy("locations", array("job"), array("hierarchical" => true, "label" => "Locations", "singular_label" => "Location", "rewrite" => true, ));
+register_taxonomy("departments", array("job"), array("hierarchical" => true, "label" => "Departments", "singular_label" => "Department", "rewrite" => true, ));
+register_taxonomy("job-categories", array("job"), array("hierarchical" => true, "label" => "Categories", "singular_label" => "Category", "rewrite" => true, ));
+
+
+add_filter('manage_job_posts_columns', 'job_posts_columns');
+function job_posts_columns($defaults){
+	$defaults['location'] = __('Location');
+	$defaults['department'] = __('Department');
+    return $defaults;
+}
+
+add_filter('manage_job_posts_columns', 'job_head');  
+
+function job_head($defaults){  
+    $new = array();
+    $tags = $defaults['category_group'];  
+    foreach($defaults as $key=>$value){
+        if($key=='date') {  
+		   $new['location'] = $tags;
+		   $new['department'] = $tags;		   
+        }    
+       $new[$key]=$value;
+    }  
+   return $new;  
+} 
+
+add_action('job_posts_custom_column', 'job_posts_custom_columns', 10, 2);
+function job_custom_columns($column_name, $post_id){
+	if($column_name === 'post_thumbs'){		
+		$SlideImgUrl = wp_get_attachment_url( get_post_thumbnail_id($post_id));	
+        if ($SlideImgUrl !='')
+           echo '<img src="' .$SlideImgUrl.' " width="" height="45" alt="" />';
+        else
+           echo "N/A";
+    }
+}
+
+
+
+}
+
+
+
+// Locations
+add_action('init', 'locations_register');
+function locations_register() {
+	$labels = array(
+		'name' => _x('Locations', 'post type general name'),
+		'singular_name' => _x('Location', 'post type singular name'),
+		'add_new' => _x('Add New Location', 'Location'),
+		'add_new_item' => __('Add New Location'),
+		'edit_item' => __('Edit Location'),
+		'new_item' => __('New Location'),
+		'view_item' => __('View Location'),
+		'search_items' => __('Search Location'),
+		'all_items' => __( 'All Locations' ),
+		'not_found' =>  __('Nothing found'),
+		'not_found_in_trash' => __('Nothing found in Trash'),
+		'parent_item_colon' => '',
+//	    'menu_name' => 'Media Center'
+);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'show_ui' => true, 
+		'show_in_menu' => true, 
+		'query_var' => true,
+		'rewrite' => array('with_front' => false),
+		'capability_type' => 'post',
+		'has_archive' => true, 
+		'hierarchical' => true,
+		'menu_position' => 27,
+		'menu_icon' => 'dashicons-location-alt',
+		'supports' => array( 'title',)	
+); 
+
+register_post_type("locations" , $args);
+register_taxonomy("country", array("locations"), array("hierarchical" => true, "label" => "Country", "singular_label" => "Country", "rewrite" => false, ));
+
+
+
+
+add_filter('manage_locations_posts_columns', 'locations_posts_columns');
+function locations_posts_columns($defaults){
+	$defaults['country'] = __('Country');
+    return $defaults;
+}
+
+add_filter('manage_locations_posts_columns', 'locations_head');  
+function locations_head($defaults){  
+    $new = array();
+    $tags = $defaults['category_group'];  
+    foreach($defaults as $key=>$value){
+        if($key=='date') {  
+		   $new['country'] = $tags;	   
+        }    
+       $new[$key]=$value;
+    }  
+   return $new;  
+} 
+
+add_action('manage_locations_posts_custom_column', 'locations_custom_columns', 10, 2);
+function locations_custom_columns($column_name, $post_id){
+	if($column_name === 'country'){	
+
+		$country = get_the_terms($post_id, 'country'); 
+		foreach($country as $item){
+			echo $item->name;
+		}
+		
+    }
+}
+
+
+
+}
 
 
 // Trusted By 
@@ -521,7 +723,7 @@ function trusted_company_register() {
 		'capability_type' => 'post',
 		'has_archive' => true, 
 		'hierarchical' => true,
-		'menu_position' => 26,
+		'menu_position' => 28,
 		'menu_icon' => 'dashicons-shield',
 		'supports' => array( 'title', 'thumbnail')	
 ); 
@@ -595,7 +797,7 @@ function awards_support_register() {
 		'capability_type' => 'post',
 		'has_archive' => true, 
 		'hierarchical' => true,
-		'menu_position' => 27,
+		'menu_position' => 29,
 		'menu_icon' => 'dashicons-awards',
 		'supports' => array( 'title', 'thumbnail')	
 ); 

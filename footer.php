@@ -37,13 +37,30 @@
 </div>
 <a id="top-link" href="#top"></a>
 <?php wp_footer();  ?> 
+<script type="text/javascript" src="<?php echo get_theme_file_uri( '/assets/plugins/polygonizr/polygonizr.min.js')?>"></script>
 <script>
-        setTimeout(function () {
-            AOS.init({
-                duration: 800,
-                easing: "ease-in-out"
-            })
+jQuery(document).ready(function($){
+    let $sitelading = $('.polygonizr');
+    $sitelading.polygonizr({
+            canvasWidth: '250',
+            canvasHeight: $('.polygonizr').height(),
+            // duration: 10,
+            // nodeMovementDistance: 10,
+            // numberOfNodes: 1,
+            // numberOfUnconnectedNode: 25,
+            nodeDotColor:"10, 10, 10",
+            nodeLineColor:"5, 5, 5",
+            nodeFillColor:"5, 5, 5",
+    });
 
-        }, 800);
-    </script>
+});
+
+setTimeout(function () {
+	AOS.init({
+		duration: 800,
+		easing: "ease-in-out"
+	})
+
+}, 800);
+</script>
 </body>

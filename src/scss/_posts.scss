@@ -79,3 +79,73 @@
 }
 body.category-webinars .banner_content .banner_right .video_cont{max-width: 400px;}
 body.category-insights .banner_content .banner_right .video_cont{max-width: 400px;}
+
+
+/* ######################### Template Case Studies ########################## */
+.temp_case_studies{
+    .banner_content{
+        h1{font-size: 3.25rem;}
+        p.label{margin: 30px 0 10px;}
+        ul.scrollspy_location{list-style: none; margin: 0px; padding: 0px; width: 100%; float: left;
+            li{width: auto; float: left; text-align: left; line-height: 1; margin-right: 15px;
+                a{background: #1f77dd; border-radius: 5px; text-align: center; color: #fff; text-decoration: none;
+                    display: inline-block; padding: 20px 20px; text-decoration: none; font-size: 0.95rem;
+                    &:hover{background: $color-skyblue}
+                }
+
+                &:last-child{margin-right: 0px;}
+            }
+        }
+    }
+}
+.centum_impact_section{ background: url(../images/case_impcat_bg.jpg) no-repeat top center; background-attachment: fixed; background-size: cover;
+    color: #fff; position: relative;
+    .box_wrap{border-bottom:solid 1px #fff; border-right:solid 1px #fff; padding: 40px 10px 15px; min-height: 100%; position: relative;
+        font-size: 1rem; line-height: 1.45; font-weight:300;
+
+        &::before{width: calc(100% - 23px); height: 1px; background: #fff; position: absolute; left: 24px; top:0px; display: block; content: '';}
+        &::after{height: calc(100% - 23px); width: 1px; background: #fff; position: absolute; top: 24px; left:0px; display: block; content: '';}
+
+        figure{width: 45px; height: 45px; position: absolute; top: -23px; left: -23px;
+            img{width: 100%; height: auto;}
+        }
+    }
+    h2, p{color: #fff;}
+}
+.approch_list{
+    .heading{width: 100%; position: relative;
+        figure{width: 80px; height: 80px; background: #fff; border:solid 2px #1f77df; border-radius: 50%; position: absolute; top: -15px; left: 0px; z-index: 5;
+            img{width: 70%; height: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); position: relative;}
+        }
+        h4{border:solid 2px #1f77df; border-radius: 50px; padding: 10px 40px 10px 85px; line-height: 1.4; display: inline-block; position: relative; z-index: 1; left: 10px;}
+    }
+    .wrapper{padding: 10px 10px 10px 75px;}
+}
+
+/* ######################### Template Job ########################## */
+.job_wrap{margin: 0px auto; max-width: 300px; padding: 40px 15px 15px;  text-align: left; border: solid 0.1rem #fff; position: relative; border-radius: 5px;
+    font-size: 1rem; line-height: 1.4; font-weight: 300; color: #fff; min-height: 100%;
+
+    figure{width: 64px; height: 64px; background: #1f77df; margin: 0px; border-radius: 50%; position: absolute; top: -32px; right: 20px;
+        img{width: 38px; height: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); position: absolute;}
+    }
+    h5{border-bottom: solid 1px #92a9ce; color: #fff; font-size: 1.25rem; line-height: 1.4; font-weight: 400; padding-bottom: 10px;}
+    
+}
+.job_from_wrap{background: #f9f9f9; padding: 40px; margin-bottom: 80px; border: solid 1px #f0f0f0;}
+
+
+/* ######################### Template Location ########################## */
+.location_our_services{border:solid 1px #1f77df; padding: 45px 30px; position: relative; min-height: 100%;
+    display: flex; flex-wrap: wrap; margin: 0 30px; background: #fff;
+
+    figure{width: 82px; height: 82px; position: absolute; left: -40px; top: -40px; background: #fff; border:solid 15px #fff; margin-bottom: 0px; z-index: 9;
+        img{width: 100%; height: auto;}
+    }
+    h4{text-align: center; line-height: 1.5; align-self: center; width: 100%;  margin-bottom: 0px; @include transition(1.25s); }
+    a{display: block; position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 2;}
+
+    &:hover{
+        h4{transform: scale(1.14);}
+    }
+}

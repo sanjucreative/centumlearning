@@ -1,0 +1,185 @@
+/* ######################### Infographics Arrow ########################## */
+ul.infographic_arrow{display: flex; flex-wrap: wrap; list-style: none; margin:125px 0px 100px; padding:0px; justify-content: center; display: flex; flex-wrap: wrap; position: relative;
+    li{flex-basis: 0; flex-grow: 1; max-width: 100%; text-align: center; margin: 0px; position: relative;
+        .arrow_excerpt{width: fit-content; min-height: 60px; text-align: left; position: absolute; 
+            left:50%; bottom: 30px; padding: 0px 0px 10px 10px;
+            p{margin-bottom: 0px; font-size: 0.95rem; line-height: 1.45;}
+
+            &:before{content: ''; display: block; height: calc(100% + 30px); width: 0.1rem; background: #aaa; position: absolute; top:0px; left:-1px;}
+            &:after{content: ''; display: block; height: 8px; width: 8px; background: #aaa; border-radius: 50%; position: absolute; top:0px; left:-4px;}
+        }
+        &::before{content: ''; display: block; position: absolute; right:0px; bottom: calc(50% - 14px); z-index: 1;
+            width: 28px; height: 28px; box-shadow: -5px 5px 0 0 #fff inset; transform:rotate(45deg); }
+
+        &::after{content: ''; width: 12px; height: 12px; border-radius: 50%; background: #fff; display: block; position: absolute; left:calc(50% - 6px); bottom: calc(50% - 6px); z-index: 2;}
+
+        &:last-child{
+            &::before{box-shadow: -5px 5px 0 0 #fff inset, -11px 11px 0 0 #fff inset; width: 32px; height: 32px; right: -8px; 
+                bottom: calc(50% - 16px); transform:rotate(45deg);}
+        }
+
+        &:nth-child(even){
+            .arrow_excerpt{top: 50px; bottom: unset; padding: 0px 10px 0px  0px; left: -50%; text-align: right;
+                &:before{left:unset; right: -1px; top: unset; bottom: 0px; height: calc(100% + 45px); }
+                &::after{left: unset; right: -4px; bottom: 0px; top: unset;}
+            }
+        }
+
+    }
+
+    &::before{width: 100%; height: 30px; position: absolute; top:calc(50% - 15px); left: 0px; display: block; content: ''; background:$color-lightblue;}
+    &::after{content: ''; display: block; position: absolute; left:0px; bottom: calc(50% - 15px); z-index: 1;
+        width: 0px; height: 0px; border-top: 15px solid transparent; border-bottom: 15px solid transparent;
+        border-left: 15px solid #fff;}
+}
+
+/* ######################### Infographics Line ########################## */
+ul.infographic_line{ display: block; width: 100%; margin: 20px 0 40px; padding: 0px; list-style: none; justify-content: center !important;
+    display: flex; flex-wrap: wrap; position: relative;
+    &::after{content: ''; width: 100%; height: 1px; background: $color-lightblue; display: block; position: absolute; top: 50%;}
+    li{float: left; margin: 8px; max-width: 15%; width: 180px; position: relative; height: 200px;
+        & > div{padding: 0px 10px; font-size: 0.9rem; line-height: 1.35; position: relative; height: 100px; border-left: solid 1px $color-lightblue; vertical-align: top; 
+            p{margin-bottom: 0px; font-size: 0.9rem; line-height: 1.35;}
+            &::before{content: ''; width: 20px; height: 20px; background: $color-lightblue; position: absolute; left: -10px; border-radius: 50%; bottom: -10px;}
+            &::after{content: ''; width: 8px; height: 8px; background: $color-lightblue; position: absolute; left: -4px; border-radius: 50%; top: -4px;}
+        }
+    
+        &:nth-child(even){
+            & > div{top: 100px; padding-top: 10px;
+                &::before{bottom: unset; top: -10px;}
+                &::after{top: unset; bottom: -4px;}
+            }
+        }
+    }
+}
+
+/* ######################### Infographics Circle ########################## */
+ul.infographic_circle{display: flex; flex-wrap: wrap; list-style: none; margin: 50px 0px; padding:0px; justify-content: center; display: flex; flex-wrap: wrap; position: relative;
+    li{flex-basis: 0; flex-grow: 1; max-width: 100%; text-align: center; margin: 0px; position: relative;
+        .circle_excerpt{max-width: 250px; min-width: 250px; text-align: center; position: absolute; 
+            left:50%; bottom: calc(50% + 75px); transform: translateX(-50%);
+            p{margin-bottom: 0px; font-size: 0.95rem; line-height: 1.45;}
+
+            &:before{content: ''; display: block; height: 40px; width: 0.1rem; background: #5f95ff; position: absolute; bottom:-50px; left:50%;}
+        }
+        &::before{content: ''; width: 50px; height: 50px; border-radius: 50%; background: #fff; border:solid 7px #5f95ff; display: block; position: absolute; left:calc(50% - 25px); bottom: calc(50% - 25px); z-index: 1;}
+        &::after{content: ''; width: 12px; height: 12px; border-radius: 50%; background: #5f95ff; display: block; position: absolute; left:calc(50% - 6px); bottom: calc(50% - 6px); z-index: 2;}
+        &:nth-child(even){
+            .circle_excerpt{top: calc(50% + 70px); bottom: unset;
+                &:before{top:-50px; bottom:unset;}
+            }
+        }
+
+
+        &:nth-child(3n+2){
+            &::before{border-color:#00589f}
+            &::after{background: #00589f;}
+        }
+        &:nth-child(3n+3){
+            &::before{border-color:#002776}
+            &::after{background: #002776;}
+        }
+
+    }
+
+    &::before{width: 100%; height: 6px; position: absolute; top:calc(50% - 3px); left: 0px; display: block; content: ''; background: #ccc;}
+}
+
+/* ######################### Infographics Circle Wave ########################## */
+ul.infographic_circle_wave{float: left; width: 100%; list-style: none; margin: 3.5rem 0 0; padding: 0px; justify-content: center !important; display: flex;
+    flex-wrap: wrap;
+    li{float: left; margin: 8px; padding: 160px 0px; max-width: 15%; position: relative;
+        
+        .follow_circle{width: 140px; height: 140px; border-radius: 50%; border:solid 1px $color-lightblue; background: #fff; position: relative; z-index: 2;
+            .follow_excerpt{position: absolute; left: -10px; vertical-align: bottom; width: calc(100% + 42px);
+                bottom: calc(50% + 110px);
+                font-size: 0.875rem; line-height: 1.4;
+                p{font-size: 0.875rem; line-height: 1.4; margin: 0 0 5px 0; padding: 0 0 0 12px; position: relative;
+                    &::before{content: ''; width:5px; height:5px; display: block; border-radius: 50%; background: #444; position: absolute; left: 0px; top: 7px;}
+                }
+            }
+
+            figure{width: 48px; height: 48px; margin:16px auto 0px; position: relative; z-index: 5;}
+            span{display: block; text-align: center; font-size: 0.95rem; line-height: 1.3; font-weight: 500; padding: 0 10px; position: relative; z-index: 5;}
+
+            &::before{content: ''; display: block; border-radius: 50%; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px; background: #fff;}
+
+            &::after{content: ''; display: block; border-radius: 50%; position: absolute; z-index: -1; width: calc(100% + 36px); height:calc(100% + 36px); left: -18px; top: -18px;
+                background: -moz-linear-gradient(rgba(255,255,255, 0) 50%, rgba(31,119,223,1) 50%);
+                background: -webkit-linear-gradient(rgba(255,255,255, 0) 50%, rgba(31,119,223,1) 50%);
+                background: linear-gradient(rgba(255,255,255, 0) 50%, rgba(31,119,223,1) 50%);
+
+            }
+        }
+    
+        &:nth-child(even){
+            .follow_circle{
+                .follow_excerpt{bottom:unset; vertical-align: top; top: calc(50% + 110px);}
+                &::after{transform: rotate(180deg);}
+
+            }
+        }
+
+        &:nth-child(3n+2){
+            .follow_circle{
+                &::after{
+                    background: -moz-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 88, 159, 1) 50%);
+                    background: -webkit-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 88, 159, 1) 50%);
+                    background: linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 88, 159, 1) 50%);
+
+                }
+
+            }
+        }
+        &:nth-child(3n+3){
+            .follow_circle{
+                &::after{
+                    background: -moz-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 39, 118, 1) 50%);
+                    background: -webkit-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 39, 118, 1) 50%);
+                    background: linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 39, 118, 1) 50%);
+
+                }
+
+            }
+        }
+    }
+
+}
+
+
+/* ######################### Infographics Column ########################## */
+#infographic{
+    .card.col_wrap{min-height: 100%;
+        .card-heading{background: $color-lightblue; padding: 5px 10px; min-height: 40px; height: 100%; display: flex;
+            flex-wrap: wrap;
+            figure{float: left; width: 32px; height: 32px; margin: 0px 10px 0px 0px;
+                img{width: 100%; height: auto;}
+            }
+            h4{color: #fff; font-weight: 400; font-size: 1.125rem; line-height: 1.25; margin-bottom: 0px; align-self: center;}
+        }
+        .card-body{
+            ul {list-style: none; margin: 0; padding-left: 25px;
+                li{margin-bottom: 12px; line-height: 1.35; position: relative;
+                    &::before{content: '✓'; display: inline-block;  position: absolute; left: -25px; top:0px}
+
+                    &:last-child{margin-bottom: 0;}
+                }
+            }
+        }
+    }
+}
+
+/* ######################### Infographics Table ########################## */   
+#infographic{ 
+    table{table-layout: fixed; border:solid  0.1rem $color-lightblue; border-collapse:collapse;
+        thead{background: $color-lightblue;
+            th{color: #fff; font-weight: 400; padding: 8px 10px; font-size: 1.125rem; line-height: 1.5;}
+        }
+        tbody{
+            tr{background: #fff;
+                &:nth-child(even){background: #f7f8ff;}
+            }
+            td{font-size: 1rem; line-height: 1.5; padding: 10px 10px; border-right:solid 0.1rem $color-lightblue; vertical-align: top;}
+        }
+    }
+}

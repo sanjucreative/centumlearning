@@ -12,13 +12,13 @@ $page_url = get_field('page_url');
 $check_for_page_url = get_field('check_for_page_url');
 ?>
 <div class="TemplateBanner temp_CTS" style="background-image: url('<?php echo $template_banner_image; ?>')">
-	<div class="container banner_content pt-0 pt-md-5">
+	<div class="container banner_content pt-0 pt-lg-4">
 		<div class="row">
-			<div class="col-12 col-md-7 pr-0 pr-md-5" data-aos="fade-up" data-aos-delay="50">
+			<div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="50">
 				<h1><?php the_title();?></h1>
 				<?php echo $template_banner_content ?>
 			</div>
-			<div class="col-12 col-md-5" data-aos="fade-up" data-aos-delay="50">
+			<div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="50">
 				<div class="video_cont">
 					<figure>
 						<?php if($page_video_url !='' && $check_for_page_url[0] != 'Yes'){ 
@@ -46,7 +46,7 @@ $check_for_page_url = get_field('check_for_page_url');
 			<div class="row">
 				<h3 class="col-12 text-center section-title font-weight-bold"><?php echo $item['heading']; ?></h3>
 				<?php
-					if($i % 2 == 0) echo '<figure class="col-12 col-md-5 pr-0 pr-md-5"><img class="img-fluid" src="'. $item['thumbnail'] .'" alt="'. $item['heading'] .'" /></figure>';	
+					if($i % 2 == 0) echo '<figure class="col-12 col-md-5 pr-3 pr-md-5"><img class="img-fluid" src="'. $item['thumbnail'] .'" alt="'. $item['heading'] .'" /></figure>';	
 				?>
 				<div class="col-12 col-md-7">
 					<?php echo $item['content']; ?>
@@ -54,7 +54,7 @@ $check_for_page_url = get_field('check_for_page_url');
 					<?php 
 						if(!empty($item['know_more'])):
 							foreach (  $item['know_more'] as $know  ) {
-								echo '<div class="col-6"><div class="knowmore_box">';
+								echo '<div class="col-12 col-md-6 mb-4"><div class="knowmore_box">';
 								echo '<h5>'. $know['heading'] . '</h5>';
 								echo '<p>'. $know['sub_heading'] . '</p>';
 								if($know['url'] !=''){
@@ -69,7 +69,7 @@ $check_for_page_url = get_field('check_for_page_url');
 				
 				</div>
 				<?php
-					if($i % 2 != 0) echo '<figure class="col-12 col-md-5 pr-0 pr-md-5"><img class="img-fluid" src="'. $item['thumbnail'] .'" alt="'. $item['heading'] .'" /></figure>';	
+					if($i % 2 != 0) echo '<figure class="col-12 col-md-5 pr-3 pr-md-5"><img class="img-fluid" src="'. $item['thumbnail'] .'" alt="'. $item['heading'] .'" /></figure>';	
 				?>
 				
 			</div>
@@ -88,12 +88,12 @@ $check_for_page_url = get_field('check_for_page_url');
 				<h3 class="col-12 text-center section-title font-weight-bold"><?php echo get_field('project_management_heading'); ?></h3>
 				<div class="col-12 col-md-8 text-center"><?php echo get_field('project_management_excerpt'); ?></div>
 				<div class="col-12">
-						<ul class="project_follow">
+						<ul class="infographic_circle_wave">
 						<?php
 							if( have_rows('project_management_follow') ): 
 							foreach ( get_field("project_management_follow") as $item  ) {
 								echo '<li>';
-								echo '<div class="follow_circle"><figure><img class="img-fluid" src="'. $item['follow_icon'] . '" alt="" /></figure>';
+								echo '<div class="follow_circle"><figure><img class="img-fluid" src="'. $item['follow_icon'] . '" alt="'. $item['follow_label'] .'" /></figure>';
 								echo '<span>' . $item['follow_label'] .'</span>';
 								echo '<div class="follow_excerpt">' . $item['follow_excerpt'] .'</div></div>';
 								// echo '<div class="follow_excerpt">' . $item['follow_excerpt'] .'</div>';

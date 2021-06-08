@@ -27,6 +27,17 @@ jQuery(document).ready(function($){
             $('#top-link').css("bottom", "-70px");
         }
 
+
+        $('.infographic_circle').each(function(){  
+            var $columns = $('li .circle_excerpt',this);
+            var maxHeight = Math.max.apply(Math, $columns.map(function(){
+                return $(this).height();
+            }).get());
+            $(this).height((maxHeight*2) + (60*2));
+        });
+        
+    
+
 });
 
 function carouselResize(){
@@ -94,6 +105,8 @@ $(document).on('click', '.scrollspy[href^="#"], .scrollspy a[href^="#"]', functi
     }, 800);
 });	
 
+
+$("select.wpcf7-select option:first-child").text("Select");
 
 
 

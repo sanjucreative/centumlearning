@@ -39,6 +39,14 @@ add_action( 'after_setup_theme', 'centumlearning_setup' );
 
 add_filter('use_block_editor_for_post', '__return_false');
 
+
+function cc_mime_types($mimes) {
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+	}
+	add_filter('upload_mimes', 'cc_mime_types');
+
+
 /**
  * Register custom fonts.
  */
@@ -207,7 +215,7 @@ function remove_dashboard_meta() {
 add_action( 'admin_init', 'remove_dashboard_meta' );
 
 
-add_action('init', 'create_cf7editor_role');
+// add_action('init', 'create_cf7editor_role');
 function create_cf7editor_role(){
   add_role('cf7_editor', 'Form Editor',
     array('wpcf7_edit_contact_forms'=>1,
@@ -221,7 +229,7 @@ function create_cf7editor_role(){
     );
 }
 
-
+// remove_role( 'cf7_editor' );
 
 require get_template_directory() . '/inc/sanitize-functions.php';
 require get_template_directory() . '/inc/theme-options.php';
@@ -597,6 +605,96 @@ function ajax_load_post_type_media(){
 }
 
 
+// #################################### For load Job Opportunities  #############################3
+
+add_action('wp_ajax_get_job_opportunities', 'ajax_get_job_opportunities');
+add_action('wp_ajax_nopriv_get_job_opportunities', 'ajax_get_job_opportunities');
+function ajax_get_job_opportunities(){
+ 	$location = $_POST['location'];
+ 	$department = $_POST['department'];
+	$category = $_POST['category'];
+
+	 
+
+    $args = array (
+		'post_type' => 'job',
+		'numberposts' => -1,
+		'order' => 'DESE',
+		'tax_query' => array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'locations',
+				'field'    => 'id',
+				'terms'    => $location,
+			),
+			array(
+				'taxonomy' => 'departments',
+				'field'    => 'id',
+				'terms'    => $department,
+			),
+			array(
+				'taxonomy' => 'job-categories',
+				'field'    => 'id',
+				'terms'    => $category,
+			),			
+		),
+    );
+
+	// echo '<pre>';
+	// print_r($args);
+	// echo '</pre>';
+	$posts = get_posts($args);
+    ob_start ();
+
+    foreach ($posts as $post ) {
+	 setup_postdata( $post );
+		// echo $post->ID;
+		// echo $post->post_title;
+		?>
+		<div class="col-12 col-md-3 mb-4">
+		<div class="jobList_wrap">
+			<h4><?php echo $post->post_title ?></h4>
+			<div class="opeing_date"><?php echo 'Opening Till - ' .get_field('job_opening_closed', $post->ID); ?></div>
+			<hr/>
+			<ul>
+				<?php
+					$location_list = get_the_terms( $post->ID, 'locations' );
+					if(!empty($location_list)){
+						echo '<li>';
+							array_list_item($location_list);
+						echo '</li>';
+					}
+
+					$department_list = get_the_terms( $post->ID, 'departments' );
+					if(!empty($department_list)){
+						echo '<li>';
+							array_list_item($department_list);
+						echo '</li>';
+					}
+
+					$category_list = get_the_terms( $post->ID, 'job-categories' );
+					if(!empty($category_list)){
+						echo '<li>';
+							array_list_item($category_list);
+						echo '</li>';
+					}
+				?>
+			</ul>
+			<div class="applynow_btn"><a href="<?php the_permalink(); ?>" class="btn btn-primary">Apply Now</a></div>
+		</div>
+	</div>		
+
+
+<?php
+
+   } 
+
+   wp_reset_postdata();
+ //  ob_end_clean();
+ die();
+}
+
+
 /* ################################# Carousel  ############################################ */
 function carouselLoop($slug, $sliderID){	
 	$args = array('posts_per_page' => 10, 'order' => 'ASC', 'orderby' => 'menu_order', 'tax_query' => array(
@@ -629,7 +727,7 @@ function carouselLoop($slug, $sliderID){
 		
 
 		$thecontent = get_the_content();
-		$content .= '<div class="banner_content" data-aos="fade-up" data-aos-delay="50"><div class="banner_left">' . apply_filters( 'the_content', $thecontent ) . '</div>';
+		$content .= '<div class="banner_content" data-aos="fade-up" data-aos-delay="50"><div class="container"><div class="banner_left">' . apply_filters( 'the_content', $thecontent ) . '</div>';
 		if($add_video_cover_image !=''){
 			$content .= '<div class="banner_right"><div class="video_cont"><figure>';
 			if($add_video_cover_url!=''){
@@ -644,7 +742,7 @@ function carouselLoop($slug, $sliderID){
 			$content .= '</div></div>';
 		}
 
-		$content .= '</div>';
+		$content .= '</div></div>';
 		
 		if($active_video[0] == 'Yes'){
 					if($active_video_url_youtube !=''){
@@ -669,11 +767,11 @@ wp_reset_query();
 
 
 
-function bartag_func( $atts ) {
-	$message = '<div id="infographics"></div>';
+function infographics_shortcode( $atts ) {
+	$message = '<div id="infographic"></div>';
 	return $message;
 }
-add_shortcode( 'infographics', 'bartag_func' );
+add_shortcode( 'infographic', 'infographics_shortcode' );
 add_filter('acf/format_value/type=textarea', 'do_shortcode');
 
 
@@ -698,4 +796,17 @@ function my_acf_fields_post_object_result( $text, $post, $field, $post_id ) {
 
 	}
 	return $text;
+}
+
+function array_list_item($arr){
+	$arr_no = count($arr);
+	foreach($arr   as $key => $item){
+		echo  $item->name;
+		if(($arr_no > $key) && ($key < $arr_no - 2)){
+			echo  ', ';
+		}
+		if($key == ($arr_no -2)){
+			echo  ' & ';
+		}
+	} 
 }

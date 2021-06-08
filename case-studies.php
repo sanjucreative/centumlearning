@@ -23,7 +23,9 @@ $case = new WP_Query($case_args);
                 <div class="case_box_wrap">
                     <figure><a href="<?php the_permalink(); ?>"><img class="img-fluid" src="<?php echo $img;?>" alt="<?php echo get_the_title();?>" /></a></figure>
                 </div>
-        <?php endwhile;  endif; ?>
+        <?php endwhile;  endif; 
+        wp_reset_query();
+        ?>
 		</div>
 	</div>
 </div>

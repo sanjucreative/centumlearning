@@ -63,7 +63,9 @@ $client = new WP_Query($client_args);
                         ?>
                     </div>
                 </div>
-        <?php endwhile;  endif; ?>
+        <?php endwhile;  endif;
+        wp_reset_query();
+        ?>
 		</div>
 	</div>
 </div>

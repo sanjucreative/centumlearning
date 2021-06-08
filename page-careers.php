@@ -38,7 +38,10 @@ get_header();
 			<div class="row" data-aos="fade-up" data-aos-delay="50">
 				<h2 class="col-12 text-center"><?php echo get_field('careers_infographic_heading');?></h2>
 				<div class="careers_infographic_bg" style="background-image:url('<?php echo get_field('careers_infographic_image');?>');">
-						<a class="btn btn-primary" href="<?php echo get_field('careers_apply_now_url');?>" target="_blank">Apply Now</a>
+					<?php if(get_field('show_apply_now_button')[0] == 'Yes'){
+							$url = get_permalink( get_page_by_path('job-list'));
+							echo '<a class="btn btn-primary" href="'. $url.'">Apply Now</a>';
+					 } ?>
 				</div>
 			</div>
 		</div>
@@ -60,8 +63,11 @@ get_header();
 <link rel="Stylesheet" type="text/css" href="<?php echo get_theme_file_uri( '/assets/plugins/fancybox/jquery.fancybox.min.css')?>" />
 <script type="text/javascript">
   jQuery(document).ready(function($) {
-		$('<a class="btn btn-primary" href="<?php echo get_field('careers_apply_now_url');?>" target="_blank">Apply Now</a>').appendTo(".banner_content .banner_left");
-
+	<?php if(get_field('show_apply_now_button')[0] == 'Yes'){
+			$url = get_permalink( get_page_by_path('job-list'));
+		?>
+		$('<a class="btn btn-primary" href="<?php echo $url;?>">Apply Now</a>').appendTo(".banner_content .banner_left");
+	<?php }?>
 			$(".fancybox").fancybox({
 				showNavArrows: true,
 			});

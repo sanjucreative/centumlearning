@@ -120,7 +120,7 @@ get_header(); ?>
 		bannerCont +='<div class="closed_msg">REGISTRATIONS FOR THIS WEBINAR ARE CLOSED!</div>'
 	  <?php } ?>
 	  bannerCont +='</div>';
-	  $(bannerCont).appendTo(".banner_content .banner_left");	
+	  	$(bannerCont).appendTo(".banner_content .banner_left");	
   });  
 </script>
 <?php endwhile; endif; ?>

@@ -7,7 +7,7 @@
 }
 
 /* ######################### Template Corporate Training Solutions Page ########################## */
-.temp_CTS{ padding-top: 100px;
+.temp_CTS{
     .CTS_page_list_wrap{margin-right: -8px; margin-left: -8px;
         .CTS_page_child_wrap{ height: 150px; overflow: hidden; margin-bottom: 16px; padding-left: 8px; padding-right: 8px;
             .CTS_page_child_content{overflow: hidden; position: relative; height: 100%;
@@ -16,11 +16,13 @@
                 }
 
                 h4{font-size: 0.9rem; line-height: 1.25; position: absolute; bottom: 0px; background-color:$color-skyblue; color:#fff; text-align: center;
-                    margin: 0px; padding: 6px 10px; width: 100%; @include transition(0.2s); z-index: 5;}
+                    margin: 0px; padding: 6px 10px; width: 100%; @include transition(0.2s); z-index: 5;
+						a{position:relative; display:black; color:#fff; text-decoration:none}
+					}
                 a.parent_link{display: block; position: absolute; z-index: 4; width: 100%; height: 100%; left: 0px; top: 0px;}
-                ul{list-style: none; margin: 0px; padding: 0px;position: absolute; bottom: 0px;  z-index: 5; height: 0px; 
-                    li{padding: 5px 12px 5px 20px; margin: 0px; line-height: 1; position: relative;
-                        a{font-size: 0.8rem; line-height: 1.45; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block;
+                ul{list-style: none; margin: 0px; padding: 0px;position: absolute; bottom: 0px;  z-index: 5; height: 0px; overflow-y: auto;
+                    li{padding: 5px 12px 2px 20px; margin: 0px; line-height: 1; position: relative;
+                        a{font-size: 0.85rem; line-height: 1.45; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block;
                             &:hover{color: rgba(255, 255, 255, 1);}
                         }
 
@@ -30,6 +32,25 @@
                         
                         }
                     }
+
+
+                    &::-webkit-scrollbar {
+                        width: 3px;
+                      }
+                  
+                      &::-webkit-scrollbar-track {
+                        background: #fff;
+                      }
+                  
+                      &::-webkit-scrollbar-thumb {
+                        background-color: $color-orange;
+        
+                      }
+        
+                  
+                      &::-webkit-scrollbar-thumb:hover {
+                        background: #ccc;
+                      }
                 }
                    
                 &:hover{
@@ -37,7 +58,7 @@
                         &::after{display: block;}
                     }
                     h4{top:0px; bottom: unset;}
-                    ul{height: calc(100% - 36px);}
+                    ul{height: calc(100% - 50px);}
                 }
             }
 
@@ -46,15 +67,23 @@
                 .CTS_page_child_content{height: 142px; margin-bottom: 16px;}
             }
             &:nth-child(3) {height: 300px;}
+
+
+            &:nth-last-child(1) .CTS_page_child_content:hover, &:nth-last-child(2) .CTS_page_child_content:hover{
+                ul{height: calc(100% - 35px);}
+              }
+
         }
+
+
     }
 }
 
 
 /* ######################### Template CSR Partnerships Page ########################## */
-ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 100%; float: left;
+ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 100%; float: left; display: flex; flex-wrap: wrap;
     li{float: left; text-align: center; width: 25%; margin: 0px; padding:0px 15px 0px 0px; 
-        & > div{background: #f2f2f2; padding: 6px 8px; border-radius: 10px;}
+        & > div{background: #f2f2f2; padding: 6px 8px; border-radius: 10px; min-height: 100%;}
         figure{max-width: 40px; margin: 0 auto 5px; 
             img{width: 100%; height: auto;}
         }
@@ -67,70 +96,14 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
     left: 50%; transform: translateX(-50%);
     }
 }
-ul.project_follow{float: left; width: 100%; list-style: none; margin: 3.5rem 0 0; padding: 0px; justify-content: center !important; display: flex;
-    flex-wrap: wrap;
-    li{float: left; margin: 8px; padding: 200px 0px; max-width: 15%; position: relative;
-        
-        .follow_circle{width: 140px; height: 140px; border-radius: 50%; border:solid 1px #1f77df; background: #fff; position: relative; z-index: 2;
-            .follow_excerpt{position: relative; top: -330px; left: -21px; vertical-align: bottom; min-height: 200px; width: calc(100% + 42px);
-                font-size: 0.95rem; line-height: 1.45;                
-                p{font-size: 0.95rem; line-height: 1.45; margin: 0 0 5px 0; padding: 0 0 0 12px; position: relative;
-                    &::before{content: ''; width:5px; height:5px; display: block; border-radius: 50%; background: #444; position: absolute; left: 0px; top: 7px;}
-                }
-            }
 
-            figure{width: 48px; height: 48px; margin:16px auto 0px; position: relative; z-index: 5;}
-            span{display: block; text-align: center; line-height: 1.2; font-weight: 500; padding: 0 10px; position: relative; z-index: 5;}
-
-            &::before{content: ''; display: block; border-radius: 50%; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px; background: #fff;}
-
-            &::after{content: ''; display: block; border-radius: 50%; position: absolute; z-index: -1; width: calc(100% + 36px); height:calc(100% + 36px); left: -18px; top: -18px;
-                background: -moz-linear-gradient(rgba(255,255,255, 0) 50%, rgba(31,119,223,1) 50%);
-                background: -webkit-linear-gradient(rgba(255,255,255, 0) 50%, rgba(31,119,223,1) 50%);
-                background: linear-gradient(rgba(255,255,255, 0) 50%, rgba(31,119,223,1) 50%);
-
-            }
-        }
-    
-        &:nth-child(even){
-            .follow_circle{
-                .follow_excerpt{bottom: -75px; vertical-align: top; top: unset;}
-                &::after{transform: rotate(180deg);}
-
-            }
-        }
-
-        &:nth-child(3n+2){
-            .follow_circle{
-                &::after{
-                    background: -moz-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 88, 159, 1) 50%);
-                    background: -webkit-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 88, 159, 1) 50%);
-                    background: linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 88, 159, 1) 50%);
-
-                }
-
-            }
-        }
-        &:nth-child(3n+3){
-            .follow_circle{
-                &::after{
-                    background: -moz-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 39, 118, 1) 50%);
-                    background: -webkit-linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 39, 118, 1) 50%);
-                    background: linear-gradient(rgba(255,255,255, 0) 50%, rgba(0, 39, 118, 1) 50%);
-
-                }
-
-            }
-        }
-    }
-
-}
 
 /* ######################### Template Contact Us Page ########################## */
 .temp_contact_us{
     ul.scrollspy_location{list-style: none; margin: 2rem 0px 0px; padding: 0px; width: 100%; float: left;
         li{width: 50%; float: left; text-align: left; line-height: 1;
             a{background: $color-skyblue; border-radius: 5px; max-width: 200px; text-align: center; display: inline-block; padding: 10px 25px 15px; text-decoration: none;
+                img{max-width: 40px; height: auto; margin-bottom: 8px;}
                 i{font-style: normal; width: 40px; height: 40px; display: inline-block; margin: 0px; @include location_Map('fff');}
                 span{display: block; line-height: 1;}
 
@@ -138,14 +111,17 @@ ul.project_follow{float: left; width: 100%; list-style: none; margin: 3.5rem 0 0
             }
         }
     }
-    .form_wrap{ background: rgba(0, 39, 118, 0.9); padding: 20px;
-        label{color:#fff;
-            span{color: #f00;}
+    .form_wrap{ background: rgba(0, 39, 118, 0.9); padding: 20px; 
+        label{color:#fff; font-size: 0.9rem; font-weight: 300; margin-bottom: 0;
+            span{color: #f00; font-size: 1.1rem; line-height: 1;}
         }
         .form-control{background: #f2f2f2;}
         #form-submit-button{background: #ffc20e; border: solid 1px #000; border-radius: 6px; padding: 8px 30px; font-size: 1.1rem;
             &:hover{background: #ff9900;}
         }
+    }
+    .map_wrap{background: #f0f0f0; padding: 8px; @include box-shadow(2px,5px,3px,1px,0.1); border-radius: 5px; line-height: 1; font-size: 0px;
+        iframe{width: 100%; height: 400px; margin: 0px;}
     }
 }
 .contact_us{
@@ -193,26 +169,7 @@ ul.project_follow{float: left; width: 100%; list-style: none; margin: 3.5rem 0 0
 }
 
 /* ######################### Template Careers Page ########################## */
-ul.careers_infographics_list{ display: block; width: 100%; margin: 20px 0 40px; padding: 0px; list-style: none; justify-content: center !important;
-    display: flex; flex-wrap: wrap; position: relative;
-    &::after{content: ''; width: 100%; height: 1px; background: #1f77df; display: block; position: absolute; top: 50%;}
-    li{float: left; margin: 8px; max-width: 15%; width: 180px; position: relative; height: 200px;
-        & > div{width: 160px; padding: 0px 10px; font-size: 0.85rem; line-height: 1.3; position: relative; height: 100px; border-left: solid 1px #1f77df; vertical-align: top; 
-            &::before{content: ''; width: 20px; height: 20px; background: #1f77df; position: absolute; left: -10px; border-radius: 50%; bottom: -10px;}
-            &::after{content: ''; width: 8px; height: 8px; background: #1f77df; position: absolute; left: -4px; border-radius: 50%; top: -4px;}
-        }
-    
-        &:nth-child(even){
-            & > div{top: 100px; padding-top: 10px;
-                &::before{bottom: unset; top: -10px;}
-                &::after{top: unset; bottom: -4px;}
-            }
-        }
-    
-    }
 
-
-}
 .careers_infographic_bg{ width: 100%; height: 400px; background-repeat: no-repeat; background-position: center center; background-size: contain; position: relative;
     .btn{top: 50%; left: 50%; transform: translate(-50%, -50%); position: absolute; z-index: 5;}
 }
@@ -228,8 +185,7 @@ ul.careers_infographics_list{ display: block; width: 100%; margin: 20px 0 40px; 
 }
 
 /* ######################### Template Our Team Page ########################## */
-.temp_out_team {
-    .banner_content{padding-top: 80px;}
+.temp_our_team {padding-top: 80px;
     .ourTeam-flipBox{
         .flip-box-front{background: #0078b7;}
         .flip-box-back{background: #fff;
@@ -287,8 +243,8 @@ ul.careers_infographics_list{ display: block; width: 100%; margin: 20px 0 40px; 
 }
 
 /* ######################### Template Media Page ########################## */
-.temp_media{padding-top: 150px;
-    .contact_info{width: 100%; max-width: 340px; margin: 0 auto; border: solid 2px #fff; padding: 25px;
+.temp_media{
+    .contact_info{width: 100%; max-width: 340px; margin: 80px auto 0px; border: solid 2px #fff; padding: 25px;
         h4{color: $color-orange; margin-bottom: 0.75rem; line-height: 1.25;}
         h5{font-size: 1rem; color: $color-white; margin-bottom: 0px;}
         p{font-size: 0.9rem; line-height: 1.35; font-weight: 200; margin-bottom: 0px;
@@ -346,7 +302,7 @@ ul.careers_infographics_list{ display: block; width: 100%; margin: 20px 0 40px; 
 
 
 /* ######################### Template Dialogues Page ########################## */
-.temp_dialogues{padding-top: 100px;
+.temp_dialogues{padding-top: 90px;
     .banner_content{
         h1{font-size: 2.25rem; text-align: center;}
     }
@@ -504,8 +460,109 @@ ul.careers_infographics_list{ display: block; width: 100%; margin: 20px 0 40px; 
 
 }
 
+/* ######################### Template Job List Page ########################## */
+.temp_job_list{
+    &.TemplateBanner .banner_content .video_cont figure{max-width: 360px; margin:  0  auto;}
+
+    .filter_drop{background: rgba(31, 119, 223, 0.6); padding: 15px;
+        label{color: #fff; font-size: 1rem; margin-bottom: 5px;}
+        select{font-size: 1rem;}
+    }
+
+    ul.scrollspy_location{list-style: none; margin: 2rem 0px 0px; padding: 0px; width: 100%; float: left;
+        li{width: 100%; float: left; text-align: left; line-height: 1;
+            a{background: #1f77dd; border-radius: 5px; max-width: 260px; text-align: center; display: inline-block; padding: 15px 25px 12px; text-decoration: none;
+                i{font-style: normal; width: 32px; height: 32px; display: inline-block; margin: 0px 0px 6px; 
+                    &.mc{width: 42px;}
+                    img{width: 100%; height: auto;}
+                }
+                span{display: block; line-height: 1.4; color: #fff;}
+
+                &:hover{background:#00aeef}
+            }
+        }
+    }
+}
+.jobList_wrap{min-height: 100%; background: #f8f8f8; padding: 20px 20px 60px; border: solid 1px #ddd; border-radius: 10px; position: relative;
+    h4{font-size: 1.2rem; line-height: 1.3; margin-bottom: 5px; text-align: center;}
+    .opeing_date{font-size: 0.85rem; line-height: 1.25; text-align: center;}
+    li{margin-bottom: 8px; font-size: 1rem; line-height: 1.3;}
+
+    .applynow_btn{position: absolute; bottom: 20px; text-align: right; width: calc(100% - 40px);}
+}
+
+#job_opportunities_list{min-height: 350px; position: relative;}
 
 
+/* ######################### Template Skill Development Page ########################## */
+.skill_item_wrap{border:solid 2px #1f77df; text-align: center; padding: 20px 15px; min-height: 100%; border-radius: 10px; @include transition(0.4s);
+    figure{width: 80px; height: 80px; margin: 0 auto 10px; position: relative; border:solid 2px #1f77df;  border-radius: 50%; @include transition(0.4s);
+        img{width: 60%; height: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); position: absolute; @include transition(0.4s);}
+    }
+    h5{font-size: 1rem; line-height: 1.4; margin-bottom: 0; @include transition(0.2s);}
+        
+    &:hover{background: #1f77df; color: #fff;
+        figure{background: #fff;}
+        h5{color: #fff;}
+    }
+
+    a{position: absolute; z-index: 25; display: block; width: 100%; height: 100%; top:0px; left: 0px;}
+}
+.employability_item_wrap{position: relative;
+    .box_wrap{background: #1f77df; padding: 15px 15px 5px; min-height: calc(100% - 30px); border-radius: 10px; margin:15px; position: relative;  @include transition(0.2s);
+        h5{color: #fff; line-height: 1.35; text-align: center; position: relative; z-index: 5;  @include transition(0.2s);}
+        ul{ position: relative; z-index: 5; margin-bottom: 0px;
+            li{font-size: 0.85rem; line-height: 1.3; color: #fff; margin-bottom: 10px;  @include transition(0.2s);}
+        }
+        &::before{content: ''; display: block;  width: calc(100% + 30px); height: calc(100% + 30px); border:dashed 4px #1f77df; position: absolute; left: -15px; top:-15px; border-radius: 16px; z-index: 1;}
+        &::after{content: ''; display: block; width: calc(100% + 30px); height: calc(50% + 15px); position: absolute; left: -15px; top:-15px; border-radius: 16px; z-index: 2;
+           
+            border:solid 4px #1f77df;
+            border-bottom: none;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+
+        }
+
+        &:hover{background: #fff;
+            h5, li{color: $text-heading;}
+        }
+    }
+
+    &::before{content: ''; display: block; width: 30px; height: 4px; background: #1f77df; position: absolute; top:calc(50% + 1px); right: -11px; z-index: 98;}
+    &::after{content: ''; display: block; position: absolute; top:calc(50% - 7px); right: -15px; z-index: 99;
+        width: 0; height: 0; border-width: 10px 0 10px 10px; border-style: solid; border-color: transparent transparent transparent #1f77df;}
+
+    &:nth-child(even){
+        .box_wrap{background: #002776;
+            &::before{border-color: #002776;}
+            &::after{transform: rotate(180deg); height: calc(50% + 15px); top:50%; border-color: #002776;}
+
+            &:hover{background: #fff;
+                h5, li{color: $text-heading;}
+            }
+        }
+
+        &::before{background: #002776;}
+        &::after{border-color: transparent transparent transparent #002776;}
+    
+    }
+    &:last-child{
+        &::before, &::after{display: none;}
+    }
+
+}
+/* ######################### Template 404 Page ########################## */
+.temp_404{ padding-top: 100px;
+    .found_404{max-width: 250px; margin: 0 auto;
+        img{width: 100%; height: auto;}
+    }
+}
+
+
+@media (max-width:1280px){
+
+}
 
 @media (max-width:900px){
     .about_us{width: 96%;}

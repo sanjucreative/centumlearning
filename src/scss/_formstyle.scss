@@ -34,7 +34,28 @@
         -webkit-box-shadow: 0 0 0px 1000px white inset !important;
          box-shadow: 0 0 0px 1000px white inset !important; background: transparent;
     }
+}
 
+.wpcf7-form{
+  label{width: 100%; margin-bottom: 0px; font-size: 1rem;
+    span{color: #f00; font-size: 0.95rem;}
+  }
+  .wpcf7-form-control-wrap{position: relative; margin-bottom: 25px; display: block; width: 100%;
+        .wpcf7-form-control{width: 100%; border: solid 1px #ddd; padding: 3px 10px; color: #555; font-weight: 400;
+          &.wpcf7-textarea{max-height: 120px;}
+        }
+        .wpcf7-not-valid-tip{font-size: 0.9rem; display: block;}
+  }
+  .wpcf7-submit{width: auto; margin-bottom: 0px; padding:10px 40px; font-size: 1.25rem; line-height: 1.25;}
+  .ajax-loader{display: none;}
 
-  
+  &.submitting{
+    .ajax-loader{display: inline-block;}
+  }
+  .captcha-text{display: inline-block; margin-right: 15px;
+    img{min-height: 36px; min-width: 110px;}
+  }
+  .captcha-field{display: inline-block;
+    .wpcf7-form-control-wrap{margin-bottom: 0px;}
+  }
 }

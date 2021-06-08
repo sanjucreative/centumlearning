@@ -29,7 +29,7 @@ get_header();
 		<?php
 			if( have_rows('hww_approach_infograph') ): 
 			foreach ( get_field("hww_approach_infograph") as $item  ) {
-				echo '<div class="col-12 col-md-auto my-3"><div class="approach_wrap">';
+				echo '<div class="col-12 col-md-auto my-4"><div class="approach_wrap">';
 				echo '<figure><img class="img-fluid" src="'. $item['approach_infograph_image'] .'" alt="'. $item['approach_infograph_heading'] .'" /></figure>';
 				echo '<h4>'. $item['approach_infograph_heading'] .'</h4>';
 				echo '<p>'. $item['approach_infograph_excerpt'] . '</p>';

@@ -9,11 +9,11 @@ $template_banner_content = get_field('template_banner_content');
 <div class="TemplateBanner temp_CTS" style="background-image: url('<?php echo $template_banner_image; ?>')">
 	<div class="container banner_content" data-aos="fade-up" data-aos-delay="50">
 		<div class="row">
-			<div class="col-12 col-md-6 pt-0 pt-md-3 pr-0 pr-md-3">
+			<div class="col-12 col-lg-6 pt-0 pt-lg-3 pr-0 pr-lg-3">
 				<h1><?php the_title();?></h1>
 				<?php echo $template_banner_content ?>
 			</div>
-			<div class="col-12 col-md-6">
+			<div class="col-12 col-lg-6">
 				<div class="CTS_page_list_wrap row">
 				<?php
                 if( have_rows('page_cover_image') ): 
@@ -28,7 +28,7 @@ $template_banner_content = get_field('template_banner_content');
 					}
 				echo '<div class="CTS_page_child_content">';
 				echo '<figure style="background-image:url('. $item["page_cover_image"] .')" ></figure>';
-				echo '<h4>' . $item["parent_page_name"] . '</h4>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["parent_page_name"] . '</a></h4>';
 
 				?>
 					<ul class="page_child_list">

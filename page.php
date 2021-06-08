@@ -1,5 +1,7 @@
 <?php get_header(); ?>
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php if (have_posts()) : while (have_posts()) : the_post(); 
+if(the_content() !=''){
+?>
 <?php /* <div class="breadcrumbs"><div class="container" data-aos="fade-right" data-aos-delay="50"><?php echo bcn_display(true) ?></div></div> */?>
 <div class="container">
 	<div class="post-content py-5">
@@ -19,7 +21,9 @@
 	</div>
 
 </div>
-<?php endwhile; endif; ?>
+<?php 
+}
+endwhile; endif; ?>
 <div class="video_modal">
     <div class="closed"></div>
     <div class="modal_container">
