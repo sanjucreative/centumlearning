@@ -1,8 +1,10 @@
 /* ######################### Infographics Arrow ########################## */
-ul.infographic_arrow{display: flex; flex-wrap: wrap; list-style: none; margin:125px 0px 100px; padding:0px; justify-content: center; display: flex; flex-wrap: wrap; position: relative;
-    li{flex-basis: 0; flex-grow: 1; max-width: 100%; text-align: center; margin: 0px; position: relative;
-        .arrow_excerpt{width: fit-content; min-height: 60px; text-align: left; position: absolute; 
-            left:50%; bottom: 30px; padding: 0px 0px 10px 10px;
+ul.infographic_arrow{display: flex; flex-wrap: wrap; list-style: none; margin:50px 0px 20px; padding:0px; justify-content: center; display: flex; flex-wrap: wrap; position: relative;
+    li{flex-basis: 0; flex-grow: 1; max-width: 100%; text-align: center; margin: 0px; position: relative; height: auto;
+        .arrow_excerpt{text-align: left; position: absolute; min-height: inherit;  width: calc(200% - 40px);
+            // width: fit-content; 
+            left:50%; top: -15px; padding: 0px 0px 10px 10px;
+            
             p{margin-bottom: 0px; font-size: 0.95rem; line-height: 1.45;}
 
             &:before{content: ''; display: block; height: calc(100% + 30px); width: 0.1rem; background: #aaa; position: absolute; top:0px; left:-1px;}
@@ -19,12 +21,21 @@ ul.infographic_arrow{display: flex; flex-wrap: wrap; list-style: none; margin:12
         }
 
         &:nth-child(even){
-            .arrow_excerpt{top: 50px; bottom: unset; padding: 0px 10px 0px  0px; left: -50%; text-align: right;
+            .arrow_excerpt{bottom: -15px; top: unset; padding: 0px 10px 0px  0px; left: unset; right: 50%; text-align: right; display: table;
                 &:before{left:unset; right: -1px; top: unset; bottom: 0px; height: calc(100% + 45px); }
                 &::after{left: unset; right: -4px; bottom: 0px; top: unset;}
+
+                & > div{display: table-cell; height: inherit; vertical-align: bottom;}
             }
         }
 
+        &.empty{
+            &::after{display: none;}
+        }
+        &.pre_empty{
+            &::before{display: none;}
+        }
+        
     }
 
     &::before{width: 100%; height: 30px; position: absolute; top:calc(50% - 15px); left: 0px; display: block; content: ''; background:$color-lightblue;}
@@ -34,18 +45,18 @@ ul.infographic_arrow{display: flex; flex-wrap: wrap; list-style: none; margin:12
 }
 
 /* ######################### Infographics Line ########################## */
-ul.infographic_line{ display: block; width: 100%; margin: 20px 0 40px; padding: 0px; list-style: none; justify-content: center !important;
+ul.infographic_line{ display: block; width: 100%; margin: 30px 0 20px; padding: 0px; list-style: none; justify-content: center !important;
     display: flex; flex-wrap: wrap; position: relative;
     &::after{content: ''; width: 100%; height: 1px; background: $color-lightblue; display: block; position: absolute; top: 50%;}
-    li{float: left; margin: 8px; max-width: 15%; width: 180px; position: relative; height: 200px;
-        & > div{padding: 0px 10px; font-size: 0.9rem; line-height: 1.35; position: relative; height: 100px; border-left: solid 1px $color-lightblue; vertical-align: top; 
+    li{float: left; margin: 8px; max-width: 10%; width: 180px; position: relative; height: 200px;
+        & > div{padding: 0px 10px; font-size: 0.9rem; line-height: 1.35; position: relative; height: 100px; border-left: solid 1px $color-lightblue; vertical-align: top; width: 180%;
             p{margin-bottom: 0px; font-size: 0.9rem; line-height: 1.35;}
             &::before{content: ''; width: 20px; height: 20px; background: $color-lightblue; position: absolute; left: -10px; border-radius: 50%; bottom: -10px;}
             &::after{content: ''; width: 8px; height: 8px; background: $color-lightblue; position: absolute; left: -4px; border-radius: 50%; top: -4px;}
         }
     
         &:nth-child(even){
-            & > div{top: 100px; padding-top: 10px;
+            & > div{top: 100px; padding-top: 10px; vertical-align: bottom;
                 &::before{bottom: unset; top: -10px;}
                 &::after{top: unset; bottom: -4px;}
             }
@@ -54,7 +65,7 @@ ul.infographic_line{ display: block; width: 100%; margin: 20px 0 40px; padding: 
 }
 
 /* ######################### Infographics Circle ########################## */
-ul.infographic_circle{display: flex; flex-wrap: wrap; list-style: none; margin: 50px 0px; padding:0px; justify-content: center; display: flex; flex-wrap: wrap; position: relative;
+ul.infographic_circle{display: flex; flex-wrap: wrap; list-style: none; margin: 50px 0px 20px; padding:0px; justify-content: center; display: flex; flex-wrap: wrap; position: relative;
     li{flex-basis: 0; flex-grow: 1; max-width: 100%; text-align: center; margin: 0px; position: relative;
         .circle_excerpt{max-width: 250px; min-width: 250px; text-align: center; position: absolute; 
             left:50%; bottom: calc(50% + 75px); transform: translateX(-50%);
@@ -68,6 +79,13 @@ ul.infographic_circle{display: flex; flex-wrap: wrap; list-style: none; margin: 
             .circle_excerpt{top: calc(50% + 70px); bottom: unset;
                 &:before{top:-50px; bottom:unset;}
             }
+        }
+
+        &:nth-child(odd){
+            .circle_excerpt{display: table;
+                & > div{ display: table-cell; vertical-align: bottom;}
+            }
+
         }
 
 
@@ -88,12 +106,11 @@ ul.infographic_circle{display: flex; flex-wrap: wrap; list-style: none; margin: 
 /* ######################### Infographics Circle Wave ########################## */
 ul.infographic_circle_wave{float: left; width: 100%; list-style: none; margin: 3.5rem 0 0; padding: 0px; justify-content: center !important; display: flex;
     flex-wrap: wrap;
-    li{float: left; margin: 8px; padding: 160px 0px; max-width: 15%; position: relative;
+    li{float: left; margin: 8px; padding: 0px; max-width: 15%; position: relative; top:calc(50% - 80px);
         
         .follow_circle{width: 140px; height: 140px; border-radius: 50%; border:solid 1px $color-lightblue; background: #fff; position: relative; z-index: 2;
             .follow_excerpt{position: absolute; left: -10px; vertical-align: bottom; width: calc(100% + 42px);
-                bottom: calc(50% + 110px);
-                font-size: 0.875rem; line-height: 1.4;
+                bottom: calc(50% + 110px); font-size: 0.875rem; line-height: 1.4; 
                 p{font-size: 0.875rem; line-height: 1.4; margin: 0 0 5px 0; padding: 0 0 0 12px; position: relative;
                     &::before{content: ''; width:5px; height:5px; display: block; border-radius: 50%; background: #444; position: absolute; left: 0px; top: 7px;}
                 }

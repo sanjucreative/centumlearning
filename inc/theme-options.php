@@ -56,6 +56,24 @@ function my_login_redirect( $redirect_to, $request, $user ) {
 
 add_filter( 'login_redirect', 'my_login_redirect', 10, 3 );
 
+
+// Allow editors to see Appearance menu
+// $role_object = get_role( 'editor' );
+// $role_object->add_cap( 'edit_theme_options' );
+function hide_editor_menu() {
+    // Hide theme selection page
+    remove_submenu_page( 'themes.php', 'themes.php' );
+    // Hide widgets page
+    remove_submenu_page( 'themes.php', 'widgets.php' );
+    // Hide customize page
+    // remove_submenu_page( 'themes.php', 'customize.php' );
+    global $submenu;
+    unset($submenu['themes.php'][6]);
+}
+ 
+// add_action('admin_head', 'hide_editor_menu');
+
+
 function hr_role() {
     add_role('hr_role', 'HR',
         array(
@@ -66,8 +84,6 @@ function hr_role() {
     );
 }
 add_action( 'init', 'hr_role' );
-
-
 
 
 if( current_user_can('hr_role')) {

@@ -59,6 +59,19 @@ jQuery(document).ready(function($){
 		$category_image_url = get_field('category_image');	
 		$category_banner_text = get_field('banner_text');
 		$show_page_banner = get_field('show_page_banner');
+
+		// $template_banner_image = get_field('template_banner_image');
+		$template_banner_content = get_field('template_banner_content');
+		$page_video_cover_image = get_field('page_video_cover_image');
+		$page_video_url = get_field('page_video_url');
+		$page_url = get_field('page_url');
+		$check_for_page_url = get_field('check_for_page_url');
+		if($category_image_url ==''){
+			$category_image_url = get_theme_file_uri('/assets/images/solutions_banner_bg.jpg');
+		}
+		if($page_video_cover_image ==''){
+			$page_video_cover_image = get_theme_file_uri('/assets/images/solution_right.jpg');
+		}		
 	}
 	if($category_image_url ==''){
 			$category_image_url = get_header_image();
@@ -78,8 +91,7 @@ jQuery(document).ready(function($){
             <?php  wp_nav_menu(array('theme_location' => 'top', 'container' => 'ul', 'menu_id' => 'primary-menu', 'menu_class' => 'menu nav-menu')); ?>
         </nav>
 </header>
-<?php 
-if (is_home() || is_front_page() || is_page_template('index.php')) {  ?>
+<?php if (is_home() || is_front_page() || is_page_template('index.php')) {  ?>
 	<div class="HomeCarousel">
             <?php echo carouselLoop('home', 'home_hero'); ?>
     </div>
@@ -87,6 +99,7 @@ if (is_home() || is_front_page() || is_page_template('index.php')) {  ?>
 	if($show_page_banner[0] == 'Yes'){
 
 	if($CarouselActive[0] != 'Yes'){
+		/*
 		echo '<div class="InnerCarousel">';
         echo '<div class="banner_content">';
 				if($category_banner_text){
@@ -97,6 +110,34 @@ if (is_home() || is_front_page() || is_page_template('index.php')) {  ?>
         echo '</div>';
         echo '<figure style="background-image:url('. $category_image_url.')"> </figure>';
 		echo '</div>';
+		*/
+			?>
+		<div class="TemplateBanner temp_CTS" style="background-image: url('<?php echo $category_image_url; ?>')">
+		<div class="container banner_content">
+			<div class="row">
+				<div class="col-12 col-lg-7 pr-3 pr-lg-5" data-aos="fade-up" data-aos-delay="50">
+					<h1><?php the_title();?></h1>
+					<?php echo $category_banner_text ?>
+				</div>
+				<div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="50">
+					<div class="video_cont">
+						<figure>
+							<?php if($page_video_url !='' && $check_for_page_url[0] != 'Yes'){ 
+								echo '<div class="video_play" data-url="'. $page_video_url.'"></div>';
+							}
+							if($check_for_page_url[0] == 'Yes'){
+								echo '<a class="page_url" href="'. $page_url.'"></a>';
+							}
+							?>
+							<img src="<?php echo $page_video_cover_image; ?>">
+						</figure>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+
 	} else { 
 		echo '<div class="HomeCarousel">';
 		echo carouselLoop($CarouselSlug, 'home_hero'); 

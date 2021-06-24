@@ -14,7 +14,7 @@ $pageid =  get_page_id('home');
             <h4><?php echo get_field("heading_second");?></h4>
             <p><?php echo get_field("content_excerpt");?></p>        
             <div class="more_content"><p><?php echo get_field("content_excerpt_read_more");?></p></div>
-            <a class="readmore" href="#">Read More <i></i></a>
+            <a class="readmore" href="#">Read More</a>
         </div>
         <div class="carousel pb-5" data-aos="fade-up" data-aos-delay="100">
             <div class="slides"> 

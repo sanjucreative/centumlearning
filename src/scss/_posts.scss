@@ -48,15 +48,15 @@
 .reg_closed_msg{background: #1f77df; padding: 5px 15px; color: #fff;}
 
 
-.cat_wrap{ border: solid 1px #1f77df; padding: 10px 10px 60px; height: 100%; position: relative;
+.cat_wrap{ border: solid 1px #1f77df; padding: 10px 10px 60px; height: 100%; position: relative; border-radius: 12px;
     h4{font-size: 1.1rem; line-height: 1.4; color: $text-heading;}
     .cat-featured-image{width: 100%; min-height: 152px; margin-bottom: 12px; @include transition(0.8s);  background-repeat: no-repeat; background-position: center; background-size: cover; position: relative;
         &.webinarThumb{background-image: url(../images/webinar-listing-thumb.jpg);}
     }
 
-    &:hover{
-        .cat-featured-image{transform: scale(1.07, 1.125);}
-    }
+    // &:hover{
+    //     .cat-featured-image{transform: scale(1.07, 1.125); left: -1px; border-top-left-radius: 12px; border-top-right-radius: 12px;}
+    // }
     p{margin: 0; font-size: 0.95rem;}
     .know_more{position: absolute; bottom: 6px; left: 10px;
         a{font-size: 0.775rem;}

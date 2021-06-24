@@ -86,7 +86,11 @@ if($page_video_cover_image ==''){
 				$infographic .= '<div class="col-12"><ul class="infographic_arrow">';
 				if( have_rows('Infographics_item_content') ): 
 					foreach ( get_field("Infographics_item_content") as $i => $item  ) {
-						$infographic .= '<li><div class="arrow_excerpt">' . str_replace("\n", "",  wpautop($item["Infographics_excerpt"])) .'</div></li>';
+						if($item["Infographics_excerpt"] ==''){
+							$infographic .= '<li class="empty"></li>';
+						}else{
+							$infographic .= '<li><div class="arrow_excerpt"><div>' . str_replace("\n", "",  wpautop($item["Infographics_excerpt"])) .'</div></div></li>';
+						}
 					}
 				endif;
 				$infographic .= '</ul></div>';
@@ -108,7 +112,7 @@ if($page_video_cover_image ==''){
 				$infographic .= '<div class="col-12"><ul class="infographic_circle">';
 					if( have_rows('Infographics_item_content') ): 
 					foreach ( get_field("Infographics_item_content") as $i => $item  ) {
-						$infographic .= '<li><div class="circle_excerpt">' . str_replace("\n", "",  wpautop($item["Infographics_excerpt"])) .'</div></li>';
+						$infographic .= '<li><div class="circle_excerpt"><div>' . str_replace("\n", "",  wpautop($item["Infographics_excerpt"])) .'</div></div></li>';
 					}
 					endif;
 				$infographic .= '</ul></div>';

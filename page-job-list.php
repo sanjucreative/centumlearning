@@ -33,10 +33,9 @@ $category_list = get_terms( array(
 				<div class="row">
 						<div class="col-12 col-md-4">
 							<div class="filter_drop">
-							<label>Choose Locations</label>
 							<select class="form-control" id="job_location">
 								<?php
-								echo '<option value=" ">Select Locations</option>';
+								echo '<option value=" ">Locations</option>';
 								foreach($location_list   as $key => $locations){
 										echo '<option value="'. $locations->term_id.'">'. $locations->name . '</option>';
 								}
@@ -46,10 +45,9 @@ $category_list = get_terms( array(
 						</div>
 						<div class="col-12 col-md-4">
 							<div class="filter_drop">
-							<label>Choose Departments</label>
 							<select class="form-control" id="job_department">
 								<?php
-								echo '<option value=" ">Select Department</option>';
+								echo '<option value=" ">Departments</option>';
 								foreach($department_list   as $key => $department){
 										echo '<option value="'. $department->term_id.'">'. $department->name . '</option>';
 								}
@@ -59,10 +57,9 @@ $category_list = get_terms( array(
 						</div>
 						<div class="col-12 col-md-4">
 							<div class="filter_drop">
-							<label>Choose Category</label>
 							<select class="form-control" id="job_category">
 								<?php
-								echo '<option value=" ">Select Category</option>';
+								echo '<option value=" ">Role</option>';
 								foreach($category_list   as $key => $category){
 										echo '<option value="'. $category->term_id.'">'. $category->name . '</option>';
 								}
@@ -70,12 +67,13 @@ $category_list = get_terms( array(
 							</select>
 							</div>
 						</div>
-
+						<?php /*
 						<div class="col-12 mt-4">
 								<ul class="scrollspy_location">
 									<li><a class="scrollspy" href="#open_job_opportunities"><i class="mc"><img src="<?php echo get_theme_file_uri( '/assets/images/icon-job.png')?>" alt=""></i> <span>View Opportunities</span></a></li>
 								</ul>
 						</div>
+						*/ ?>
 				</div>
 			</div>
 			<div class="col-12 col-lg-4" data-aos="fade-up" data-aos-delay="50">
@@ -97,59 +95,56 @@ $category_list = get_terms( array(
 </div>
 <div class="animation_wrap">
 	<div class="container" data-aos="fade-up" data-aos-delay="50" id="open_job_opportunities">
-				<div class="row justify-content-center">
-					<h2 class="col-12 text-center py-4">Browse Open Job Positions</h2>
-				</div>
-				<div class="row justify-content-center pb-5" id="job_opportunities_list">
-				<?php
-				$jobOpening_args = array('post_type' => 'job', 'posts_per_page' => -1, 'orderby' => 'menu_order', 'order' => 'ASC');
-				$jobOpening = new WP_Query($jobOpening_args);
-				
-				if ($jobOpening->have_posts()) :  while ( $jobOpening->have_posts() ) : $jobOpening->the_post();
-				?>
-				<div class="col-12 col-md-3 mb-4">
-					<div class="jobList_wrap">
-						<h4><?php the_title();?></h4>
-						<div class="opeing_date"><?php echo 'Opening Till - ' .get_field('job_opening_closed'); ?></div>
-						<hr/>
-						<ul>
-								<?php
-									$location_list = get_the_terms( $post->ID, 'locations' );
-									if(!empty($location_list)){
-										echo '<li>';
-											array_list_item($location_list);
-										echo '</li>';
-									}
+		<div class="row justify-content-center">
+			<h2 class="col-12 text-center py-4">Browse Open Job Positions</h2>
+		</div>
+		<div class="row justify-content-center pb-5" id="job_opportunities_list">
+			<?php
+			$jobOpening_args = array('post_type' => 'job', 'posts_per_page' => -1, 'orderby' => 'menu_order', 'order' => 'ASC');
+			$jobOpening = new WP_Query($jobOpening_args);
+			
+			if ($jobOpening->have_posts()) :  while ( $jobOpening->have_posts() ) : $jobOpening->the_post();
+			?>
+			<div class="col-12 col-md-3 mb-4 jobList_col">
+				<div class="jobList_wrap">
+					<h4><?php the_title();?></h4>
+					<ul>
+							<?php
+								$location_list = get_the_terms( $post->ID, 'locations' );
+								if(!empty($location_list)){
+									echo '<li><strong>location: </strong>';
+										array_list_item($location_list);
+									echo '</li>';
+								}
 
-									$department_list = get_the_terms( $post->ID, 'departments' );
-									if(!empty($department_list)){
-										echo '<li>';
-											array_list_item($department_list);
-										echo '</li>';
-									}
+								$department_list = get_the_terms( $post->ID, 'departments' );
+								if(!empty($department_list)){
+									echo '<li><strong>Department: </strong>';
+										array_list_item($department_list);
+									echo '</li>';
+								}
 
-									$category_list = get_the_terms( $post->ID, 'job-categories' );
-									if(!empty($category_list)){
-										echo '<li>';
-											array_list_item($category_list);
-										echo '</li>';
-									}
-								?>
-								
-						</ul>
-						<div class="applynow_btn"><a href="<?php the_permalink(); ?>" class="btn btn-primary">Apply Now</a></div>
+								$category_list = get_the_terms( $post->ID, 'job-categories' );
+								if(!empty($category_list)){
+									echo '<li><strong>Role: </strong>';
+										array_list_item($category_list);
+									echo '</li>';
+								}
+							?>
+							
+					</ul>
+					<div class="applynow_btn">
+						<small>Last day of application<br/><?php echo get_field('job_opening_closed'); ?></small>
+						<a href="<?php the_permalink(); ?>" class="btn btn-primary">Apply Now</a>
 					</div>
 				</div>
-				<?php endwhile;  endif; ?>
-				</div>
-				
 			</div>
-
-			
+			<?php endwhile;  endif; ?>
+		</div>
+				
 	</div>
 	<?php include('polygonizr-animation-left.php'); ?>
 </div>
-
 
 <div class="video_modal">
     <div class="closed"></div>

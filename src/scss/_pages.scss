@@ -64,7 +64,9 @@
 
             &:nth-child(1) {height: 300px;}
             &:nth-child(2) {height: 300px;
-                .CTS_page_child_content{height: 142px; margin-bottom: 16px;}
+                .CTS_page_child_content{height: 142px; margin-bottom: 16px;
+                    &:nth-child(even) h4{background: #002776;}
+                }
             }
             &:nth-child(3) {height: 300px;}
 
@@ -72,6 +74,10 @@
             &:nth-last-child(1) .CTS_page_child_content:hover, &:nth-last-child(2) .CTS_page_child_content:hover{
                 ul{height: calc(100% - 35px);}
               }
+
+
+            &:nth-child(3n+2) .CTS_page_child_content h4{background: #00589f;}
+            &:nth-child(4n+4) .CTS_page_child_content h4{background: #002776;}
 
         }
 
@@ -90,7 +96,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
         p{color: $color-blue!important; font-weight: 600!important; font-size: 0.8rem!important; line-height: 1.3; margin: 0px;}
     }
 }
-.knowmore_box{border: solid 1px $color-skyblue; padding: 10px 15px 40px; text-align: center; height: 100%; position: relative;
+.knowmore_box{border: solid 1px $color-skyblue; padding: 10px 15px 40px; text-align: center; height: 100%; position: relative; border-radius: 16px;
     h5{font-size: 1.15rem; color: #111; font-weight: 600; margin-bottom: 5px;}
     .know_more_btn{position: absolute; bottom: 20px;
     left: 50%; transform: translateX(-50%);
@@ -132,7 +138,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
             &:hover{color: #1f77df;}
         }
     }
-    .location_box{padding: 10px 20px 55px; border: solid 1px $color-skyblue; background: #fff; height: 100%; position: relative;
+    .location_box{padding: 10px 20px 55px; border: solid 1px $color-skyblue; background: #fff; height: 100%; position: relative; border-radius: 12px;
         h5{font-size: 1.25rem;}
         .map_location_btn{position: absolute; bottom: 20px; left: 20px;
             a{border: solid 1px #1f77df; font-size: 0.7rem; line-height: 1; display: inline-block; text-decoration: none !important;
@@ -150,7 +156,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
         }
     }
 
-    iframe{width: 100%;}
+    iframe{width: 100%; border-radius: 16px;}
 }
 #location_map_modal{
     .modal-dialog{max-width: 600px;}
@@ -176,8 +182,10 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 
 /* ######################### Template How We Work Page ########################## */
 .approach_wrap{position: relative; max-width: 198px; height: 100%; border:solid 1px $color-lightblue; padding: 75px 12px 12px; @include transition(1s);
-    background: #fff;
-    figure{width: 100px; height: 95px; position: absolute; right: 20px; top: -25px; margin: 0px;}
+    background: #fff; border-radius: 10px;
+    figure{width: 100px; height: 95px; position: absolute; right: 20px; top: -25px; margin: 0px;
+        img{border-radius: 8px;}
+    }
     h4{font-size: 1.3rem; line-height: 1.6; color: $color-lightblue; margin: 0px;}
     p{font-size: 0.8rem; line-height: 1.3; margin: 0px;}
 
@@ -185,7 +193,10 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 }
 
 /* ######################### Template Our Team Page ########################## */
-.temp_our_team {padding-top: 80px;
+.temp_our_team {padding-top: 80px; padding-bottom: 60px; height: auto;  background-attachment: fixed;
+    &::after{display: none;}
+
+
     .ourTeam-flipBox{
         .flip-box-front{background: #0078b7;}
         .flip-box-back{background: #fff;
@@ -209,7 +220,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 
 }
 
-.ourTeam-flipBox{padding: 0 15px; height: 330px;
+.ourTeam-flipBox{padding: 0 10px; height: 330px;
         .flip-box-front{background: #0078b7; padding: 15px 10px; border-radius: 15px;
             figure{width: 130px; height: 130px; margin: 0px auto 15px; 
                 img{width: 100%; height: auto; border-radius: 12px; @include box-shadow(2px,5px,3px,1px,0.1)}
@@ -244,7 +255,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 
 /* ######################### Template Media Page ########################## */
 .temp_media{
-    .contact_info{width: 100%; max-width: 340px; margin: 80px auto 0px; border: solid 2px #fff; padding: 25px;
+    .contact_info{width: 100%; max-width: 340px; margin: 80px auto 0px; border: solid 2px #fff; padding: 25px; border-radius: 15px;
         h4{color: $color-orange; margin-bottom: 0.75rem; line-height: 1.25;}
         h5{font-size: 1rem; color: $color-white; margin-bottom: 0px;}
         p{font-size: 0.9rem; line-height: 1.35; font-weight: 200; margin-bottom: 0px;
@@ -282,7 +293,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
             .slick-track{display: flex !important;
                 .slick-slide{padding: 0px 15px;  height: inherit !important;
                     & > div{height: 100%;}
-                    .media_box{border:solid 1px #0078b7; width: 100%; height: 100%; padding: 15px 20px;
+                    .media_box{border:solid 1px #0078b7; width: 100%; height: 100%; padding: 15px 20px; border-radius: 15px;
                         h4{font-size: 1rem; line-height: 1.45; font-weight: 400; min-height: 100px;}
                         p{font-size: 0.9rem; line-height: 1.25; margin: 0 0 5px; color: #666;
                             strong{font-weight: 500; color: #000;}
@@ -302,10 +313,8 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 
 
 /* ######################### Template Dialogues Page ########################## */
-.temp_dialogues{padding-top: 90px;
-    .banner_content{
-        h1{font-size: 2.25rem; text-align: center;}
-    }
+.temp_dialogues{padding-top: 100px;
+    .banner_content{padding: 30px 50px 0px 0px;}
     .page_banner_content{position: relative; z-index: 99;
         h2{color: $color-orange; font-size: 1.75rem; line-height: 1.35;}
         .block_scrollbar{overflow-y: scroll; max-height: 340px; padding-right: 10px;
@@ -327,6 +336,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
                 background: #ccc;
               }
         }
+
         ul.upcoming_discussions{list-style: none; margin: 0px; padding: 0px;
             li{margin: 0 0 30px; padding: 0px; opacity: 0.92;
                 .feature_img{width: 100%; height: 170px; display: block; margin:0 0 10px; background: url(../images/upcoming-webinar.jpg) no-repeat top center; background-size: cover; 
@@ -388,7 +398,60 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
             }
         }
     }
+
+    .feature_content{position: relative; z-index: 99;
+        .feature_wrap{ background: #002671; padding: 10px 20px 20px; max-width: 450px; border-radius: 20px;
+            h2{color: $color-orange; text-align: center; margin-bottom: 5px;}
+            .feature_img{width: 100%; height: 170px; display: block; margin:0 0 10px; background: url(../images/upcoming-webinar.jpg) no-repeat top center; background-size: cover; 
+                position: relative; text-align: center; border-radius: 20px;  font-size: 0; line-height: 1;              
+            }
+            h3{color: #fff; font-size: 1.2rem; line-height: 1.4; margin: 0; padding: 15px; font-weight: 500; position: relative; z-index: 5; top: 60%; left: 50%; transform: translate(-50%, -50%);}
+            .schedule_date{color: #fff; font-size: 1rem; line-height: 1.35; font-weight: 300; margin-bottom: 10px;}
+            .heading{color: #fcd04e; font-size: 0.85rem; line-height: 1.35; font-weight: 400; margin-bottom: 5px;}
+            p{color: #fff; font-size: 0.9rem; line-height: 1.35; margin: 0 0 8px 0; font-weight: 200;
+                strong{color: #fff; font-weight: 400;}
+            }
+            a{color: #fff; text-decoration: none;}
+
+            &:hover{opacity: 1;}
+
+        }
+    }
 }
+
+.dialogue_slider{
+    .slick-track{display: flex !important;
+        .slick-slide{padding: 0px 15px 15px; height: inherit !important;
+            &> div{ min-height: 100%; border: solid 1px #1f77df; border-radius: 12px; background: #fff; position: relative; 
+                padding: 12px 12px 60px 12px; @include box-shadow(0px,5px,10px,0px,0.25);
+                .dialogues_wrap{
+                    h4{font-size: 1.1rem; line-height: 1.4; color: $text-heading; margin-bottom: 5px;}
+                    .cat-featured-image{width: 100%; min-height: 152px; margin-bottom: 12px; @include transition(0.8s);  background-repeat: no-repeat; background-position: center; background-size: cover; position: relative;
+                        &.webinarThumb{background-image: url(../images/webinar-listing-thumb.jpg);}
+                    }
+                    
+                    p{margin:0 0 5px 0; font-size: 0.95rem; line-height: 1.3;
+                        strong{color: $color-black; font-size: 0.9rem; font-weight: 500;}
+                    }
+                    .heading{color: $color-black; font-size: 0.9rem; line-height: 1.3; font-weight: 600; margin-top: 10px;}
+                }
+
+                .know_more{position: absolute; bottom: 20px; right: 12px;
+                    a{display: block; background:$color-blue; color: $color-white; padding: 2px 20px; border-radius: 25px; font-size: 0.85rem; 
+                        &:hover{text-decoration: none; background-color: $color-lightblue;}
+                    }
+                }
+            }
+        }
+    }
+
+    &.slick-slider ul.slick-dots{margin-top: 40px;}
+}
+
+.more_dialogues_btn{position: relative; top: -65px; text-align: right; width: 100%; padding: 0 35px;
+    i{background: url(../images/arrow-blue.svg) no-repeat center center; background-size: contain; width: 20px; height: 13px; display: inline-block;}
+}
+
 
 
 /* ######################### Template Solutions Page ########################## */
@@ -483,12 +546,24 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
         }
     }
 }
-.jobList_wrap{min-height: 100%; background: #f8f8f8; padding: 20px 20px 60px; border: solid 1px #ddd; border-radius: 10px; position: relative;
-    h4{font-size: 1.2rem; line-height: 1.3; margin-bottom: 5px; text-align: center;}
-    .opeing_date{font-size: 0.85rem; line-height: 1.25; text-align: center;}
-    li{margin-bottom: 8px; font-size: 1rem; line-height: 1.3;}
+.jobList_col{
+    .jobList_wrap{min-height: 100%; background: #fcfcfc; padding: 20px 20px 60px; border: solid 1px #ddd; border-radius: 12px; position: relative;
+        h4{font-size: 1.2rem; line-height: 1.3; width: calc(100% + 42px); left: -21px; top:-20px; position: relative; padding: 16px 20px; color: #fff;
+            margin-bottom: 0px; background-color: #0078b7; border-top-left-radius: 12px;  border-top-right-radius: 12px;
+        }
+        .opeing_date{font-size: 0.85rem; line-height: 1.25; text-align: center;}
+        li{margin-bottom: 8px; font-size: 1rem; line-height: 1.3;
+            strong{font-weight: 600;}
+        }
 
-    .applynow_btn{position: absolute; bottom: 20px; text-align: right; width: calc(100% - 40px);}
+        .applynow_btn{position: absolute; bottom: 20px; width: calc(100% - 38px); 
+            small{line-height: 1.4; float: left; padding-right: 10px; font-size: 75%;}
+            a{float: right;}
+        }
+    }
+
+    &:nth-child(3n+2) .jobList_wrap h4{background-color: #002776}
+    // &:nth-child(3n+3) .jobList_wrap h4{background-color: #002776;}
 }
 
 #job_opportunities_list{min-height: 350px; position: relative;}
@@ -557,6 +632,12 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
     .found_404{max-width: 250px; margin: 0 auto;
         img{width: 100%; height: auto;}
     }
+}
+
+/* ######################### Template Privacy Page ########################## */
+.privacy_contact_wrap{background: url(../images/privacy-contact-us-bg.jpg) no-repeat top center;
+    padding: 70px 0px 50px; background-size: cover; color: #fff;
+    p{color: #fff;}
 }
 
 

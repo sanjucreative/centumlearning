@@ -82,6 +82,7 @@ if(function_exists("register_field_group"))
 				'key' => 'field_5ad014e64c21d',
 				'label' => 'Banner BG Image',
 				'name' => 'category_image',
+				'instructions' => 'Dimension size:-	width: 1920px and height: 1080px',
 				'type' => 'image',
 				'conditional_logic' => array (
 					'status' => 1,
@@ -105,7 +106,7 @@ if(function_exists("register_field_group"))
 			),
 			array (
 				'key' => 'field_5c7b7ea09eeb1',
-				'label' => 'Banner Text',
+				'label' => 'Banner Content',
 				'name' => 'banner_text',
 				'type' => 'wysiwyg',
 				'default_value' => '',
@@ -127,6 +128,146 @@ if(function_exists("register_field_group"))
 					),
 					'allorany' => 'all',
 				),
+			),
+
+			array(
+				'key' => 'field_609e3516324d8',
+				'label' => 'Featured/Video Cover Image',
+				'name' => 'page_video_cover_image',
+				'type' => 'image',
+				'instructions' => 'Dimension size:-	width: 800px and height: 600px',
+				'conditional_logic' => array (
+					'status' => 1,
+					'rules' => array (
+						array (
+							'field' => 'field_5ad356d348d33',
+							'operator' => '==',
+							'value' => 'Yes',
+						),
+						array (
+							'field' => 'field_5ad356d348d34',
+							'operator' => '!=',
+							'value' => 'Yes',
+						),
+					),
+					'allorany' => 'all',
+				),
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'return_format' => 'url',
+				'preview_size' => 'full',
+				'library' => 'all',
+				'min_width' => '',
+				'min_height' => '',
+				'min_size' => '',
+				'max_width' => '',
+				'max_height' => '',
+				'max_size' => '',
+				'mime_types' => '',
+			),
+			array (
+				'key' => 'field_5ad8b226b8406',
+				'label' => '',
+				'name' => 'check_for_page_url',
+				'type' => 'checkbox',
+				'choices' => array (
+					'Yes' => 'Check for page URL',
+				),
+				//'default_value' => '',
+				'default_value' => 'No',
+				'conditional_logic' => array (
+					'status' => 1,
+					'rules' => array (
+						array (
+							'field' => 'field_5ad356d348d33',
+							'operator' => '==',
+							'value' => 'Yes',
+						),
+						array (
+							'field' => 'field_5ad356d348d34',
+							'operator' => '!=',
+							'value' => 'Yes',
+						),
+					),
+					'allorany' => 'all',
+				),
+				'layout' => 'vertical',
+			),
+			array(
+				'key' => 'field_609e34a2324s7',
+				'label' => 'Video URL',
+				'name' => 'page_video_url',
+				'type' => 'text',
+				'instructions' => '',
+				'conditional_logic' => array(
+					array(
+						array(
+							'field' => 'field_5ad8b226b8406',
+							'operator' => '!=',
+							'value' => 'Yes',
+						),
+						array (
+							'field' => 'field_5ad356d348d33',
+							'operator' => '==',
+							'value' => 'Yes',
+						),
+						array (
+							'field' => 'field_5ad356d348d34',
+							'operator' => '!=',
+							'value' => 'Yes',
+						),
+					),
+				),
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_609e34a2324f7',
+				'label' => 'Page URL',
+				'name' => 'page_url',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 1,
+				'conditional_logic' => array(
+					array(
+						array(
+							'field' => 'field_5ad8b226b8406',
+							'operator' => '==',
+							'value' => 'Yes',
+						),
+						array (
+							'field' => 'field_5ad356d348d33',
+							'operator' => '==',
+							'value' => 'Yes',
+						),
+						array (
+							'field' => 'field_5ad356d348d34',
+							'operator' => '!=',
+							'value' => 'Yes',
+						),
+					),
+				),
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
 			),
 
 			
@@ -4577,5 +4718,69 @@ acf_add_local_field_group(array(
 	'active' => true,
 	'description' => '',
 ));
+
+/* ###################### Page Privacy ################################### */
+acf_add_local_field_group(array(
+	'key' => 'group_60c968632e50e',
+	'title' => 'Privacy issue contact',
+	'fields' => array(
+		array(
+			'key' => 'field_60c968a899ed1',
+			'label' => 'Privacy issue contact',
+			'name' => 'privacy_issue_contact',
+			'type' => 'wysiwyg',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'all',
+			'toolbar' => 'full',
+			'media_upload' => 1,
+			'delay' => 0,
+		),
+		array(
+			'key' => 'field_60c96a9ab120d',
+			'label' => 'After issue contact',
+			'name' => 'after_issue_contact',
+			'type' => 'wysiwyg',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'all',
+			'toolbar' => 'full',
+			'media_upload' => 1,
+			'delay' => 0,
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'page_template',
+				'operator' => '==',
+				'value' => 'page-privacy.php',
+			),
+		),
+	),
+	'menu_order' => 3,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
 
 }

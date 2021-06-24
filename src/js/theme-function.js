@@ -27,6 +27,16 @@ jQuery(document).ready(function($){
             $('#top-link').css("bottom", "-70px");
         }
 
+        $('.infographic_arrow').each(function(){  
+            var $columns = $('li .arrow_excerpt',this);
+            var maxHeight = Math.max.apply(Math, $columns.map(function(){
+                return $(this).height();
+            }).get());
+            $(this).height((maxHeight*2) + (30*2));
+            $columns.height(maxHeight);
+            $('li.empty').prev().addClass("pre_empty");
+        });
+
 
         $('.infographic_circle').each(function(){  
             var $columns = $('li .circle_excerpt',this);
@@ -34,7 +44,19 @@ jQuery(document).ready(function($){
                 return $(this).height();
             }).get());
             $(this).height((maxHeight*2) + (60*2));
+            $columns.height(maxHeight);
         });
+
+        $('.infographic_circle_wave').each(function(){  
+            var $columns = $('li .follow_excerpt',this);
+            var maxHeight = Math.max.apply(Math, $columns.map(function(){
+                return $(this).height();
+            }).get());
+            $(this).height((maxHeight*2) + (85*2));
+            $columns.height(maxHeight);
+        });
+
+
         
     
 
@@ -66,6 +88,8 @@ $('#top-link').on('click', function(e){
 $(document).on('click', '.readmore', function (e) {
     e.preventDefault();
     $(this).prev(".more_content").slideToggle();
+    // $(this).text("aaa");
+    ($(this).text() === "Read More") ? $(this).text("Read Less") : $(this).text("Read More");
 });
 
 $("header .container nav ul.sub-menu").each(function(){
@@ -203,6 +227,30 @@ $('.speakers_slider').slick({
 $('.solution_slider').slick({
     slidesToShow: 3,
     slidesToScroll: 3,
+    infinite: false,
+    arrows: false,
+    dots: true,
+    autoplay: false,
+    autoplaySpeed: 6000,
+    speed: 1000,
+    responsive: [{
+        breakpoint: 1024,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            }
+        },{
+            breakpoint: 640,
+            settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            }
+        }]
+})
+
+$('.dialogue_slider').slick({
+    slidesToShow: 4,
+    slidesToScroll: 4,
     infinite: false,
     arrows: false,
     dots: true,

@@ -36,7 +36,7 @@ $media_banner_right_side = get_field('media_banner_right_side');
 					<div class="col-12 col-md-10 py-5 text-center">
 						<p><?php echo get_field("media_content_excerpt");?></p> 
 						<div class="more_content"><p><?php echo get_field("media_content_excerpt_read_more");?></p></div>
-            			<a class="readmore" href="#">Read More <i></i></a>
+            			<a class="readmore" href="#">Read More</a>
 					</div>
 			</div>
 

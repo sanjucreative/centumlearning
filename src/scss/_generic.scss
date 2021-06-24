@@ -22,7 +22,7 @@ hr{box-sizing: border-box;}
 body.on{overflow: hidden;}
 .breadcrumbs{margin: 1rem 0;}
 .section-heading{font-size: 1.5rem; font-weight: 600; color:$text-heading}
-
+.card{border-color: rgba($color-blue, 0.25); min-height: 100%;}
 
 .trustedBy{padding: 0 30px; position: relative;
     .slick-slide{padding: 0 15px;
@@ -107,7 +107,8 @@ img.aligncenter, a img.aligncenter {display: block; margin-left: auto; margin-ri
 
 
 
-@media (min-width:1500px){.container{max-width:1400px;}}
+
+
 .py-5{padding-top: 4rem!important; padding-bottom: 4rem!important;}
 .page-section{padding: 4rem 0;}
 .readmore{background: $color-blue; color: $color-white; display: inline-block; padding: 6px 12px; text-decoration: none; font-size: 0.825rem; line-height: 1.5; font-weight: 300;
@@ -115,6 +116,7 @@ img.aligncenter, a img.aligncenter {display: block; margin-left: auto; margin-ri
     i{font-style: normal; width: 14px; height: 10px; background: url(../images/arrow-white.svg) no-repeat center center; display: inline-block; background-size: cover;}
 
     &:hover{text-decoration: none; color: $color-white; background-color: $color-blue-hover;}
+    &::after{content: ''; display: inline-block; margin-left: 5px; width: 14px; height: 10px; background: url(../images/arrow-white.svg) no-repeat center center; background-size: cover;}
 }
 .more_content{display: none;}
 .animation_wrap{position: relative;
@@ -135,7 +137,7 @@ img.aligncenter, a img.aligncenter {display: block; margin-left: auto; margin-ri
 }
 
 
-
+@media (min-width:1500px){.container{max-width:1400px;}}
 @media (max-width:1024px){
     .container, .container-sm {max-width: 100%;}
 }

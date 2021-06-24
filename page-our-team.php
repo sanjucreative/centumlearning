@@ -7,7 +7,7 @@ $our_team_banner_image = get_field('our_team_banner_image');
 $banner_content = get_field('banner_content');
 
 function team_member($item){
-$memeber ='<div class="col-12 col-md-3 my-3">';
+$memeber ='<div class="col-12 col-md-3 my-4">';
 $memeber .='<div class="flip-box ourTeam-flipBox"><div class="flip-box-inner">';
 $memeber .='<div class="flip-box-front">';
 	$memeber .='<figure><img src="'. $item ['our_team_profile_picture'].'" /></figure>';
@@ -57,7 +57,7 @@ return $memeber;
 				if( have_rows('team_member') ): 
 				$x = 0;
 				foreach ( get_field("team_member") as $x  => $item  ) {
-				if ($x == 4) break;
+				// if ($x == 4) break;
 					echo team_member($item);					
 				}
 				endif;
@@ -65,6 +65,8 @@ return $memeber;
 		</div>
 	</div>
 </div>
+
+<?php /*
 <div class="animation_wrap">
 <div class="container">
 	<div class="row justify-content-center py-5" data-aos="fade-up" data-aos-delay="50">
@@ -84,6 +86,7 @@ return $memeber;
 	<?php include('polygonizr-animation-left.php'); ?>
 </div>
 </div>
+*/?>
 <?php endwhile; endif; ?>
 
 <?php get_footer(); ?>
