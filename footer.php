@@ -36,8 +36,9 @@
             </div>
 </div>
 <a id="top-link" href="#top"></a>
+<div class="contact_us_btn"><a href="<?php echo get_permalink( get_page_by_path('contact-us')); ?>"></a></div>
+
 <?php wp_footer();  ?> 
-<script type="text/javascript" src="<?php echo get_theme_file_uri( '/assets/plugins/polygonizr/polygonizr.min.js')?>"></script>
 <script>
 jQuery(document).ready(function($){
     let $sitelading = $('.polygonizr');
@@ -48,9 +49,9 @@ jQuery(document).ready(function($){
             // nodeMovementDistance: 10,
             // numberOfNodes: 1,
             // numberOfUnconnectedNode: 25,
-            nodeDotColor:"10, 10, 10",
-            nodeLineColor:"5, 5, 5",
-            nodeFillColor:"5, 5, 5",
+            nodeDotColor:"8, 8, 8",
+            nodeLineColor:"4, 4, 4",
+            nodeFillColor:"4, 4, 4",
     });
 
 });
@@ -63,4 +64,20 @@ setTimeout(function () {
 
 }, 800);
 </script>
+<?php
+    echo get_theme_option('footer_script');
+	$queried_object = get_queried_object(); 
+	$taxonomy = $queried_object->taxonomy;
+	$term_id = $queried_object->term_id;  	
+	if(is_category()){
+		echo get_field('page_footer_script_and_style', $taxonomy . '_' . $term_id);
+	}else{
+		echo get_field('page_footer_script_and_style');
+	}
+
+
+    $arr_cookie_options = array ('path' => '/', 'domain' => 'localhost',  'secure' => true, 'httponly' => true,);
+    setcookie('cookielawinfo', 'A', $arr_cookie_options);   
+
+?>
 </body>

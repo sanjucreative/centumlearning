@@ -12,6 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
 <link rel="profile" href="https://gmpg.org/xfn/11" />	
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400&display=swap" rel="stylesheet">
 <?php wp_head(); ?>
 <script>
 jQuery(document).ready(function($){
@@ -40,13 +41,24 @@ jQuery(document).ready(function($){
 	<?php } ?>
 })
 </script>
+<?php
+	echo get_theme_option('header_script');
+	$queried_object = get_queried_object(); 
+	$taxonomy = $queried_object->taxonomy;
+	$term_id = $queried_object->term_id;  	
+	if(is_category()){
+		echo get_field('page_header_script_and_style', $taxonomy . '_' . $term_id);
+	}else{
+		echo get_field('page_header_script_and_style');
+	}
+?>
 </head>
 <body <?php body_class(); ?>>
 <?php
 
-	$queried_object = get_queried_object(); 
-	$taxonomy = $queried_object->taxonomy;
-	$term_id = $queried_object->term_id;  	
+	// $queried_object = get_queried_object(); 
+	// $taxonomy = $queried_object->taxonomy;
+	// $term_id = $queried_object->term_id;  	
 	if(is_category()){
 		$CarouselActive = get_field('active_carousel', $taxonomy . '_' . $term_id);
 		$CarouselSlug = get_field('carousel_slug', $taxonomy . '_' . $term_id);
@@ -79,7 +91,8 @@ jQuery(document).ready(function($){
     
     
 ?>
-<header>
+
+<header class="<?php echo (!is_front_page() || !is_page_template('index.php')) ?  'inner_pages' : '' ;?>">
 <div class="container">
             <div class="logo"><?php the_custom_logo(); ?></div>
         <div class="menu-toggle">      
@@ -94,6 +107,8 @@ jQuery(document).ready(function($){
 <?php if (is_home() || is_front_page() || is_page_template('index.php')) {  ?>
 	<div class="HomeCarousel">
             <?php echo carouselLoop('home', 'home_hero'); ?>
+
+			<a class="nextFold scrollspy" href="#nextFold"></a>
     </div>
 <?php } else{
 	if($show_page_banner[0] == 'Yes'){
@@ -116,8 +131,10 @@ jQuery(document).ready(function($){
 		<div class="container banner_content">
 			<div class="row">
 				<div class="col-12 col-lg-7 pr-3 pr-lg-5" data-aos="fade-up" data-aos-delay="50">
-					<h1><?php the_title();?></h1>
-					<?php echo $category_banner_text ?>
+					<div class="banner_left">
+						<?php /* <h1><?php the_title();?></h1> */ ?>
+						<?php echo $category_banner_text ?>
+					</div>
 				</div>
 				<div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="50">
 					<div class="video_cont">
@@ -134,13 +151,16 @@ jQuery(document).ready(function($){
 					</div>
 				</div>
 			</div>
+		
+			<a class="nextFold scrollspy" href="#nextFold"></a>
 		</div>
 	</div>
 <?php
 
 	} else { 
-		echo '<div class="HomeCarousel">';
+		echo '<div class="HomeCarousel inner_page_banner">';
 		echo carouselLoop($CarouselSlug, 'home_hero'); 
+		echo '<a class="nextFold scrollspy" href="#nextFold"></a>';
 		echo '</div>';
 	 }
 	} 

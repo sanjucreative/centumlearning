@@ -131,7 +131,7 @@ $banner_content = get_field('dialogues_banner_content');
 										<li>
 											<figure style="background-image:url(<?php echo $img[0]; ?>)"></figure>
 											<h3><?php the_title(); ?></h3>
-											<div class="reamore_btn"><a href="<?php the_permalink(); ?>">Read More</a></div>
+											<div class="reamore_btn"><a href="<?php the_permalink(); ?>">View More</a></div>
 										</li>
 
 								<?php

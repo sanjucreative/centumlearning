@@ -3,13 +3,7 @@
 <?php /* <div class="breadcrumbs"><div class="container" data-aos="fade-right" data-aos-delay="50"><?php echo bcn_display(true) ?></div></div> */?>
 <div class="animation_wrap">
 <div class="container">
-	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">
-		<div class="post-content col-12 col-md-10">
-			<h1 class="text-center"><?php the_title(); ?></h1>
-				<?php if (has_excerpt()){ ?>
-					<article class="text-center"><?php the_excerpt();?></article>
-				<?php } ?>
-			
+	<section class="post-content py-5" id="nextFold">			
 			<?php $featured_image_display = get_field('show_featured_image_in_post');
 					if($featured_image_display[0] == 'Yes'):
 						if( has_post_thumbnail() ) { ?>
@@ -17,12 +11,20 @@
 						<?php }
 					endif;
 			?>
-			<article><?php the_content(); ?></article>
-		</div>
-	</div>
+			<article class="the_post"><?php  the_content(); ?></article>
+			<div class="clear"></div>
+	</section>
 
 </div>
-<?php include('polygonizr-animation-left.php'); ?>
+<?php include('polygonizr-animation.php'); ?>
 </div>
 <?php endwhile; endif; ?>
+<div class="video_modal">
+    <div class="closed"></div>
+    <div class="modal_container">
+        <div class="videoWrapper">
+                <iframe id="iframe_video" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        </div>
+    </div>
+</div>
 <?php get_footer(); ?>

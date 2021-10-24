@@ -41,11 +41,12 @@ $country = get_terms('country', 'orderby=menu_order&hide_empty=0');
 			</div>
 		</div>
 	</div>
+	<a class="nextFold scrollspy" href="#nextFold"></a>
 </div>
 
 
 <div class="animation_wrap">
-	<div class="container mb-5 contact_us">
+	<div class="container mb-5 contact_us" id="nextFold">
 			<?php
 			if($country): 
 				foreach ( $country as $item  ) {
@@ -74,7 +75,7 @@ $country = get_terms('country', 'orderby=menu_order&hide_empty=0');
 				<div class="row mt-5" data-aos="fade-up" data-aos-delay="50">
 					
 					<div class="col-12 col-md-6 pr-3 pr-md-5" id="<?php echo $item->name?>_location">
-						<h3><?php echo $item->name;?></h3>
+						<h3 class="section-heading"><?php echo $item->name;?></h3>
 						<?php 
 							// echo $item['contact_corporate_office'];
 							echo wpautop(get_field('country_address', 'country' . '_' . $item->term_id));
@@ -93,9 +94,9 @@ $country = get_terms('country', 'orderby=menu_order&hide_empty=0');
 				<?php 
 
 					if($i == 0){
-						echo '<h3 class="col-12 mb-2 mt-4">Other Offices</h3>';
+						echo '<h3 class="col-12 mb-2 mt-4 section-heading">Other Offices</h3>';
 					}else{
-						echo '<h3 class="col-12 mb-2 mt-4">Other Location</h3>';
+						echo '<h3 class="col-12 mb-2 mt-4 section-heading">Other Location</h3>';
 					}
 					$i++;
 
@@ -117,7 +118,7 @@ $country = get_terms('country', 'orderby=menu_order&hide_empty=0');
 				endif;
 			?>
 		
-		<?php include('polygonizr-animation-left.php'); ?>
+		<?php include('polygonizr-animation.php'); ?>
 	</div>
 </div>
 

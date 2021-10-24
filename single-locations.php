@@ -33,7 +33,7 @@ if($location_banner_heading ==''){
 <div class="animation_wrap">
 <div class="container">
 	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50" id="our_services_location">
-		<h2 class="text-center">Our Services in <?php echo get_the_title(); ?></h2>
+		<h2 class="text-center section-heading">Our Services in <?php echo get_the_title(); ?></h2>
 		<div class="col-12 col-lg-10 pt-5 pb-3">
 			<div class="row">
 					<?php
@@ -55,7 +55,7 @@ if($location_banner_heading ==''){
 	</div>
 
 	</div>
-	<?php include('polygonizr-animation.php'); ?>
+	<?php include('polygonizr-animation-left.php'); ?>
 </div>
 
 

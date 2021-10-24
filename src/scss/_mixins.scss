@@ -21,6 +21,30 @@
 	-ms-transition: all $s ease;
 }
 
+@mixin transition-cubic($s){
+	transition: all $s cubic-bezier(.25,1,.35,1) 0s;
+	-webkit-transition: all $s cubic-bezier(.25,1,.35,1) 0s;
+	-moz-transition: all $s cubic-bezier(.25,1,.35,1) 0s;
+	-o-transition: all $s cubic-bezier(.25,1,.35,1) 0s;
+	-ms-transition: all $s cubic-bezier(.25,1,.35,1) 0s;
+}
+
+@mixin transition-delay($s){
+	transition-delay: $s;
+	-webkit-transition-delay: $s;
+	-moz-transition-delay: $s;
+	-o-transition-delay: $s;
+	-ms-transition-delay: $s;
+}
+
+@mixin invert($p) {
+	filter: invert($p);
+	-webkit-filter: invert($p);
+	-moz-filter: invert($p);
+	-o-filter: invert($p);
+	-ms-filter: invert($p);
+}
+
 @mixin placeholder {
   ::-webkit-input-placeholder {@content}
   :-moz-placeholder           {@content}

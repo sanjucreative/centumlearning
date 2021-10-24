@@ -6,12 +6,12 @@ get_header();
 
 <div class="animation_wrap">
 	<div class="container">
-		<div class="row justify-content-center pt-5 pb-3" data-aos="fade-up" data-aos-delay="50">	
+		<div class="row justify-content-center pt-5 pb-3" id="nextFold" data-aos="fade-up" data-aos-delay="50">	
 			<article class="col-12 col-md-10"><?php the_content(); ?></article>
 		</div>
 
 		<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">
-			<h2 class="col-12 text-center"><?php echo get_field('hww_approach_heading');?></h2>
+			<h2 class="col-12 text-center section-heading"><?php echo get_field('hww_approach_heading');?></h2>
 			<div class="col-12 col-md-9">
 				<div class="row">
 					<div class="col-12 col-md-6"><figure><img class="img-fluid" src="<?php echo get_field('hww_approach_image');?>" alt="" /></figure></div>
@@ -19,27 +19,23 @@ get_header();
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<?php include('polygonizr-animation-left.php'); ?>
-</div>
-<div class="animation_wrap">
-<div class="container">
-	<div class="row justify-content-center my-5" data-aos="fade-up" data-aos-delay="50">	
-		<?php
-			if( have_rows('hww_approach_infograph') ): 
-			foreach ( get_field("hww_approach_infograph") as $item  ) {
-				echo '<div class="col-12 col-md-auto my-4"><div class="approach_wrap">';
-				echo '<figure><img class="img-fluid" src="'. $item['approach_infograph_image'] .'" alt="'. $item['approach_infograph_heading'] .'" /></figure>';
-				echo '<h4>'. $item['approach_infograph_heading'] .'</h4>';
-				echo '<p>'. $item['approach_infograph_excerpt'] . '</p>';
-				echo '</div></div>';
-				}
-			endif;
-		?>
+		
+			<div class="row justify-content-center my-5" data-aos="fade-up" data-aos-delay="50">	
+			<?php
+				if( have_rows('hww_approach_infograph') ): 
+				foreach ( get_field("hww_approach_infograph") as $item  ) {
+					echo '<div class="col-12 col-sm-6 col-md-auto my-4"><div class="approach_wrap">';
+					echo '<figure><img class="img-fluid" src="'. $item['approach_infograph_image'] .'" alt="'. $item['approach_infograph_heading'] .'" /></figure>';
+					echo '<h4>'. $item['approach_infograph_heading'] .'</h4>';
+					echo '<p>'. $item['approach_infograph_excerpt'] . '</p>';
+					echo '</div></div>';
+					}
+				endif;
+			?>
+		</div>
 	</div>
-</div>
-<?php include('polygonizr-animation-right.php'); ?>
+	<?php include('polygonizr-animation.php'); ?>
 </div>
 <?php endwhile; endif; ?>
 <div class="video_modal">

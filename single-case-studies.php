@@ -18,21 +18,24 @@ if($page_video_cover_image ==''){
 		<div class="row">
 			<div class="col-12 col-lg-7 pr-3 pr-md-5" data-aos="fade-up" data-aos-delay="50">
 				<?php echo $template_banner_content ?>
-				<p class="label">-A Case Studies</p>
-				<ul class="scrollspy_location">
+				<p class="label">-A Case Study</p>
+				
 					<?php 
+					/*
+						echo '<ul class="scrollspy_location">';
 						if(get_field('case_centum_challenge') !=''){
-							echo '<li><a class="scrollspy" href="#challenge_location">CHALLENGE</a></li>';
+							echo '<li><a class="scrollspy text-uppercase" href="#challenge_location">'. get_field('case_centum_challenge_heading') .'</a></li>';
 						}
 						if(get_field('case_impact_content') !='' || get_field('case_centum_impact_list') !=''){ 
-							echo '<li><a class="scrollspy" href="#impact_location">CENTUM IMPACT</a></li>';
+							echo '<li><a class="scrollspy text-uppercase" href="#impact_location">'. get_field('case_centum_impact_heading') .'</a></li>';
 						}
 						if(get_field('case_centum_approach_content') !='' || get_field('case_centum_impact_list') !=''){
-							$numrows = count(get_field('case_centum_approach_item' ));
-							echo '<li><a class="scrollspy" href="#centum_5d_location">CENTUM '. $numrows .'D APPROACH</a></li>';
+							echo '<li><a class="scrollspy text-uppercase" href="#centum_5d_location">'. get_field('case_centum_approach_heading') .'</a></li>';
 						}
+						echo '</ul>';
+					*/
 					?>					
-				</ul>
+				
 			</div>
 			<div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="50">
 				<div class="video_cont">
@@ -55,7 +58,7 @@ if($page_video_cover_image ==''){
 <div class="container">
 	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50" id="challenge_location">
 		<?php if(get_field('case_centum_challenge') !=''){
-			echo '<h2 class="col-12 col-xl-10 text-center">Challenge</h2>';
+			echo '<h2 class="col-12 col-xl-10 text-center">'. get_field('case_centum_challenge_heading') .'</h2>';
 			echo '<div class="col-12 col-xl-10 text-center mb-5">' . get_field('case_centum_challenge') . '</div>';
 
 		}?>
@@ -68,7 +71,7 @@ if($page_video_cover_image ==''){
 <div class="centum_impact_section" <?php if($impact_bg !=''){echo 'style=background-image:url("'.$impact_bg.'")';} ?> id="impact_location">
 	<div class="container">
 		<div class="row justify-content-center pt-5 pb-4" data-aos="fade-up" data-aos-delay="50">
-				<h2 class="col-12 col-xl-10 text-center">Centum Impact</h2>
+				<h2 class="col-12 col-xl-10 text-center"><?php echo get_field('case_centum_impact_heading'); ?></h2>
 				<div class="col-12 col-xl-10 text-center mb-5"><?php echo get_field('case_impact_content'); ?></div>
 				<div class="col-12 col-xl-10">
 					<div class="row justify-content-center ~~row-cols-4">
@@ -92,7 +95,7 @@ if($page_video_cover_image ==''){
 	?>
 <div class="container">
 	<div class="row justify-content-center pt-5 pb-4" data-aos="fade-up" data-aos-delay="50" id="centum_5d_location">
-			<h2 class="col-12 col-xl-10 text-center">Centum <?php echo $numrows;?>D Approach</h2>
+			<h2 class="col-12 col-xl-10 text-center"><?php echo get_field('case_centum_approach_heading');?></h2>
 			<div class="col-12 col-xl-10 text-center mb-5"><?php echo get_field('case_centum_approach_content'); ?></div>
 			<div class="col-12 col-xl-10">
 				<div class="row justify-content-center approch_list">

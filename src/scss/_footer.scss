@@ -50,15 +50,29 @@ footer{border-top: solid 1px #e3e3e3; margin:0rem; padding: 1.5rem 0 2.5rem; bac
         }
     }
 }
-#top-link {position: fixed; bottom: -70px; right: 0; background: #000; width: 45px; height: 45px; color: #fff; text-align: center; z-index: 9999; padding-top: 10px;
+#top-link {position: fixed; bottom: -70px; right: 0; background: #00225b; width: 45px; height: 45px; color: #fff; text-align: center; z-index: 9999; padding-top: 10px;
     font-size: 0.75rem; line-height: 1; @include transition(0.25s); @include box-shadow(0px,2px,6px,2px,0.15);
     &::after{content: ''; width: 26px; height: 26px; position: absolute; background: url(../images/arrow-white.svg) no-repeat center center; background-size: cover;
         transform: rotate(270deg);left: 10px; top: 12px;}
     &:hover{background: $color-skyblue;}
 }
+.contact_us_btn{display: block; position: fixed; right: -1px; bottom: calc(50% - 70px); width: 30px; height: 118px; z-index: 999; 
+    background: url('../images/contact-button.png') no-repeat 0 0; border-radius:8px 0 0 8px; @include transition(0.25s);
+    a{display: block; width: 100%; height: 100%;}
+}
+#cookie-law-info-bar{background-color: rgba(0, 0, 0, 0.75)!important; padding: 10px 25px!important; 
+    .cli-style-v2 .cli-bar-message{width: 100%!important; color: #fff!important;}
+    #wt-cli-accept-all-btn{border-radius: 30px!important;}
+}
+@media (max-width:800px){
+    .contact_us_btn{bottom: 0!important; right: calc(50% - 59px)!important; width: 118px; height: 30px;  background: url('../images/contact-button2.png') no-repeat 0 0;
+        border-radius:8px 8px 0 0;
+    }
 
+}
 @media (max-width:576px){
     footer{text-align: center;
+        .footer_logo{margin:1.5rem auto;}
         .footer_address {padding-right: 15px;}
     }
 }

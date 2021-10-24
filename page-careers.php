@@ -6,7 +6,7 @@ get_header();
 <div class="animation_wrap">
 	<div class="section_content" data-aos="fade-up" data-aos-delay="50">	
 		<div class="container">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center"  id="nextFold">
 				<article class="col-12"><?php the_content(); ?></article>
 			</div>
 		</div>
@@ -15,14 +15,14 @@ get_header();
 	<div class="section_content" data-aos="fade-up" data-aos-delay="50">
 		<div class="container">
 			<div class="row justify-content-center">
-			<h2 class="col-12 text-center"><?php echo get_field('careers_gallery_heading');?></h2>
+			<h2 class="col-12 text-center section-heading"><?php echo get_field('careers_gallery_heading');?></h2>
 				<?php
 					if( have_rows('careers_gallery_images') ): 
 					foreach ( get_field("careers_gallery_images") as $item  ) {
 						$title = $item['careers_add_image']['title'];
 						$thumbnail = $item['careers_add_image']['sizes']['thumbnail'];
 						$url = $item['careers_add_image']['url'];
-						echo '<div class="col-6 col-md-3 mb-3"><figure>';
+						echo '<div class="col-12 col-sm-6 col-md-3 mb-3"><figure>';
 						echo '<a class="fancybox" data-fancybox="images"  href="'. $url .'"><img class="img-fluid" src="'.  $url .'" alt="'. $title .'" /></a>';
 						echo '</figure></div>';
 						}
@@ -36,7 +36,7 @@ get_header();
 	<div class="section_content" data-aos="fade-up" data-aos-delay="50">
 		<div class="container">
 			<div class="row" data-aos="fade-up" data-aos-delay="50">
-				<h2 class="col-12 text-center"><?php echo get_field('careers_infographic_heading');?></h2>
+				<h2 class="col-12 text-center section-heading"><?php echo get_field('careers_infographic_heading');?></h2>
 				<div class="careers_infographic_bg" style="background-image:url('<?php echo get_field('careers_infographic_image');?>');">
 					<?php if(get_field('show_apply_now_button')[0] == 'Yes'){
 							$url = get_permalink( get_page_by_path('job-list'));
@@ -47,7 +47,7 @@ get_header();
 		</div>
 	</div>
 	
-	<?php include('polygonizr-animation-left.php'); ?>
+	<?php include('polygonizr-animation.php'); ?>
 </div>
 <?php endwhile; endif; ?>
 <div class="video_modal">

@@ -1,99 +1,243 @@
 /* ############################## Home Page ####################################### */
 .about_us{padding: 1.5rem 0rem 1.5rem; text-align: center; width: 80%; margin: 0 auto;
-    h3{color: $color-black; font-weight: 300; font-size: 2rem; line-height: 1;}
-    h4{color: $color-blue; font-weight: 600; font-size: 2.25rem; line-height: 1;}
+    h3{color: $color-black; font-weight: 400; font-size: 1.8rem; font-family: 'Source Serif Pro', serif; line-height: 1; margin-bottom: 0.5rem;}
+    h4{color: $color-blue; font-weight: 400; font-size: 1.8rem; font-family: 'Source Serif Pro', serif; line-height: 1;}
     p{font-weight: 300;}
 
+    iframe{max-width: 300px;}
+}
+.home_quick_logo{
+    figure{border:solid 1px #ccc; border-radius:15px; background:#fff; text-align:center; overflow:hidden;
+        img{@include transition(2.5s);}
+
+        &:hover img{transform: scale(1.2);}
+    }
+}
+
+#home_our_business{
+    .slick-slide{
+        div{font-size: 0px; line-height: 0; margin: 0;
+            .slideItem{position: relative; padding: 2px;
+                figure{position: relative; margin: 0px;
+                    a{position: absolute; width: 100%; height: 100%; text-align: center;  z-index: 2; 
+                        top: 0px; left: 0px; @include transition-cubic(1s);
+                        span{font-size: 1.5rem; line-height: 1.5; transform: translate(-50%, -50%); position: absolute; left: 50%; top: 50%;
+                            color: #fff;
+                             width: 75%;}
+                    }
+                    img{position: relative; width: 100%; height: auto; z-index: 1;}
+
+                    &:hover{
+                        a{background:rgba($color-bdazzledBlue, 0.8);}
+                    }
+                }
+            }
+        }
+    }
 }
 
 /* ######################### Template Corporate Training Solutions Page ########################## */
 .temp_CTS{
     .CTS_page_list_wrap{margin-right: -8px; margin-left: -8px;
-        .CTS_page_child_wrap{ height: 150px; overflow: hidden; margin-bottom: 16px; padding-left: 8px; padding-right: 8px;
-            .CTS_page_child_content{overflow: hidden; position: relative; height: 100%;
+        .CTS_page_child_wrap{ height: 150px; overflow: hidden; margin-bottom: 2px; padding-left: 2px; padding-right: 2px;
+            .CTS_page_child_content{overflow: hidden; position: relative; height: 100%; @include transition(1s); 
                 figure{background-repeat: no-repeat; background-position: center center; background-size: cover; height: 100%; position: relative; z-index: 1; margin: 0px; padding: 0px;
-                    &::after{content: ''; display: none; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); @include transition(0.2s); z-index: 2; position: absolute; top: 0px; left: 0px;}
+                    &::before{content: ''; display: block; width: 100%; height: 100%; background: rgba(75,83, 97, 0.7); @include transition(1s); z-index: 2; position: absolute; top: 0px; left: 0px;
+                        @include transition-cubic(1s);
+                    }
+                    &::after{content: ''; display: block; width: 100%; height: 100%; background: rgba($color-bdazzledBlue, 0.7); @include transition(1s); z-index: 2; position: absolute; top: 0px; left: 0px; opacity: 0;}
                 }
 
-                h4{font-size: 0.9rem; line-height: 1.25; position: absolute; bottom: 0px; background-color:$color-skyblue; color:#fff; text-align: center;
-                    margin: 0px; padding: 6px 10px; width: 100%; @include transition(0.2s); z-index: 5;
-						a{position:relative; display:black; color:#fff; text-decoration:none}
-					}
+                h4{position: absolute; width: 100%; height: 100%; text-align: center;  z-index: 2; opacity: 1; 
+                    top: 0px; left: 0px;  @include transition(1s); font-weight: 400;
+                    a{font-size: 1.15rem; line-height: 1.5; transform: translate(-50%, -50%); position: absolute; left: 50%; top: 50%;
+                        color: #fff; width: 75%; text-decoration: none;}
+                }
+
                 a.parent_link{display: block; position: absolute; z-index: 4; width: 100%; height: 100%; left: 0px; top: 0px;}
-                ul{list-style: none; margin: 0px; padding: 0px;position: absolute; bottom: 0px;  z-index: 5; height: 0px; overflow-y: auto;
-                    li{padding: 5px 12px 2px 20px; margin: 0px; line-height: 1; position: relative;
-                        a{font-size: 0.85rem; line-height: 1.45; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block;
-                            &:hover{color: rgba(255, 255, 255, 1);}
+                .child_data{@include transition(1s); position: absolute; z-index: 5; height: 100%; width: 100%; opacity: 0;
+                    overflow-y: auto; top:0px;
+                        .paraText{ position: relative; margin: 0px; padding: 10px 15px; height: auto; max-height: 100%; transform: translateY(-50%);  top:50%;  
+                            p{color: $color-white; font-size: 0.85rem; line-height: 1.5; margin: 0; position: relative; z-index: 1;}
+                            a{position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2;}
                         }
-
-                        &::before{content: '';  display: block; width: 0; height: 0; position: absolute; left: 10px; top: 8px; border-style: solid; 
-                            border-width: 5px 0 5px 5px;
-                            border-color: transparent transparent transparent $color-skyblue;
+                    
                         
+                        ul{list-style: none; position: relative; margin: 0px; padding: 10px 0px; height: auto; max-height: 100%; transform: translateY(-50%);  top:50%;  
+                            li{padding: 5px 12px 5px 20px; margin: 0px; line-height: 1; position: relative; 
+                                a{font-size: 0.85rem; line-height: 1.45; color: rgba(255, 255, 255, 0.92); text-decoration: none; display: block;
+                                    &:hover{color: rgba(255, 255, 255, 1);}
+                                }
+
+                                &::before{content: '';  display: block; width: 0; height: 0; position: absolute; left: 10px; top: 8px; border-style: solid; 
+                                    border-width: 5px 0 5px 5px;
+                                    border-color: transparent transparent transparent $color-skyblue;
+                                
+                                }
+                            }
                         }
-                    }
 
-
-                    &::-webkit-scrollbar {
-                        width: 3px;
-                      }
-                  
-                      &::-webkit-scrollbar-track {
-                        background: #fff;
-                      }
-                  
-                      &::-webkit-scrollbar-thumb {
-                        background-color: $color-orange;
-        
-                      }
-        
-                  
-                      &::-webkit-scrollbar-thumb:hover {
-                        background: #ccc;
-                      }
-                }
-                   
-                &:hover{
+                        
+                        &::-webkit-scrollbar {
+                            width: 3px;
+                        }
+                    
+                        &::-webkit-scrollbar-track {
+                            background: #fff;
+                        }
+                    
+                        &::-webkit-scrollbar-thumb {
+                            background-color: $color-orange;
+            
+                        }
+            
+                    
+                        &::-webkit-scrollbar-thumb:hover {
+                            background: #ccc;
+                        }
+                }                   
+                &:hover, &.active{
                     figure{
-                        &::after{display: block;}
+                        &::after{opacity: 1; }
                     }
-                    h4{top:0px; bottom: unset;}
-                    ul{height: calc(100% - 50px);}
+                    h4{opacity: 0;}
+                    .child_data{opacity: 1;}
                 }
             }
-
-            &:nth-child(1) {height: 300px;}
-            &:nth-child(2) {height: 300px;
-                .CTS_page_child_content{height: 142px; margin-bottom: 16px;
-                    &:nth-child(even) h4{background: #002776;}
-                }
-            }
-            &:nth-child(3) {height: 300px;}
-
-
-            &:nth-last-child(1) .CTS_page_child_content:hover, &:nth-last-child(2) .CTS_page_child_content:hover{
-                ul{height: calc(100% - 35px);}
-              }
-
-
-            &:nth-child(3n+2) .CTS_page_child_content h4{background: #00589f;}
-            &:nth-child(4n+4) .CTS_page_child_content h4{background: #002776;}
-
         }
 
+    &.grid1{
+        .CTS_page_child_wrap{
+            &:nth-child(1) {height: 360px;
+                .CTS_page_child_content{height: 360px; margin-bottom:0px;}
+            }
+        }
+    }
+
+    &.grid2{
+        .CTS_page_child_wrap{
+            &:nth-child(1), &:nth-child(2) {height: 360px;
+                .CTS_page_child_content{height: 360px; margin-bottom:0px;}
+            }
+        }
+    }
+
+    &.grid3{
+        .CTS_page_child_wrap{
+            &:nth-child(1){height: 360px;
+                .CTS_page_child_content{height: 360px; margin-bottom:0px;}
+            }
+            &:nth-child(2){height: 360px;
+                .CTS_page_child_content{height: 178px; margin-bottom:4px;}
+            }
+        }
+    }    
+
+
+    &.grid4{
+        .CTS_page_child_wrap{
+            &:nth-child(1), &:nth-child(2){height: 380px;
+                .CTS_page_child_content{height: 188px; margin-bottom:4px;}
+            }
+           
+        }
+    }
+
+    &.grid5{
+        .CTS_page_child_wrap{height: 252px;
+            .CTS_page_child_content{height: 250px; margin-bottom:4px;}
+             &:nth-child(4), &:nth-child(5){height: 202px;
+                .CTS_page_child_content{height: 200px; margin-bottom:0px;}
+            }
+        }
+    }    
+
+    &.grid5a{
+        .CTS_page_child_wrap{height: 302px;
+                .CTS_page_child_content{height: 300px; margin-bottom:4px;}
+            &:nth-child(4), &:nth-child(5){height: 162px;
+                .CTS_page_child_content{height: 160px; margin-bottom:0px;}        
+            }
+            &:nth-child(5){
+                .CTS_page_child_content{background: #323232;
+                    figure{height: 100px; max-width: 220px; width: 100%; background-size: contain; margin: 30px auto 0;
+                        &::after, &::before{display: none;}
+                    }
+                }
+            }
+        }
+    }  
+    
+    &.grid6{
+        .CTS_page_child_wrap{
+            &:nth-child(1), &:nth-child(3){height: 302px;
+                .CTS_page_child_content{height: 300px; margin-bottom:4px;}        
+            }
+            &:nth-child(2){height: 300px;
+                .CTS_page_child_content{height: 148px; margin-bottom:4px;}
+            }
+            &:nth-child(4), &:nth-child(5){height: 162px;
+                .CTS_page_child_content{height: 160px; margin-bottom:4px;}        
+            }
+
+        }
+    }
+
+    &.grid6a{
+        .CTS_page_child_wrap{
+            &:nth-child(1), &:nth-child(3){height: 302px;
+                .CTS_page_child_content{height: 300px; margin-bottom:4px;}        
+            }
+            &:nth-child(2){height: 300px;
+                .CTS_page_child_content:nth-child(1){height: 175px; margin-bottom:4px;}
+                .CTS_page_child_content:nth-child(2){height: 120px; margin-bottom:0px; background: #323232;
+                    figure{height: 100px; max-width: 200px; width: 100%; background-size: contain; margin: 14px auto 0;
+                        &::after, &::before{display: none;}
+                    }
+                }
+            }
+            &:nth-child(4), &:nth-child(5){height: 162px;
+                .CTS_page_child_content{height: 160px; margin-bottom:4px;}        
+            }
+
+        }
+    }
+
+    &.grid7{
+        .CTS_page_child_wrap{
+            &:nth-child(1) {height: 306px;
+                .CTS_page_child_content{height: 150px; margin-bottom: 4px;}
+            }
+            &:nth-child(2) {height: 306px;
+                .CTS_page_child_content{height: 304px;}
+            }
+            &:nth-child(3) {height: 306px;
+                .CTS_page_child_content{height: 150px; margin-bottom: 4px;}
+            }
+        }
+    }
 
     }
 }
 
 
 /* ######################### Template CSR Partnerships Page ########################## */
-ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 100%; float: left; display: flex; flex-wrap: wrap;
-    li{float: left; text-align: center; width: 25%; margin: 0px; padding:0px 15px 0px 0px; 
-        & > div{background: #f2f2f2; padding: 6px 8px; border-radius: 10px; min-height: 100%;}
-        figure{max-width: 40px; margin: 0 auto 5px; 
-            img{width: 100%; height: auto;}
+ul.csr_banner_icon{list-style: none; margin: -15px 0px 15px; padding: 0px; width: 100%; float: left; display: flex; flex-wrap: wrap;
+    li{float: left; text-align: center; width: 25%; margin: 0px; padding:0px 10px; 
+        // & > div{padding: 10px; border-radius: 50%; border: solid 1px #fff; height: 120px; width: 120px; @include transition(0.2s); cursor: pointer;
+        //     &:hover{background: rgba(255, 255, 255,1);}
+        // }
+        figure{width: 80px; height: 80px; margin: 0 auto 5px;  border-radius: 50%; border: solid 1px #999; position: relative;
+            img{width: 58%!important; height: auto; transform: translate(-50%, -50%); position: absolute; left: 50%; top: 50%;  @include transition(1s);}
         }
-        p{color: $color-blue!important; font-weight: 600!important; font-size: 0.8rem!important; line-height: 1.3; margin: 0px;}
+        p{font-weight: 400!important; font-size: 0.85rem!important; line-height: 1.45; margin: 0px;}
+        a{color: #000!important; text-decoration: none;}
+
+        &:hover{
+            figure{
+                img{width: 80%!important;}
+            }
+        }
     }
 }
 .knowmore_box{border: solid 1px $color-skyblue; padding: 10px 15px 40px; text-align: center; height: 100%; position: relative; border-radius: 16px;
@@ -108,22 +252,25 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 .temp_contact_us{
     ul.scrollspy_location{list-style: none; margin: 2rem 0px 0px; padding: 0px; width: 100%; float: left;
         li{width: 50%; float: left; text-align: left; line-height: 1;
-            a{background: $color-skyblue; border-radius: 5px; max-width: 200px; text-align: center; display: inline-block; padding: 10px 25px 15px; text-decoration: none;
+            a{border-radius: 5px; border:solid 1px #333; max-width: 200px; text-align: center; display: inline-block; padding: 5px 15px 8px; text-decoration: none;
                 img{max-width: 40px; height: auto; margin-bottom: 8px;}
-                i{font-style: normal; width: 40px; height: 40px; display: inline-block; margin: 0px; @include location_Map('fff');}
-                span{display: block; line-height: 1;}
+                i{font-style: normal; width: 40px; height: 40px; display: inline-block; margin: 0px; @include location_Map('000');}
+                span{display: block; line-height: 1; color: #000; font-weight: 400;}
 
-                &:hover{background: $color-blue}
+                &:hover{background: $color-bdazzledBlue;
+                    i{@include location_Map('fff');}
+                    span{color: #fff;}
+                }
             }
         }
     }
-    .form_wrap{ background: rgba(0, 39, 118, 0.9); padding: 20px; 
+    .form_wrap{ background: $color-bdazzledBlue; padding: 20px; 
         label{color:#fff; font-size: 0.9rem; font-weight: 300; margin-bottom: 0;
             span{color: #f00; font-size: 1.1rem; line-height: 1;}
         }
-        .form-control{background: #f2f2f2;}
-        #form-submit-button{background: #ffc20e; border: solid 1px #000; border-radius: 6px; padding: 8px 30px; font-size: 1.1rem;
-            &:hover{background: #ff9900;}
+        .form-control{background: #fff;}
+        #form-submit-button{background: #fff; border: solid 1px #000; border-radius: 6px; padding: 8px 30px; font-size: 1.1rem; font-weight: 500;
+            &:hover{background: #000; color: #fff;}
         }
     }
     .map_wrap{background: #f0f0f0; padding: 8px; @include box-shadow(2px,5px,3px,1px,0.1); border-radius: 5px; line-height: 1; font-size: 0px;
@@ -131,8 +278,8 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
     }
 }
 .contact_us{
-    h3{font-weight: 600; margin-bottom: 0px;}
-    h5{font-weight: 600; margin-bottom: 0px;}
+    h3{margin-bottom: 0px;}
+    h5{margin-bottom: 0px;}
     p{margin-bottom: 10px;
         a{color: #111;
             &:hover{color: #1f77df;}
@@ -182,7 +329,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 
 /* ######################### Template How We Work Page ########################## */
 .approach_wrap{position: relative; max-width: 198px; height: 100%; border:solid 1px $color-lightblue; padding: 75px 12px 12px; @include transition(1s);
-    background: #fff; border-radius: 10px;
+    background: #fff; border-radius: 10px; margin: 0 auto;
     figure{width: 100px; height: 95px; position: absolute; right: 20px; top: -25px; margin: 0px;
         img{border-radius: 8px;}
     }
@@ -193,14 +340,14 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 }
 
 /* ######################### Template Our Team Page ########################## */
-.temp_our_team {padding-top: 80px; padding-bottom: 60px; height: auto;  background-attachment: fixed;
+.temp_our_team {padding-top: 100px; padding-bottom: 60px; height: auto;  background-attachment: fixed;
     &::after{display: none;}
 
-
+    .banner_content h1{margin-top: 40px;}
     .ourTeam-flipBox{
         .flip-box-front{background: #0078b7;}
         .flip-box-back{background: #fff;
-            h5{color: #0078b7;}
+            h5{color: #222;}
             p{color: #0078b7; font-weight: 400;}
             ul.socialLink{border-top-color: #0078b7;
                 li{
@@ -232,8 +379,8 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
             }
         }
         .flip-box-back{background: #0078b7; padding: 20px 15px; border-radius: 15px;
-            h5{color: #fff; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.20); font-size: 1.35rem; line-height: 1.2; margin-bottom: 5px;}
-            p{margin-bottom: 20px; font-size: 0.95rem; line-height: 1.45; color: #fff; font-weight: 200; }
+            h5{color: #fff; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.20); font-size: 1.1rem; line-height: 1.2; margin-bottom: 5px;}
+            p{margin-bottom: 20px; font-size: 0.9rem; line-height: 1.3; color: #fff; font-weight: 200; }
         
             ul.socialLink{display: flex; flex-wrap: wrap; list-style: none; margin: 0px auto; padding: 0px; text-align: center; border-top: solid 2px #fff;
                 width: 80%;
@@ -250,15 +397,15 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
                 }
             }
         }
-
 }
 
 /* ######################### Template Media Page ########################## */
 .temp_media{
-    .contact_info{width: 100%; max-width: 340px; margin: 80px auto 0px; border: solid 2px #fff; padding: 25px; border-radius: 15px;
-        h4{color: $color-orange; margin-bottom: 0.75rem; line-height: 1.25;}
-        h5{font-size: 1rem; color: $color-white; margin-bottom: 0px;}
-        p{font-size: 0.9rem; line-height: 1.35; font-weight: 200; margin-bottom: 0px;
+    .contact_info{width: 100%; max-width: 340px; margin: 80px auto 0px; padding: 25px; border-radius: 15px;
+        background: url('../images/media-queries_bg.jpg') 0 0 no-repeat; background-size: cover;
+        h4{color: $color-white; margin-bottom: 0.75rem; line-height: 1.25;}
+        h5{font-size: 1.15rem; color: $color-white; margin-bottom: 0px;}
+        p{font-size: 0.9rem; line-height: 1.35; font-weight:300; margin-bottom: 0px; color: $color-white;
             a{color: $color-white; text-decoration: none;
                 &:hover{color: $color-orange;}
             }
@@ -267,14 +414,17 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
 
     ul.scrollspy_location{list-style: none; margin: 2rem 0px 0px; padding: 0px; width: 100%; float: left;
         li{width: 50%; float: left; text-align: left; line-height: 1;
-            a{background: $color-skyblue; border-radius: 5px; max-width: 200px; text-align: center; display: inline-block; padding: 15px 25px 15px; text-decoration: none;
+            a{border: solid 1px #333; border-radius: 5px; max-width: 200px; text-align: center; display: inline-block; padding: 5px 15px 8px; text-decoration: none;
                 i{font-style: normal; width: 32px; height: 32px; display: inline-block; margin: 0px 0px 6px; 
                     &.mc{width: 42px;}
-                    img{width: 100%; height: auto;}
+                    img{width: 100%; height: auto; @include invert(100%);}
                 }
-                span{display: block; line-height: 1; color: #fff;}
+                span{display: block; line-height: 1; color: #000;}
 
-                &:hover{background: $color-blue}
+                &:hover{background: $color-bdazzledBlue;
+                    img{@include invert(0%);}
+                    span{color: #fff;}
+                }
             }
         }
     }
@@ -293,7 +443,7 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
             .slick-track{display: flex !important;
                 .slick-slide{padding: 0px 15px;  height: inherit !important;
                     & > div{height: 100%;}
-                    .media_box{border:solid 1px #0078b7; width: 100%; height: 100%; padding: 15px 20px; border-radius: 15px;
+                    .media_box{border:solid 1px #0078b7; width: 100%; height: 100%; padding: 15px 20px; border-radius: 15px; background: #fff;
                         h4{font-size: 1rem; line-height: 1.45; font-weight: 400; min-height: 100px;}
                         p{font-size: 0.9rem; line-height: 1.25; margin: 0 0 5px; color: #666;
                             strong{font-weight: 500; color: #000;}
@@ -308,13 +458,17 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
             }
         }
     }
-
+    .download_logo{padding: 25px; text-align: center;
+        .img-fluid{max-width: 200px;}
+        h5{line-height: 1.5; margin: 5px 0 0 0;}
+        p{font-size: 0.775rem; margin: 0px;}
+    }
 }
 
 
 /* ######################### Template Dialogues Page ########################## */
-.temp_dialogues{padding-top: 100px;
-    .banner_content{padding: 30px 50px 0px 0px;}
+.temp_dialogues{
+    .banner_content{padding: 0px 50px 0px 15px;}
     .page_banner_content{position: relative; z-index: 99;
         h2{color: $color-orange; font-size: 1.75rem; line-height: 1.35;}
         .block_scrollbar{overflow-y: scroll; max-height: 340px; padding-right: 10px;
@@ -398,40 +552,22 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
             }
         }
     }
-
-    .feature_content{position: relative; z-index: 99;
-        .feature_wrap{ background: #002671; padding: 10px 20px 20px; max-width: 450px; border-radius: 20px;
-            h2{color: $color-orange; text-align: center; margin-bottom: 5px;}
-            .feature_img{width: 100%; height: 170px; display: block; margin:0 0 10px; background: url(../images/upcoming-webinar.jpg) no-repeat top center; background-size: cover; 
-                position: relative; text-align: center; border-radius: 20px;  font-size: 0; line-height: 1;              
-            }
-            h3{color: #fff; font-size: 1.2rem; line-height: 1.4; margin: 0; padding: 15px; font-weight: 500; position: relative; z-index: 5; top: 60%; left: 50%; transform: translate(-50%, -50%);}
-            .schedule_date{color: #fff; font-size: 1rem; line-height: 1.35; font-weight: 300; margin-bottom: 10px;}
-            .heading{color: #fcd04e; font-size: 0.85rem; line-height: 1.35; font-weight: 400; margin-bottom: 5px;}
-            p{color: #fff; font-size: 0.9rem; line-height: 1.35; margin: 0 0 8px 0; font-weight: 200;
-                strong{color: #fff; font-weight: 400;}
-            }
-            a{color: #fff; text-decoration: none;}
-
-            &:hover{opacity: 1;}
-
-        }
-    }
+    .btn.btn-warning{color: #000;}
 }
 
 .dialogue_slider{
     .slick-track{display: flex !important;
         .slick-slide{padding: 0px 15px 15px; height: inherit !important;
-            &> div{ min-height: 100%; border: solid 1px #1f77df; border-radius: 12px; background: #fff; position: relative; 
-                padding: 12px 12px 60px 12px; @include box-shadow(0px,5px,10px,0px,0.25);
+            &> div{ min-height: 100%; border: solid 1px #1f77df; border-radius: 12px; background: #fff; position: relative;
+                padding: 12px 12px 60px 12px; @include box-shadow(0px,5px,10px,0px,0.25); overflow: hidden;
                 .dialogues_wrap{
-                    h4{font-size: 1.1rem; line-height: 1.4; color: $text-heading; margin-bottom: 5px;}
-                    .cat-featured-image{width: 100%; min-height: 152px; margin-bottom: 12px; @include transition(0.8s);  background-repeat: no-repeat; background-position: center; background-size: cover; position: relative;
+                    h4{font-size: 1rem; line-height: 1.4; color: $text-heading; margin-bottom: 5px;}
+                    .cat-featured-image{width: 100%; min-height: 152px; margin-bottom: 15px; @include transition(0.8s);  background-repeat: no-repeat; background-position: center; background-size: cover; position: relative;
                         &.webinarThumb{background-image: url(../images/webinar-listing-thumb.jpg);}
                     }
-                    
-                    p{margin:0 0 5px 0; font-size: 0.95rem; line-height: 1.3;
-                        strong{color: $color-black; font-size: 0.9rem; font-weight: 500;}
+                    .excerpt p{font-size: 0.9rem;}
+                    p{margin:0 0 5px 0; font-size: 0.85rem; line-height: 1.3;
+                        strong{color: $color-black; font-size: 0.875rem; font-weight: 500;}
                     }
                     .heading{color: $color-black; font-size: 0.9rem; line-height: 1.3; font-weight: 600; margin-top: 10px;}
                 }
@@ -440,6 +576,10 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
                     a{display: block; background:$color-blue; color: $color-white; padding: 2px 20px; border-radius: 25px; font-size: 0.85rem; 
                         &:hover{text-decoration: none; background-color: $color-lightblue;}
                     }
+                }
+
+                &:hover{
+                    .cat-featured-image{transform: scale(1.17);}
                 }
             }
         }
@@ -452,19 +592,24 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
     i{background: url(../images/arrow-blue.svg) no-repeat center center; background-size: contain; width: 20px; height: 13px; display: inline-block;}
 }
 
+/* ######################### Template Solutions Page ########################## */
 
+.page-template-page-careers .HomeCarousel .slick-slider .slick-slide div .item .banner_content .banner_left .btn-primary{
+    border:solid 1px #000; background: none; color: #000; font-weight: 400;
+
+    &:hover{background: $color-bdazzledBlue; color: #fff; border-color: $color-bdazzledBlue;}
+}
 
 /* ######################### Template Solutions Page ########################## */
 .client_slider{
     &.slick-slider{
         .slick-track{display: flex !important;
-            .slick-slide{padding: 0px 15px;  height: inherit !important;
+            .slick-slide{padding: 0px 15px;  height: inherit !important; text-align:center;
                 & > div{height: 100%;}
-                .client_box_wrap{width: 100%; max-width: 375px; height: 100%; position: relative; text-align: center;
+                .client_box_wrap{width: 100%; max-width: 300px; height: 100%; position: relative; text-align: center;
 
-                    figure{width: 100%; max-width: 375px; height: auto; position: relative; margin: 0; 
+                    figure{width: 100%; max-width: 300px; height: auto; position: relative; margin: 0; 
                         background-repeat: no-repeat; background-position: left top; background-size: cover;
-
                         img{width: 100%; height: auto;}
 
                         &::before{content: ''; display: block; width:calc(100% + 2px); height: calc(100% + 2px); left:-1px; top: 0px; position: absolute; z-index: 1;
@@ -472,25 +617,25 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
                         }
 
                         &.video{
-                            .show_btn{position: absolute; width: 80px; height: 50px; background: #f00; z-index: 5;
+                            .show_btn{position: absolute; width: 70px; height: 40px; background: #f00; z-index: 5;
                                 border-radius: 12px; opacity: 0.75; top: 50%; left: 50%; transform: translate(-50%, -60%); cursor: pointer;
-                                &::after{width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent #fff;
-                                    content: ''; display: block; left: 30px; top: 14px; position: relative;}
+                                &::after{width: 0; height: 0; border-style: solid; border-width: 8px 0 8px 14px; border-color: transparent transparent transparent #fff;
+                                    content: ''; display: block; left: 28px; top: 12px; position: relative;}
 
                                 &:hover{opacity: 1;}
                             }
                         }
                         &.text{
-                            .read_btn{position: absolute; width: 100px; height: 40px; line-height: 40px; text-align: center;  background: #f00; z-index: 5; color: #fff;
+                            .read_btn{position: absolute; width: 76px; height: 40px; line-height: 40px; text-align: center;  background: #f00; z-index: 5; color: #fff;
                                 border-radius: 12px; opacity: 0.75; top: 50%; left: 50%; transform: translate(-50%, -60%); cursor: pointer;
 
-                                &:hover{opacity: 1;}
+                                &:hover{opacity: 1; text-decoration: none;}
                             }
                         }
                     }
                     .client_meta{ padding: 1rem 10%;
-                        h5{font-size: 1.2rem; line-height: 1.4; margin: 0; font-weight: 500;}
-                        p{font-size: 1rem; line-height: 1.4; margin: 0px;
+                        h5{font-size: 1.05rem; line-height: 1.4; margin: 0; font-weight: 500;}
+                        p{font-size: 0.85rem; line-height: 1.4; margin: 0px;
                             strong{font-weight: 500;}
                         }
                     }
@@ -501,10 +646,19 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
     }
 
 }
+.client_speak_modal{max-width: 800px!important; max-height: 500px!important; overflow-y: auto; padding: 40px 30px 20px!important;
+    p{font-size: 1.1rem; line-height: 1.5;}
+    .client_info{padding-top: 10px;
+        figure img{border-radius: 10px;}
+        h4{font-size: 1.2rem; line-height: 1.35; margin-bottom: 5px;}
+        p{font-size: 1rem; line-height: 1.2; margin-bottom: 5px;}
+    }
+
+}
 .case_slider{
     &.slick-slider{
         .slick-track{display: flex !important;
-            .slick-slide{padding: 0px 40px;  height: inherit !important;
+            .slick-slide{padding: 0px 25px;  height: inherit !important;
                 & > div{height: 100%;}
                 .case_box_wrap{width: 100%; height: 100%; position: relative; text-align: center;
 
@@ -521,6 +675,27 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
         }
     }
 
+}
+
+.learnProCard{background: #1f77df; padding:20px 24px; color: #fff; font-size: 1rem; line-height: 1.45; border-radius: 10px; font-weight: 300;}
+.platform_features_list{display: none;}
+.learnProCard-flipBox{
+    .flip-box-inner{height: 300px;
+        .flip-box-front{border:solid 1px #0078b7; padding: 25px; background: #fff; min-height: 300px;
+            border-radius: 16px;
+            .cont{transform: translate(-50%, -50%); position: relative; top: 50%; left: 50%;
+                figure{margin: 0 auto; width: 100px; height: 100px; background: #007bff; margin-bottom: 15px; border-radius: 50%;
+                    img{width: 70%; height: auto; transform: translate(-50%, -50%); position: relative; top: 50%; left: 50%;}
+                }
+                h4{width: 100%; font-size: 1.175rem; line-height: 2rem;}
+            }
+        }
+        .flip-box-back{background: #1f77df; min-height: 300px; padding: 20px 24px; color: #fff; font-size: 1rem; line-height: 1.45;
+            border-radius: 10px; font-weight: 300;
+            h4{color: #fff; text-align: center; font-size: 1.175rem; line-height: 2rem; margin-bottom: 10px;}
+            p{color: #fff; text-align: center; font-size: 1rem; line-height: 1.5;}
+        }
+    }
 }
 
 /* ######################### Template Job List Page ########################## */
@@ -627,6 +802,14 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
     }
 
 }
+
+.csd_wrap{border:solid 1px #1f77df; min-height: 100%; width: calc(100% - 40px); padding: 70px 15px 40px; margin: 0 auto; position: relative;
+    figure{position: absolute; top: -35px; left: -35px; background: #ddd; padding: 15px; margin: 0px;;
+        img{width: 50px; height: auto; margin: 0px; padding: 0; max-width: 50px; height: auto;}
+    }
+
+}
+
 /* ######################### Template 404 Page ########################## */
 .temp_404{ padding-top: 100px;
     .found_404{max-width: 250px; margin: 0 auto;
@@ -640,12 +823,153 @@ ul.csr_banner_icon{list-style: none; margin: 0px 0px 15px; padding: 0px; width: 
     p{color: #fff;}
 }
 
+/* ######################### Investor Relations Page ########################## */
+.page-investor-relations .banner_content h1{margin-top: 80px;}
+.investor_relations_list{margin: 0px; padding: 0px; list-style: none; display: block;
+    li{padding: 20px 10px; float: left; width: 100%; margin: 0px; border: solid 1px #007bff; border-top: none; background: #fff;
+        .icon{background: url('../images/ic-pdf.svg') no-repeat 0 0; float: left; width: 40px; height: 28px; background-size: contain;}
+        a{float: left; color: $text-color;
+            &:hover{color: $color-lightblue; text-decoration: none;}
+        }
+    }
+}
+.investor_relations_tabs{margin-bottom: 0px; position: relative; bottom: -2px;
+    li {margin-bottom: 0px; text-align: center;
+         a{background: #f0f0f0; color: $color-black;}
+    }
+}
 
-@media (max-width:1280px){
+/* ######################### Template Africa Page ########################## */
+.africa_LS{
+    .slick-track { display: flex !important; }
+    .slick-slide{height: inherit !important; padding: 0 15px;
+        &> div{ height: 100%; position: relative; }
 
+        .africa_LMS{padding: 0px; min-height:calc(100% - 15px); border-radius: 5px; @include box-shadow(0px,0px,10px,1px,0.08);
+            background: #fff;
+            figure{width: 100%; height: auto; margin: 0 0 15px 0;
+                img{width: 100%; height: auto; border-radius: 5px 2px 0 0;}
+            }
+            .africa_LMS_content{padding: 20px 25px;
+                h4{line-height: 1.4; font-size: 1.35rem;}
+                ul {list-style: none; margin: 0; padding-left: 25px;
+                    li{margin-bottom: 12px; line-height: 1.35; position: relative;
+                        &::before{content: '✓'; display: inline-block;  position: absolute; left: -25px; top:0px}
+        
+                        &:last-child{margin-bottom: 0;}
+                    }
+                }
+            }
+        }
+    }
+
+}
+.impacting_lives{padding-bottom: 30px;
+    .slick-track { display: flex !important; }
+    .slick-slide{height: inherit !important;
+        &> div{ height: 100%; position: relative; }
+        .impacting_item{padding: 0 20px 10px; height: 100%;
+            figure{width: 100px; height: 100px; float: right; margin: 0 2px 25px 0;
+                img{width: 100%; height: auto; border:solid 2px #1f77df; border-radius: 10px;}
+            }
+            .impacting_lives_wrap{font-size: 0.9rem; line-height: 1.35;  padding: 0.5rem 1rem 1rem; border: solid 2px #1f77df; border-radius: 12px; float: left; width: 100%; height: calc(100% - 120px); position: relative;
+                h4{font-size: 1rem; font-weight: bolder; margin-bottom: 5px;}
+                .address{text-align: right; margin-top: 1rem;}
+
+                &::before, &::after{bottom: 100%;  right: 30px; content: " "; display: block; height: 0; width: 0; position: absolute;
+                    border: solid transparent; pointer-events: none;
+                }
+
+                &::before {border-bottom-color: #1f77df;  border-width: 18px;}                
+                &::after {border-bottom-color: #fff; border-width: 18px; top:-34px}
+
+            }
+        }
+    }
+}
+
+@media (max-width:1024px){
+    #home_our_business{padding-left: 40px; padding-right: 40px;
+        &.slick-slider .slick-arrow.slick-prev{left: 4px;}
+        &.slick-slider .slick-arrow.slick-next{right: 4px;}
+    }
 }
 
 @media (max-width:900px){
     .about_us{width: 96%;}
     .carousel {width: 100%!important; overflow: hidden!important;}
+    .employability_item_wrap{
+        &::before, &::after{display: none;}
+    }
+}
+
+@media (max-width:767px){
+    .approach_wrap{max-width: 84%;}
+    .temp_CTS{
+        .CTS_page_list_wrap{
+            .CTS_page_child_wrap{ height: auto!important;
+                .CTS_page_child_content{height: 200px!important;}
+            }
+
+
+        &.grid6a .CTS_page_child_wrap:nth-child(2) .CTS_page_child_content{height: auto!important;}
+        &.grid5a {
+                .CTS_page_child_wrap:nth-child(3){order: 4};
+                .CTS_page_child_wrap:nth-child(4){order: 5};
+                .CTS_page_child_wrap:nth-child(5){order: 3;
+                  .CTS_page_child_content{height: auto!important;}
+                }
+
+            }
+
+        }
+    }
+    #home_our_business .slick-track{
+         .slick-slide {
+             div .slideItem figure a span{font-size: 1.25rem;}
+             &:nth-child(1){order: 1;}
+             &:nth-child(3){order: 2;}
+             &:nth-child(5){order: 3;}
+             &:nth-child(2){order: 4;}
+             &:nth-child(4){order: 5;}
+             &:nth-child(6){order: 6;} 
+             &:nth-child(7){order: 7;} 
+             &:nth-child(8){order: 8;}   
+         }
+    }
+
+    .temp_CTS .CTS_page_list_wrap.grid5a .CTS_page_child_wrap:nth-child(5) .CTS_page_child_content figure{margin: 0 auto;}
+
+    
+}
+
+@media (max-width:576px){
+    .employability_item_wrap{
+        &::before{display: block; top: unset; right: 50%; bottom: -20px; width: 4px; height: 20px;}
+        &::after{display: block; top: unset; right: calc(50% - 3px); bottom: -30px; transform: rotate(90deg);  }
+    }
+
+    #home_our_business{padding-left: 5px; padding-right: 7px;
+        .slick-slide{display: flex; flex-direction: column;
+            div{
+                &:nth-child(1){order: 1;}
+                &:nth-child(3){order: 2;}
+                &:nth-child(5){order: 3;}
+                &:nth-child(2){order: 4;}
+                &:nth-child(4){order: 5;}
+                &:nth-child(6){order: 6;} 
+                &:nth-child(7){order: 7;} 
+                &:nth-child(8){order: 8;}        
+            }
+        }
+    }
+}
+
+@media (max-width:400px){
+    .about_us iframe{max-width: 100%;}
+    .dialogue_slider .slick-track .slick-slide, .africa_LS .slick-slide{ padding: 0px;}
+    .temp_media ul.scrollspy_location li a, .temp_contact_us ul.scrollspy_location li a{max-width: 150px; padding: 15px;}
+    .media_wrap .download_logo{padding: 10px;
+         .img-fluid{max-width: 100%;}
+    }
 }

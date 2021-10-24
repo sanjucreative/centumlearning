@@ -1,5 +1,5 @@
 <div class="row pt-4 pb-5" data-aos="fade-up" data-aos-delay="50">
-	<h3 class="col-12 h2 text-center py-3">Case Studies</h3>
+	<h3 class="col-12 h2 text-center py-3 section-heading">Case Studies</h3>
 	<div class="col-12">
     <?php
 
@@ -15,7 +15,7 @@ if($case_id){
 
 $case = new WP_Query($case_args);
 ?>
-		<div class="solution_slider case_slider">
+		<div class="case_slider">
 		<?php        
         if ($case->have_posts()) :  while ( $case->have_posts() ) : $case->the_post();
                 $img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full')[0];

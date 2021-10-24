@@ -13,10 +13,8 @@ $todays_date =  date("Ymd", strtotime($stdate));
 	<div class="container">
 
 		<div class="row" >
-			<div class="col-12 col-md-7 banner_content" data-aos="fade-up" data-aos-delay="50"><?php echo $banner_content; ?></div>
-			<div class="col-12 col-md-5 feature_content" data-aos="fade-up" data-aos-delay="50">
-				<div class="feature_wrap">
-					<h2>Featured</h2>
+			<div class="col-12 col-lg-7 banner_content" data-aos="fade-up" data-aos-delay="50"><?php echo $banner_content; ?></div>
+			<div class="col-12 col-lg-5 feature_content" data-aos="fade-up" data-aos-delay="50">
 					<?php
 						$web_upcoming_args = array(
 							'posts_per_page' => 1, 'category_name' => 'webinars', 'orderby' => 'post_date',
@@ -26,34 +24,47 @@ $todays_date =  date("Ymd", strtotime($stdate));
 									)
 							);
 							$web_upcoming_query = new WP_Query( $web_upcoming_args );
-
-						if ($web_upcoming_query->have_posts()) : while ($web_upcoming_query->have_posts()) : $web_upcoming_query->the_post();
-							$schedule_date = get_post_meta(get_the_ID(), 'schedule_date', true );
-							$schedule_time = get_post_meta(get_the_ID(), 'schedule_time', true );
-							$sdate =  date("dS, M Y", strtotime($schedule_date));
-						?>
-							<figure class="feature_img">
-								<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-							</figure>
-							<p><?php echo get_excerpt(120); ?></p>
-							<div class="schedule_date"><?php echo $sdate . ' | ' . $schedule_time; ?></div>
-							<div class="heading">Speakers:</div>
-							<?php
-									if( have_rows('select_speakers') ): 
-										foreach ( get_field("select_speakers") as $i => $item  ) {
-											$post_id = $item['speaker_name']->ID;
-											echo '<p><a href="'. get_the_permalink() .'"><strong>'. $item['speaker_name']->post_title . '</strong></br>';
-											echo get_post_meta($post_id, 'designation', true ) .', '.  get_post_meta($post_id, 'company_name', true ) .'</a></p>';
-									}
+							$count = $web_upcoming_query->found_posts;
+							if($count > 0){
+								echo '<div class="feature_wrap"><h2>Upcoming Webinars</h2>';
+								if ($web_upcoming_query->have_posts()) : while ($web_upcoming_query->have_posts()) : $web_upcoming_query->the_post();
+									$schedule_date = get_post_meta(get_the_ID(), 'schedule_date', true );
+									$schedule_time = get_post_meta(get_the_ID(), 'schedule_time', true );
+									$sdate =  date("dS, M Y", strtotime($schedule_date));
+								?>
+									<figure class="feature_img">
+										<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+									</figure>
+									<p><?php echo get_the_excerpt(); ?></p>
+									<div class="schedule_date"><?php echo $sdate . ' | ' . $schedule_time; ?></div>
+									<div class="heading">Speakers:</div>
+									<?php
+											if( have_rows('select_speakers') ): 
+												foreach ( get_field("select_speakers") as $i => $item  ) {
+													$post_id = $item['speaker_name']->ID;
+													echo '<p><a href="'. get_the_permalink() .'"><strong>'. $item['speaker_name']->post_title . '</strong></br>';
+													echo get_post_meta($post_id, 'designation', true ) .', '.  get_post_meta($post_id, 'company_name', true ) .'</a></p>';
+											}
+										endif;
+									?>
+									<div class="text-center mt-3"><a href="<?php the_permalink();?>" class="btn btn-white btn-register">Register Now</a></div>
+								<?php
+								endwhile;
 								endif;
-							?>
-						<?php
-						endwhile;
-						endif;
-						wp_reset_postdata();
-
+								wp_reset_postdata();
+								echo '</div>';
+							} else{
+								// echo '<div class="video_cont"><figure><img src="'. get_theme_file_uri( '/assets/images/Webinar- Listing-right.png') .'"></figure></div>';
+								$Selected_insight = get_field('select_insight_article');
+								echo '<div class="feature_wrap">';
+								echo '<figure class="feature_img"><h3><a href="'. get_the_permalink($Selected_insight->ID) .'">'. $Selected_insight->post_title.'</a></h3></figure>';
+								echo '<p>'. $Selected_insight->post_excerpt .'</p>';
+								echo '<div class="text-center mt-3"><a href="'. get_the_permalink($Selected_insight->ID) .'" class="btn btn-white btn-register">View More</a></div>';
+								// print_r($Selected_insight);
+								echo '</div>';
+							}
 						?>
-					</div>
+					
 			</div>
 		</div>
 
@@ -202,19 +213,20 @@ $todays_date =  date("Ymd", strtotime($stdate));
 
 		
 	</div>
+	<a class="nextFold scrollspy" href="#nextFold"></a>
 </div>
 
 <div class="animation_wrap">
 	<div class="container mb-5">
 			<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">
-				<h2 class="col-12 text-center my-3">Recent Webinars</h2>
+				<h2 class="col-12 text-center my-3" id="nextFold">Webinars</h2>
 				<div class="col-12 dialogue_slider">
 					<?php
 						$web_args = array(
 							'posts_per_page' => 12,
 							'category_name' => 'webinars',
-							'orderby' => 'post_date',
-							'order' => 'DESC',
+							'orderby' => 'menu_order',
+							'order' => 'ASC',
 							'post_status' => 'publish',
 							'meta_key' => 'schedule_date',
 							'meta_query' => array(
@@ -238,7 +250,7 @@ $todays_date =  date("Ymd", strtotime($stdate));
 							} ?>
 											
 							<h4><?php the_title(); ?></h4>
-							<p><?php echo get_excerpt(60); ?></p>
+							<div class="excerpt"><p><?php echo get_the_excerpt(); ?></p></div>
 							<div class="heading">Speakers:</div>
 							<?php
 									if( have_rows('select_speakers') ): 
@@ -249,7 +261,7 @@ $todays_date =  date("Ymd", strtotime($stdate));
 									}
 								endif;
 							?>
-							<div class="know_more"><a  href="<?php the_permalink(); ?>">KNOW MORE</a></div>
+							<div class="know_more"><a  href="<?php the_permalink(); ?>">VIEW MORE</a></div>
 							</div>
 						<?php
 						endwhile;
@@ -266,7 +278,7 @@ $todays_date =  date("Ymd", strtotime($stdate));
 				<h2 class="col-12 text-center my-3">Insights</h2>
 				<div class="col-12 dialogue_slider insights">
 					<?php
-						$web_args2 = array('posts_per_page' => 12, 'category_name' => 'insights', 'orderby'=> 'post_date', 'order' => 'DESC');
+						$web_args2 = array('posts_per_page' => 12, 'category_name' => 'insights', 'orderby'=> 'menu_order', 'order' => 'ASC');
 						$web_query2 = new WP_Query( $web_args2 );
 						if ($web_query2->have_posts()) : while ($web_query2->have_posts()) : $web_query2->the_post();
 						$img = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'thumbnail' );
@@ -279,8 +291,8 @@ $todays_date =  date("Ymd", strtotime($stdate));
 							} ?>
 											
 							<h4><?php the_title(); ?></h4>
-							<p><?php echo get_excerpt(180); ?></p>
-							<div class="know_more"><a  href="<?php the_permalink(); ?>">KNOW MORE</a></div>
+							<div class="excerpt"><p><?php echo get_the_excerpt(); ?></p></div>
+							<div class="know_more"><a  href="<?php the_permalink(); ?>">VIEW MORE</a></div>
 							</div>
 						<?php
 						endwhile;
@@ -292,7 +304,9 @@ $todays_date =  date("Ymd", strtotime($stdate));
 				</div>
 				<div class="more_dialogues_btn"><a href="<?php echo get_bloginfo('url');?>/insights">View All<i></i></a></div>
 			</div>	
-		<?php include('polygonizr-animation-left.php'); ?>
+
+		<?php include('client-speak.php'); ?>
+		<?php include('polygonizr-animation.php'); ?>
 	</div>
 </div>
 

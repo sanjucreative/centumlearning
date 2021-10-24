@@ -35,7 +35,7 @@ get_header(); ?>
 			 <div class="col-12 py-5"><?php echo get_field('after_issue_contact'); ?></div>
 		 </div>
 </div>
-<?php include('polygonizr-animation-left.php'); ?>
+<?php include('polygonizr-animation.php'); ?>
 </div>
 <?php endwhile; endif; ?>
 <div class="video_modal">

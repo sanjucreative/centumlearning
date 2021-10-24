@@ -40,6 +40,12 @@ add_action( 'after_setup_theme', 'centumlearning_setup' );
 add_filter('use_block_editor_for_post', '__return_false');
 
 
+function wc_prevent_clickjacking() {
+	header( 'X-FRAME-OPTIONS: SAMEORIGIN' );
+}
+add_action( 'send_headers', 'wc_prevent_clickjacking', 10 );
+
+
 function cc_mime_types($mimes) {
 	$mimes['svg'] = 'image/svg+xml';
 	return $mimes;
@@ -151,6 +157,9 @@ $excerpt = $excerpt.'...';
 return $excerpt;
 }
 
+remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+
+
 function centumlearning_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
@@ -168,7 +177,7 @@ add_action( 'wp_head', 'centumlearning_pingback_header' );
 function centumlearning_scripts() {
 	wp_enqueue_style( 'centumlearning-fonts', centumlearning_fonts_url(), array(), null );
     wp_enqueue_style( 'centumlearning-style', get_stylesheet_uri() );
-    wp_enqueue_style( 'centumlearning-theme-style', get_theme_file_uri( '/assets/css/theme-style.css'), array(), '1.0');
+    wp_enqueue_style( 'centumlearning-theme-style', get_theme_file_uri( '/assets/css/theme-style.min.css'), array(), '1.0');
 	wp_enqueue_style( 'aoscss', get_theme_file_uri( '/assets/plugins/aos/aos.css'), array(), '1.0');
 	// wp_enqueue_style( 'centumlearning-font-awesome', get_theme_file_uri( '/assets/plugins/font-awesome/font-awesome.css'), array(), '4.7.0');
 	
@@ -181,7 +190,8 @@ function centumlearning_scripts() {
 	wp_enqueue_script('bootstrap',  get_theme_file_uri( '/assets/js/bootstrap.min.js'), array(), '4.4.1' );
 	wp_enqueue_script('slick-carousel', get_theme_file_uri( '/assets/js/slick.min.js'), '', '', true);
 	wp_enqueue_script('aosjs', get_theme_file_uri( '/assets/plugins/aos/aos.js'), '', '', true);
-	wp_enqueue_script('themefyn', get_theme_file_uri( '/assets/js/theme-function.js'), '', '', true);
+	wp_enqueue_script('themefyn', get_theme_file_uri( '/assets/js/theme-function.min.js'), '', '', true);
+	wp_enqueue_script('polygonizr', get_theme_file_uri( '/assets/plugins/polygonizr/polygonizr.min.js'), '', '', true);
 
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -233,8 +243,8 @@ function create_cf7editor_role(){
 
 require get_template_directory() . '/inc/sanitize-functions.php';
 require get_template_directory() . '/inc/theme-options.php';
-// require get_template_directory() . '/inc/acf.php';
-// define( 'ACF_LITE', true );
+require get_template_directory() . '/inc/acf.php';
+define( 'ACF_LITE', true );
 require get_template_directory() . '/inc/acf-custom.php';
 
 
@@ -539,7 +549,6 @@ function get_posts_years_array($post_type, $y) {
 }
 
 // #################################### For load post Media  #############################3
-
 add_action('wp_ajax_load_post_type_media', 'ajax_load_post_type_media');
 add_action('wp_ajax_nopriv_load_post_type_media', 'ajax_load_post_type_media');
 function ajax_load_post_type_media(){
@@ -556,7 +565,7 @@ function ajax_load_post_type_media(){
 
     $args = array (
 		'post_type' => $post_type,
-		'numberposts' => -1,
+		'numberposts' => 10,
 		'order' => 'DESE',
 		'year' => $post_year,
 		'date_query' => array($arch_year)
@@ -581,18 +590,18 @@ function ajax_load_post_type_media(){
 			if($publication!=''){
 			echo '<p><strong>Publication</strong>: ' . $publication . '</p>';
 			}
-		echo '<p><strong>Date</strong>: ' . $newsDate . '</p>';
+		// echo '<p><strong>Date</strong>: ' . $newsDate . '</p>';
 	
 		if($media_check_for_web =='Yes' &&  $publication_url !=''){
-			echo '<div class="view_btn"><a class="know_more_btn" href="'. $publication_url .'" target="_blank"><span>VIEW ARTICLE</span></a></div>';			
+			echo '<div class="view_btn"><a class="know_more_btn" href="'. $publication_url .'" target="_blank"><span>VIEW MORE</span></a></div>';			
 		}
 		
 		if($media_check_for_web !='Yes' && $publication_pdf!=''){
 			// $ext = 	substr(strrchr($publication_pdf, "."), 1); 	
 			// if($ext == 'pdf'){
-				// echo '<div class="view_btn"><a class="know_more_btn" href="'. $publication_pdf .'" target="_blank"><span>VIEW ARTICLE</span></a></div>';
+				// echo '<div class="view_btn"><a class="know_more_btn" href="'. $publication_pdf .'" target="_blank"><span>VIEW MORE</span></a></div>';
 			// }else{
-				echo '<div class="view_btn"><a class="know_more_btn view_featured" href="'. $publication_pdf .'"><span>VIEW ARTICLE</span></a></div>';
+				echo '<div class="view_btn"><a class="know_more_btn view_featured" href="'. $publication_pdf .'"><span>VIEW MORE</span></a></div>';
 			// }
 		}
 		echo '</div>';
@@ -605,13 +614,57 @@ function ajax_load_post_type_media(){
 }
 
 
+// #################################### For load post Client  #############################3
+add_action('wp_ajax_load_post_type_client', 'ajax_load_post_type_client');
+add_action('wp_ajax_nopriv_load_post_type_client', 'ajax_load_post_type_client');
+function ajax_load_post_type_client(){
+ 	$post_ID = $_POST['post_ID'];
+    $args = array (
+		'post_type' => 'client',
+		'numberposts' => 1,
+		'include' => array($post_ID)
+    );
+
+	$posts = get_posts($args);
+    ob_start ();
+    foreach ($posts as $post ) {
+	 setup_postdata( $post );
+		// echo $post->ID;
+		// echo $post->post_title;
+		$img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full')[0];
+		echo '<div class="client_speak_modal">';
+			echo '<div class="row">';
+			echo '<div class="client_said col-12  ' . (($img)?  ' col-md-8' : ' ') . '">'.  get_field('client_content' ,  $post->ID) . '</div>';
+			echo '<div class="client_info col-12 ' . (($img)?  ' col-md-4' : ' ') . '">';
+			if($img){
+				echo '<figure><img class="img-fluid" src="'. $img . '" alt=" " /></figure>';
+			}
+			echo '<h4 class="text-center">'. $post->post_title .'</h4>';
+			if(get_field('client_designation' ,  $post->ID)){
+				echo '<p class="text-center">' .get_field('client_designation' ,  $post->ID) . '</p>';
+			}
+			if(get_field('client_company_name' ,  $post->ID)){
+				echo '<p class="text-center">' .get_field('client_company_name' ,  $post->ID) . '</p>';
+			}
+			if(get_field('client_address' ,  $post->ID)){
+				echo '<p class="text-center">' .get_field('client_address' ,  $post->ID) . '</p>';
+			}
+			echo '</div></div>';
+		echo '</div>';
+   } 
+   wp_reset_postdata();
+ //  ob_end_clean();
+ die();
+}
+
+
 // #################################### For load Job Opportunities  #############################3
 
 add_action('wp_ajax_get_job_opportunities', 'ajax_get_job_opportunities');
 add_action('wp_ajax_nopriv_get_job_opportunities', 'ajax_get_job_opportunities');
 function ajax_get_job_opportunities(){
  	$location = $_POST['location'];
- 	$department = $_POST['department'];
+ 	// $department = $_POST['department'];
 	$category = $_POST['category'];
 
 	 
@@ -627,11 +680,11 @@ function ajax_get_job_opportunities(){
 				'field'    => 'id',
 				'terms'    => $location,
 			),
-			array(
-				'taxonomy' => 'departments',
-				'field'    => 'id',
-				'terms'    => $department,
-			),
+			// array(
+			// 	'taxonomy' => 'departments',
+			// 	'field'    => 'id',
+			// 	'terms'    => $department,
+			// ),
 			array(
 				'taxonomy' => 'job-categories',
 				'field'    => 'id',
@@ -646,48 +699,54 @@ function ajax_get_job_opportunities(){
 	$posts = get_posts($args);
     ob_start ();
 
+	if(count($posts) > 0){
     foreach ($posts as $post ) {
 	 setup_postdata( $post );
 		// echo $post->ID;
 		// echo $post->post_title;
 		?>
-		<div class="col-12 col-md-3 mb-4">
+		<div class="col-12 col-md-6 col-xl-4 mb-4 jobList_col">
 		<div class="jobList_wrap">
 			<h4><?php echo $post->post_title ?></h4>
-			<div class="opeing_date"><?php echo 'Opening Till - ' .get_field('job_opening_closed', $post->ID); ?></div>
-			<hr/>
 			<ul>
 				<?php
+					$category_list = get_the_terms( $post->ID, 'job-categories' );
+					if(!empty($category_list)){
+						echo '<li><strong>Role: </strong>';
+							array_list_item($category_list);
+						echo '</li>';
+					}
+
 					$location_list = get_the_terms( $post->ID, 'locations' );
 					if(!empty($location_list)){
-						echo '<li>';
+						echo '<li><strong>Location: </strong>';
 							array_list_item($location_list);
 						echo '</li>';
 					}
 
 					$department_list = get_the_terms( $post->ID, 'departments' );
 					if(!empty($department_list)){
-						echo '<li>';
+						echo '<li><strong>Department: </strong>';
 							array_list_item($department_list);
-						echo '</li>';
-					}
-
-					$category_list = get_the_terms( $post->ID, 'job-categories' );
-					if(!empty($category_list)){
-						echo '<li>';
-							array_list_item($category_list);
 						echo '</li>';
 					}
 				?>
 			</ul>
-			<div class="applynow_btn"><a href="<?php the_permalink(); ?>" class="btn btn-primary">Apply Now</a></div>
+			<div class="applynow_btn">
+					<small>Last day of application<br/><?php echo get_field('job_opening_closed', $post->ID); ?></small>
+					<a href="<?php the_permalink($post->ID); ?>" class="btn btn-primary">Apply Now</a>
+			</div>
 		</div>
 	</div>		
 
 
-<?php
+	<?php
+		 } 
 
-   } 
+		}else{
+			echo 'No available opportunity as per filter used';
+		}
+  
 
    wp_reset_postdata();
  //  ob_end_clean();
@@ -728,21 +787,27 @@ function carouselLoop($slug, $sliderID){
 
 		$thecontent = get_the_content();
 		$content .= '<div class="banner_content" data-aos="fade-up" data-aos-delay="50"><div class="container"><div class="banner_left">' . apply_filters( 'the_content', $thecontent ) . '</div>';
-		if($add_video_cover_image !=''){
-			$content .= '<div class="banner_right"><div class="video_cont"><figure>';
-			if($add_video_cover_url!=''){
-				$content .= '<div class="video_play" data-url="'. $add_video_cover_url .'"></div>';
-			}
-			if($add_page_url!=''){
-				$content .= '<a class="page_url" href="'. $add_page_url.'"></a>';
-			}
-			$content .= '<img src="' . $add_video_cover_image . '" /></figure>';
-			$content .= '<p><strong>' . $video_person_name . '</strong></p>';
-			$content .= '<p>' . $video_person_designation . '</p>';
-			$content .= '</div></div>';
-		}
+		$content .= '<div class="banner_right banner_right_silider">';
+		if( have_rows('right_side_imagevideo_list') ): 
+			foreach ( get_field("right_side_imagevideo_list") as $i => $item ) {
+				if($item['banner_right_side_cover_image'] !=''){
+					$content .= '<div class="video_cont"><figure>';
+					if($item['banner_right_side_video_url']!=''){
+						$content .= '<div class="video_play" data-url="'. $item['banner_right_side_video_url'] .'"></div>';
+					}
+					if($item['banner_right_side_page_url']!=''){
+						$content .= '<a class="page_url" href="'.$item['banner_right_side_page_url'] .'"></a>';
+					}
+					$content .= '<img src="' . $item['banner_right_side_cover_image'] . '" /></figure>';
+					$content .= '<p><strong>' . $item['banner_right_side_person_name'] . '</strong></p>';
+					$content .= '<p>' . $item['banner_right_side_person_designation'] . '</p>';
+					$content .= '</div>';
+				}
 
-		$content .= '</div></div>';
+			}
+		endif;
+
+		$content .= '</div></div></div>';
 		
 		if($active_video[0] == 'Yes'){
 					if($active_video_url_youtube !=''){
@@ -810,3 +875,381 @@ function array_list_item($arr){
 		}
 	} 
 }
+
+
+
+/* ################################# Solution Grid  ############################################ */
+function solutionGridLayout($pageID){
+	$grid_types = get_field('grid_types', $pageID);
+	echo '<div class="CTS_page_list_wrap row justify-content-center '. $grid_types .'">';
+	if(have_rows('soution_grid_item', $pageID)): 
+	foreach (get_field("soution_grid_item", $pageID) as $i => $item ) {
+			
+			// echo $i;
+			// For Grid Box 1
+			if($grid_types == 'grid1' && $i == 0){
+				echo '<div class="col-12 col-md-8 CTS_page_child_wrap"><div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+				echo '</div></div></div>';
+			}
+			
+			// For Grid Box 2
+			if($grid_types == 'grid2' && $i <= 1){
+				echo '<div class="col-12 col-md-5 CTS_page_child_wrap"><div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+				echo '</div></div></div>';
+			}
+
+			// For Grid Box 3
+			if($grid_types == 'grid3' && $i <= 2){
+				if($i == 0 || $i == 1){ 
+					echo '<div class="col-12 col-md-6 col-lg-5 CTS_page_child_wrap">';
+				} elseif($i == 2){ 
+					echo '';
+				}
+				echo '<div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+					if($i == 0 || $i == 2){ 
+						echo '</div>';
+					} elseif($i == 1){ 
+						echo '';
+					}
+				echo '</div></div>';
+			}
+			
+			// For Grid Box 4
+			if($grid_types == 'grid4' && $i <= 3){
+				if($i == 0 || $i == 2){ 
+					echo '<div class="col-12 col-md-6 col-lg-5 CTS_page_child_wrap">';
+				} elseif($i == 1 || $i == 3){ 
+					echo '';
+				}
+				echo '<div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+					if($i == 1 || $i == 3){ 
+						echo '</div>';
+					} elseif($i == 0 || $i == 2){ 
+						echo '';
+					}
+				echo '</div></div>';
+			}	
+			
+			// For Grid Box 5
+			if($grid_types == 'grid5' && $i <= 4){
+				if($i <= 2){ 
+					echo '<div class="col-12 col-md-4 CTS_page_child_wrap">';
+				} elseif($i >= 3 || $i == 4){ 
+					echo '<div class="col-12 col-md-6 CTS_page_child_wrap">';
+				}
+				echo '<div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+				echo '</div></div></div>';
+			}
+
+			// For Grid Box 5 with logo
+			if(($grid_types == 'grid5a') && $i <= 5){
+				if($i <= 2){ 
+					echo '<div class="col-12 col-md-4 CTS_page_child_wrap">';
+				} 
+				if($i == 3){ 
+					echo '<div class="col-12 col-md-8 CTS_page_child_wrap">';
+				}
+				if($i == 4){ 
+					echo '<div class="col-12 col-md-4 CTS_page_child_wrap">';
+				}
+				echo '<div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+				echo '</div></div></div>';
+			}
+
+			// For Grid Box 6
+			if(($grid_types == 'grid6') && $i <= 5){
+				if($i == 0 || $i == 1 || $i == 3){ 
+					echo '<div class="col-12 col-md-4 CTS_page_child_wrap">';
+				} elseif($i > 3){ 
+					echo '<div class="col-12 col-md-6 CTS_page_child_wrap">';
+				}
+				echo '<div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+
+				if($i == 1){ 
+					echo '';
+				}else {
+					echo '</div>';
+				}
+
+				echo '</div></div>';
+			}
+
+			// For Grid Box 6 with logo
+			if($grid_types == 'grid6a' && $i <= 6){
+				if($i == 0 || $i == 1 || $i == 3){ 
+					echo '<div class="col-12 col-md-4 CTS_page_child_wrap">';
+				} elseif($i > 3){ 
+					echo '<div class="col-12 col-md-6 CTS_page_child_wrap">';
+				}
+				echo '<div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+
+				if($i == 1){ 
+					echo '';
+				}else {
+					echo '</div>';
+				}
+
+				echo '</div></div>';
+			}
+
+
+			// For Grid Box 7
+			if($grid_types == 'grid7' && $i <= 6){
+				if($i == 0 || $i == 2 || $i == 3  ){ 
+					echo '<div class="col-12 col-md-6 col-lg-4 CTS_page_child_wrap">';
+				} elseif($i == 1 || $i == 4){ 
+					echo '';
+				}else{
+				echo '<div class="col-12 col-lg-6 CTS_page_child_wrap">';
+				}
+				echo '<div class="CTS_page_child_content">';
+				echo '<figure style="background-image:url('. $item["grid_item_page_cover_image"]["url"] .')" ></figure>';
+				echo '<h4><a href="' . get_permalink($item['parent_page_id']) .'">' . $item["grid_item_heading"] . '</a></h4>';
+				echo '<div class="child_data">';
+				$pageLink = $item['grid_item_inner_page'];
+				if( $pageLink ) {
+					echo '<ul class="page_child_list">';
+					foreach( $pageLink as $page ) {
+						$pageName = $page['grid_item_inner_page_link'];
+						if($pageName){
+							echo '<li><a '. (($pageName['target'] !='')? 'target="_blank"': '' ).' href="'. $pageName['url'] .'">'. $pageName['title'] .'</a></li>';
+						}
+					}
+					echo '</ul>';
+				}else{
+					echo '<div class="paraText">';
+					echo ($item['grid_item_inner_text_link'] !='') ? '<a class="scrollspy" href="'. $item['grid_item_inner_text_link'] .'"></a>':'';
+					echo '<p>' . $item['grid_item_inner_text'] . '</p></div>';
+				}
+
+				if($i == 0 || $i == 3){ 
+					echo '';
+				} elseif($i == 1 || $i == 2){ 
+					echo '</div>';
+
+				}else{
+				echo '</div>';
+				}
+
+				echo '</div></div>';
+			}
+
+
+	}
+	endif;
+	echo '</div>';
+}
+
+
+function video_wrapper_shortcode( $atts ) {
+	$message = '<div class="video_wrapper" style="max-width:'.  $atts["width"] .'px"><figure>';
+	$message .= '<div class="video_play" data-url="'. $atts["url"] .'"></div>';
+	$message .= '<img src="'. $atts["thumb"] .'"></figure>';
+	$message .= '<p><strong>'. $atts["name"] .'</strong></p>';
+	$message .= '<p>'. $atts["caption"] .'</p></div>';
+	// print_r($atts);
+	return $message;
+}
+add_shortcode( 'youtube_video', 'video_wrapper_shortcode' );
+
+
+
+
+// For Insight post load on Infinite Scroll
+function wp_infinitepaginate(){
+	$paged = $_POST['page_no'];
+	$cat = $_POST['cat_no'];
+
+	$args = array('post_type' => 'post', 'cat' => $cat, 'paged' => $paged);
+	$loop = new WP_Query($args);
+	$content = '';
+    if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
+		$img = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full', false, '' );
+
+	if($cat == '13'){
+		$content .= '<div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 pb-2">';
+		$content .= '<div class="cat_wrap">';
+				if(has_post_thumbnail()) {
+					$content .= '<figure class="cat-featured-image" style="background-image:url('. $img[0] .')"></figure>';
+				}else{
+					$content .= '<figure class="cat-featured-image webinarThumb"></figure>';
+				}
+											
+		$content .= '<h4><?php the_title(); ?></h4>';
+		$content .= '<p>'. get_the_excerpt() . '</p>';
+		$content .= '<div class="heading">Speakers:</div>';
+				if(have_rows('select_speakers')): 
+					foreach ( get_field("select_speakers") as $i => $item  ) {
+					$post_id = $item['speaker_name']->ID;
+					$content .= '<p><strong>'. $item['speaker_name']->post_title . ': </strong> ';
+					$content .=  get_post_meta($post_id, 'designation', true ) .', '.  get_post_meta($post_id, 'company_name', true ) .'</p>';
+				}
+				endif;
+		
+		$content .= '<div class="know_more"><a  href="' . get_the_permalink() .'">VIEW MORE</a></div>';
+		$content .= '</div></div>';
+
+	}else{
+        $content .= '<div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 pb-2">';
+		$content .= '<div class="cat_wrap">';
+					 if( has_post_thumbnail() ) {
+						 $content .= '<figure class="cat-featured-image" style="background-image:url('. $img[0] .')"></figure>';
+					 }else{
+						 $content .=	'<figure class="cat-featured-image webinarThumb"></figure>';
+					 }
+		$content .=	'<h4>'. get_the_title() . '</h4><p>' . get_the_excerpt() .'</p>';
+		$content .= '<div class="know_more"><a  href="' .get_the_permalink() .'">VIEW MORE</a></div>';
+		$content .=	'</div></div>';
+	}
+
+    endwhile;
+    endif;
+    wp_reset_postdata();
+    die($content);
+}
+add_action('wp_ajax_infinite_scroll', 'wp_infinitepaginate');
+add_action('wp_ajax_nopriv_infinite_scroll', 'wp_infinitepaginate');

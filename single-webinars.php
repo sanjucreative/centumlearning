@@ -19,13 +19,8 @@ get_header(); ?>
 <?php /* <div class="breadcrumbs"><div class="container" data-aos="fade-right" data-aos-delay="50"><?php echo bcn_display(true) ?></div></div> */?>
 <div class="animation_wrap">
 <div class="container">
-	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">
+	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50"  id="nextFold">
 		<div class="col-12 col-md-10 pt-3 pt-md-5">
-			<!-- <h1 class="text-center"><?php // the_title(); ?></h1> -->
-				<?php if (has_excerpt()){ ?>
-					<article class="text-center"><?php the_excerpt();?></article>
-				<?php } ?>
-			
 			<?php $featured_image_display = get_field('show_featured_image_in_post');
 					if($featured_image_display[0] == 'Yes'):
 						if( has_post_thumbnail() ) { ?>
@@ -59,7 +54,7 @@ get_header(); ?>
 					<?php echo  wpautop(get_post_meta($post_id, 'speaker_content', true )); ?>
 					<div class="more_content"><?php echo  wpautop(get_post_meta($post_id, 'speaker_content_read_more', true )); ?></div>
 					<div class="more_content"><?php echo  wpautop(get_post_meta($post_id, 'speaker_content_read_more', true )); ?></div>
-					<?php if(wpautop(get_post_meta($post_id, 'speaker_content_read_more', true )) !=='') echo '<div class="text-center readmore"><a class="" href="#">Read More <i></i></a></div>';?>
+					<?php if(wpautop(get_post_meta($post_id, 'speaker_content_read_more', true )) !=='') echo '<div class="text-center readmore"><a class="" href="#">View More <i></i></a></div>';?>
 					
 					<?php // echo  wpautop($item['speaker_name']->post_content); ?>
 					</div>
@@ -104,20 +99,29 @@ get_header(); ?>
 			</div>
 
 </div>
-<?php include('polygonizr-animation-left.php'); ?>
+<?php include('polygonizr-animation.php'); ?>
+</div>
+
+<div class="video_modal">
+    <div class="closed"></div>
+    <div class="modal_container">
+        <div class="videoWrapper">
+                <iframe id="iframe_video" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
   jQuery(document).ready(function($) {
 	  var bannerCont = '<div class="temp_webinar_post">';
 	  bannerCont +='<h6 class="cat_name">Webinar on</h6>';
-	  bannerCont +='<h1><?php the_title(); ?></h1>';
+	  bannerCont +='<h2><?php the_title(); ?></h2>';
 	  bannerCont +=''
 	  bannerCont +='<div class="date_time"><span><?php echo $sdate; ?></span></div>';
 	  <?php if($register_now_url != ''){ ?>
-	  	bannerCont +='<a class="btn btn-primary" href="<?php echo $register_now_url;?>">Register Now!</a>';
+	  	bannerCont +='<a class="btn btn-white" href="<?php echo $register_now_url;?>">Register Now!</a>';
 	  <?php } else{?>
-		bannerCont +='<div class="closed_msg">REGISTRATIONS FOR THIS WEBINAR ARE CLOSED!</div>'
+		bannerCont +='<div class="closed_msg"><span>REGISTRATIONS FOR THIS WEBINAR ARE CLOSED!</span></div>'
 	  <?php } ?>
 	  bannerCont +='</div>';
 	  	$(bannerCont).appendTo(".banner_content .banner_left");	

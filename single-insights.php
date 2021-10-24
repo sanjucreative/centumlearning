@@ -5,17 +5,15 @@
  Template Post Type: post
  */
 get_header(); ?>
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php if (have_posts()) : while (have_posts()) : the_post(); 
+$show_page_banner = get_field('show_page_banner');
+?>
 <?php /* <div class="breadcrumbs"><div class="container" data-aos="fade-right" data-aos-delay="50"><?php echo bcn_display(true) ?></div></div> */?>
+<?php if($show_page_banner[0] != 'Yes') echo '<div class="no_page_banner"></div>'; ?>
 <div class="animation_wrap">
 <div class="container">
-	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">
-		<div class="col-12 col-md-10 pt-3 pt-md-5 pb-5">
-			<!-- <h1 class="text-center"><?php // the_title(); ?></h1> -->
-				<?php if (has_excerpt()){ ?>
-					<article class="text-center"><?php the_excerpt();?></article>
-				<?php } ?>
-			
+	<div class="row justify-content-center" data-aos="fade-up" data-aos-delay="50" id="nextFold">
+		<div class="col-12 col-md-10 pt-3 pt-md-5 pb-5">			
 			<?php $featured_image_display = get_field('show_featured_image_in_post');
 					if($featured_image_display[0] == 'Yes'):
 						if( has_post_thumbnail() ) { ?>
@@ -29,17 +27,16 @@ get_header(); ?>
 
 
 </div>
-<?php include('polygonizr-animation-left.php'); ?>
+<?php include('polygonizr-animation.php'); ?>
 </div>
 
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-	  var bannerCont = '<div class="temp_webinar_post">';
-	  bannerCont +='<h6 class="cat_name">Insights on</h6>';
-	  bannerCont +='<h1><?php the_title(); ?></h1>';
-	  bannerCont +='</div>';
-	  $(bannerCont).appendTo(".banner_content .banner_left");	
-  });  
-</script>
+<div class="video_modal">
+    <div class="closed"></div>
+    <div class="modal_container">
+        <div class="videoWrapper">
+                <iframe id="iframe_video" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        </div>
+    </div>
+</div>
 <?php endwhile; endif; ?>
 <?php get_footer(); ?>

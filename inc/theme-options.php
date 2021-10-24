@@ -17,8 +17,8 @@ body{background:#fff!important}
 .login form .input, .login form input[type="checkbox"], .login input[type="text"]{background:#fff; border:solid 1px rgba(85, 128, 255, 0.5);}
 .login #backtoblog a:focus, .login #nav a:focus, .login h1 a:focus{box-shadow:none}
 .login #login_error { background: rgba(220, 50, 50, 0.15)!important;}
-.login form input[type="submit"]{ background:#156ac4!important; border-color:#0d477b !important; box-shadow: 0 1px 0 rgba(20, 81, 196, 0.5) inset!important; font-size:15px!important}
-.login form input[type="submit"]:hover{ background:#0b4196!important; border-color:#082b58!important; box-shadow: 0 1px 0 rgba(20, 81, 196, 0.8) inset!important}
+.login form input[type="submit"], .login form .button{ background:#156ac4!important; border-color:#0d477b !important; color:#fff; box-shadow: 0 1px 0 rgba(20, 81, 196, 0.5) inset!important; font-size:15px!important}
+.login form input[type="submit"]:hover, .login form .button:hover{ background:#0b4196!important; border-color:#082b58!important; color:#fff; box-shadow: 0 1px 0 rgba(20, 81, 196, 0.8) inset!important}
 #backtoblog, .privacy-policy-page-link{display:none!important}
 .wp-core-ui .button-primary{text-shadow: 0 1px 1px #333!important}
 </style>
@@ -119,7 +119,33 @@ if( current_user_can('hr_role')) {
 	
 	}
 
+// Posts Column
+	add_filter('manage_post_posts_columns', function($columns) {
+		$new = array();
+		$tags = $columns['upcoming'];  
+		// $columns['upcoming'] = __('Upcoming');	
+		foreach($columns as $key=>$value){
+			if($key=='date') {  
+			   $new['upcoming'] = $tags;	   
+			}    
+		   $new[$key]=$value;
+		}  
+	   return $new;  
+	});
+	 
+	add_action('manage_post_posts_custom_column', function($column_key, $post_id) {
+		if ($column_key == 'upcoming') {
+			$stdate = current_time('mysql');
+			$todays_date =  date("Ymd", strtotime($stdate));
+			$schedule_date = get_post_meta($post_id, 'schedule_date', true );
 
+
+			$upcoming = get_post_meta($post_id, 'upcoming', true);
+			if ($schedule_date > $todays_date) {
+				echo '<span style="color:green; font-size:14px">Upcoming <br />Webinars</span>';
+			}
+		}
+	}, 10, 2);	
 
 // Banner
 add_action('init', 'banner_register');
@@ -584,7 +610,7 @@ function job_register() {
 		'hierarchical' => true,
 		'menu_position' => 26,
 		'menu_icon' => 'dashicons-groups',
-		'supports' => array( 'title', 'thumbnail')	
+		'supports' => array( 'title')	
 ); 
 
 register_post_type("job" , $args);
@@ -745,11 +771,13 @@ function trusted_company_register() {
 ); 
 
 register_post_type("trusted_company" , $args);
+register_taxonomy("trusted_by", array("trusted_company"), array("hierarchical" => true, "label" => "Countries", "singular_label" => "Country", "rewrite" => false, ));
 
 
 add_filter('manage_trusted_company_posts_columns', 'trusted_company_posts_columns');
 function trusted_company_posts_columns($defaults){
 	$defaults['post_thumbs'] = __('Logo');
+	$defaults['country'] = __('Country');
     return $defaults;
 }
 
@@ -760,7 +788,8 @@ function trusted_company_head($defaults){
     $tags = $defaults['category_group'];  
     foreach($defaults as $key=>$value){
         if($key=='date') {  
-		   $new['post_thumbs'] = $tags;		   
+		   $new['post_thumbs'] = $tags;	
+		   $new['country'] = $tags;		   	   
         }    
        $new[$key]=$value;
     }  
@@ -775,6 +804,14 @@ function trusted_company_posts_custom_columns($column_name, $post_id){
            echo '<img src="' .$SlideImgUrl.' " width="" height="45" alt="" />';
         else
            echo "N/A";
+    }
+	if($column_name === 'country'){	
+		$country = get_the_terms($post_id, 'trusted_by'); 
+		foreach($country as $i=> $item){
+			if($i>0){ echo ', ';}
+			echo $item->name;			
+		}
+		
     }
 }
 
@@ -820,10 +857,13 @@ function awards_support_register() {
 
 register_post_type("awards_support" , $args);
 
+register_taxonomy("awards", array("awards_support"), array("hierarchical" => true, "label" => "Countries", "singular_label" => "Country", "rewrite" => false, ));
+
 
 add_filter('manage_awards_support_posts_columns', 'awards_support_posts_columns');
 function awards_support_posts_columns($defaults){
 	$defaults['post_thumbs'] = __('Logo');
+	$defaults['country'] = __('Country');
     return $defaults;
 }
 
@@ -834,7 +874,8 @@ function award_columns_head($defaults){
     $tags = $defaults['category_group'];  
     foreach($defaults as $key=>$value){
         if($key=='date') {  
-		   $new['post_thumbs'] = $tags;		   
+		   $new['post_thumbs'] = $tags;
+		   $new['country'] = $tags;		   
         }    
        $new[$key]=$value;
     }  
@@ -850,6 +891,54 @@ function awards_support_posts_custom_columns($column_name, $post_id){
         else
            echo "N/A";
     }
+	if($column_name === 'country'){	
+		$country = get_the_terms($post_id, 'awards'); 
+		foreach($country as $i=> $item){
+			if($i>0){ echo ', ';}
+			echo $item->name;			
+		}
+		
+    }
 }
+
+}
+
+// Investor Relations
+add_action('init', 'investor_relations_register');
+function investor_relations_register() {
+	$labels = array(
+		'name' => _x('Investor Relations', 'post type general name'),
+		'singular_name' => _x('Investor Relations', 'post type singular name'),
+		'add_new' => _x('Add New Investor Relations', 'Case'),
+		'add_new_item' => __('Add New Investor Relations'),
+		'edit_item' => __('Edit Investor Relations'),
+		'new_item' => __('New Investor Relations'),
+		'view_item' => __('View Investor Relations'),
+		'search_items' => __('Search Investor Relations'),
+		'all_items' => __('All Investor Relations'),
+		'not_found' =>  __('Nothing found'),
+		'not_found_in_trash' => __('Nothing found in Trash'),
+		'parent_item_colon' => '',
+//	    'menu_name' => 'Media Center'
+);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'show_ui' => true, 
+		'show_in_menu' => true, 
+		'query_var' => true,
+		'rewrite' => array('with_front' => false),
+		'capability_type' => 'post',
+		'has_archive' => true, 
+		'hierarchical' => true,
+		'menu_position' => 21,
+		'menu_icon' => 'dashicons-superhero-alt',
+		'supports' => array( 'title')		
+); 
+
+register_post_type("investor-relation" , $args);
+register_taxonomy("relations", array("investor-relation"), array("hierarchical" => true, "label" => "Investor Relations", "singular_label" => "Investor Relations", "rewrite" => false, ));
 
 }

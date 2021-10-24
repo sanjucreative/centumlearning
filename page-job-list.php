@@ -31,7 +31,7 @@ $category_list = get_terms( array(
 			<div class="col-12 col-lg-8 pr-3 pr-md-5" data-aos="fade-up" data-aos-delay="50">
 				<?php echo $template_banner_content ?>
 				<div class="row">
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md">
 							<div class="filter_drop">
 							<select class="form-control" id="job_location">
 								<?php
@@ -43,7 +43,7 @@ $category_list = get_terms( array(
 							</select>
 							</div>
 						</div>
-						<div class="col-12 col-md-4">
+						<!-- <div class="col-12 col-md">
 							<div class="filter_drop">
 							<select class="form-control" id="job_department">
 								<?php
@@ -54,8 +54,8 @@ $category_list = get_terms( array(
 								?>
 							</select>
 							</div>
-						</div>
-						<div class="col-12 col-md-4">
+						</div> -->
+						<div class="col-12 col-md">
 							<div class="filter_drop">
 							<select class="form-control" id="job_category">
 								<?php
@@ -67,6 +67,13 @@ $category_list = get_terms( array(
 							</select>
 							</div>
 						</div>
+						<div class="col-12 col-md-auto px-0 text-center">
+							<div class="filter_drop" style="background:transparent">
+								<a href="#jobList" class="btn btn-primary scrollspy">GO</a>
+							</div>
+						</div>
+
+
 						<?php /*
 						<div class="col-12 mt-4">
 								<ul class="scrollspy_location">
@@ -92,11 +99,12 @@ $category_list = get_terms( array(
 			</div>
 		</div>
 	</div>
+	<a class="nextFold scrollspy" href="#nextFold"></a>
 </div>
 <div class="animation_wrap">
 	<div class="container" data-aos="fade-up" data-aos-delay="50" id="open_job_opportunities">
-		<div class="row justify-content-center">
-			<h2 class="col-12 text-center py-4">Browse Open Job Positions</h2>
+		<div class="row justify-content-center" id="nextFold">
+			<h2 class="col-12 text-center py-4 section-heading" id="jobList">Browse Open Job Positions</h2>
 		</div>
 		<div class="row justify-content-center pb-5" id="job_opportunities_list">
 			<?php
@@ -105,14 +113,21 @@ $category_list = get_terms( array(
 			
 			if ($jobOpening->have_posts()) :  while ( $jobOpening->have_posts() ) : $jobOpening->the_post();
 			?>
-			<div class="col-12 col-md-3 mb-4 jobList_col">
+			<div class="col-12 col-md-6 col-xl-4 mb-4 jobList_col">
 				<div class="jobList_wrap">
 					<h4><?php the_title();?></h4>
 					<ul>
 							<?php
+								$category_list = get_the_terms( $post->ID, 'job-categories' );
+								if(!empty($category_list)){
+									echo '<li><strong>Role: </strong>';
+										array_list_item($category_list);
+									echo '</li>';
+								}
+															
 								$location_list = get_the_terms( $post->ID, 'locations' );
 								if(!empty($location_list)){
-									echo '<li><strong>location: </strong>';
+									echo '<li><strong>Location: </strong>';
 										array_list_item($location_list);
 									echo '</li>';
 								}
@@ -121,13 +136,6 @@ $category_list = get_terms( array(
 								if(!empty($department_list)){
 									echo '<li><strong>Department: </strong>';
 										array_list_item($department_list);
-									echo '</li>';
-								}
-
-								$category_list = get_the_terms( $post->ID, 'job-categories' );
-								if(!empty($category_list)){
-									echo '<li><strong>Role: </strong>';
-										array_list_item($category_list);
 									echo '</li>';
 								}
 							?>
@@ -143,7 +151,7 @@ $category_list = get_terms( array(
 		</div>
 				
 	</div>
-	<?php include('polygonizr-animation-left.php'); ?>
+	<?php include('polygonizr-animation.php'); ?>
 </div>
 
 <div class="video_modal">
@@ -160,7 +168,7 @@ $category_list = get_terms( array(
     $( '.filter_drop select' ).on('change', function() {
 
         var job_location = $("#job_location option:selected").val();
-		var job_department = $("#job_department option:selected").val();
+		// var job_department = $("#job_department option:selected").val();
 		var job_category = $("#job_category option:selected").val();
 
 		$("#job_opportunities_list").html('<div class="loader"><img src="<?php echo get_theme_file_uri( '/assets/images/loader.svg')?>"></div>');
@@ -171,7 +179,7 @@ $category_list = get_terms( array(
 				data: {
 					'action':'get_job_opportunities',
 					'location' : job_location,
-					'department' : job_department,
+					// 'department' : job_department,
 					'category' : job_category
 				},
 				success:function(data) {

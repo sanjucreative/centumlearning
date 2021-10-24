@@ -12,18 +12,16 @@ $check_for_page_url = get_field('check_for_page_url');
 if($template_banner_image ==''){
 	$template_banner_image = get_theme_file_uri('/assets/images/solutions_banner_bg.jpg');
 }
-if($page_video_cover_image ==''){
-	$page_video_cover_image = get_theme_file_uri('/assets/images/solution_right.jpg');
-}
+$page_id = get_the_ID();
 ?>
 <div class="TemplateBanner temp_CTS" style="background-image: url('<?php echo $template_banner_image; ?>')">
 	<div class="container banner_content">
 		<div class="row">
-			<div class="col-12 col-lg-7 pr-3 pr-lg-5" data-aos="fade-up" data-aos-delay="50">
-				<h1><?php the_title();?></h1>
+			<div class="col-12 col-lg-6 pr-3 pr-lg-5" data-aos="fade-up" data-aos-delay="50">
 				<?php echo $template_banner_content ?>
 			</div>
-			<div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="50">
+			<div class="col-12 col-lg-6" data-aos="fade-up" data-aos-delay="50">
+			<?php if($page_video_cover_image){ ?>
 				<div class="video_cont">
 					<figure>
 						<?php if($page_video_url !='' && $check_for_page_url[0] != 'Yes'){ 
@@ -36,29 +34,37 @@ if($page_video_cover_image ==''){
 						<img src="<?php echo $page_video_cover_image; ?>">
 					</figure>
 				</div>
+				<?php } else{
+					echo solutionGridLayout($page_id);
+				}
+			?>
 			</div>
 		</div>
 	</div>
+	<a class="nextFold scrollspy" href="#nextFold"></a>
 </div>
 <div class="animation_wrap">
-<div class="container">
 	<?php
 		if( have_rows('content_row') ): 
-		echo '<div class="row justify-content-center pt-5" data-aos="fade-up" data-aos-delay="50">';
-		foreach ( get_field("content_row") as $item  ) {
+		foreach ( get_field("content_row")  as $i => $item  ) {
+			echo '<div class="section_content2" data-aos="fade-up" data-aos-delay="50" id="solution_'. $i .'"><div class="container">';
+			echo '<div id="nextFold" class="row justify-content-center" data-aos="fade-up" data-aos-delay="50">';
 			if($item['heading'] !=''){
-				echo '<h2 class="col-12 text-center my-3">'. $item['heading'] .'</h2>';
+				echo '<h2 class="col-12 text-center my-3 section-heading" id="section_heading_'. $i .'">'. $item['heading'] .'</h2>';
 			}
 			echo '<div class="col-12 mb-5">'. wpautop($item['content']) .'</div>';
+			echo '</div></div>';
+			echo '</div>';
 			}
-		echo '</div>';
 		endif;
 	?>
-
-	<?php include('client-speak.php'); ?>
-	<?php include('case-studies.php'); ?>
-
-	<?php include('polygonizr-animation-left.php'); ?>
+	<div class="section_content2" data-aos="fade-up" data-aos-delay="50">
+		<div class="container"><?php include('client-speak.php'); ?></div>
+	</div>
+	<div class="section_content2" data-aos="fade-up" data-aos-delay="50">
+		<div class="container"><?php include('case-studies.php'); ?></div>	
+	</div>
+	<?php include('polygonizr-animation.php'); ?>
 </div>
 </div>
 
@@ -83,7 +89,7 @@ if($page_video_cover_image ==''){
 
 			// For Inforgraphic Arrow 
 			if($selected_infographic == 'Arrow'){
-				$infographic .= '<div class="col-12"><ul class="infographic_arrow">';
+				$infographic .= '<div class="col-12 text-center"><ul class="infographic_arrow">';
 				if( have_rows('Infographics_item_content') ): 
 					foreach ( get_field("Infographics_item_content") as $i => $item  ) {
 						if($item["Infographics_excerpt"] ==''){
@@ -98,7 +104,7 @@ if($page_video_cover_image ==''){
 
 			// For Inforgraphic Line 
 			if($selected_infographic == 'Line'){
-				$infographic .= '<div class="col-12"><ul class="infographic_line">';
+				$infographic .= '<div class="col-12 text-center"><ul class="infographic_line">';
 				if( have_rows('Infographics_item_content') ): 
 					foreach ( get_field("Infographics_item_content") as $i => $item  ) {
 						$infographic .= '<li><div>' . str_replace("\n", "",  wpautop($item["Infographics_excerpt"])) .'</div></li>';
@@ -109,7 +115,7 @@ if($page_video_cover_image ==''){
 			
 			// For Inforgraphic Circle 
 			if($selected_infographic == 'Circle'){
-				$infographic .= '<div class="col-12"><ul class="infographic_circle">';
+				$infographic .= '<div class="col-12 text-center"><ul class="infographic_circle">';
 					if( have_rows('Infographics_item_content') ): 
 					foreach ( get_field("Infographics_item_content") as $i => $item  ) {
 						$infographic .= '<li><div class="circle_excerpt"><div>' . str_replace("\n", "",  wpautop($item["Infographics_excerpt"])) .'</div></div></li>';
@@ -120,12 +126,12 @@ if($page_video_cover_image ==''){
 
 			// For Inforgraphic Circle Wave 
 			if($selected_infographic == 'Circle Wave'){
-				$infographic .= '<div class="col-12"><ul class="infographic_circle_wave">';
+				$infographic .= '<div class="col-12 text-center"><ul class="infographic_circle_wave">';
 					if( have_rows('Infographics_circle_wave') ): 
 					foreach ( get_field("Infographics_circle_wave") as $i => $item  ) {
 						$infographic .= '<li><div class="follow_circle">';
-						$infographic .=  '<figure><img class="img-fluid" src="'. $item['circle_wave_icon'] . '" alt="'. $item['circle_wave_label'].'" /></figure>';
-						$infographic .=  '<span>' . $item['circle_wave_label'] .'</span>';
+						$infographic .=  '<div class="follow_heading"><figure><img class="img-fluid" src="'. $item['circle_wave_icon'] . '" alt="'. $item['circle_wave_label'].'" /></figure>';
+						$infographic .=  '<span>' . $item['circle_wave_label'] .'</span></div>';
 						$infographic .=  '<div class="follow_excerpt">' . str_replace("\n", "",  wpautop($item["circle_wave_excerpt"])) .'</div>';
 						$infographic .=  '</div></li>';
 					}

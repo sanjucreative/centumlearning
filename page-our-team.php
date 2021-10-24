@@ -8,7 +8,7 @@ $banner_content = get_field('banner_content');
 
 function team_member($item){
 $memeber ='<div class="col-12 col-md-3 my-4">';
-$memeber .='<div class="flip-box ourTeam-flipBox"><div class="flip-box-inner">';
+$memeber .='<div class="flip-box ourTeam-flipBox resets"><div class="flip-box-inner">';
 $memeber .='<div class="flip-box-front">';
 	$memeber .='<figure><img src="'. $item ['our_team_profile_picture'].'" /></figure>';
 	$memeber .='<h4>'. $item ['our_team_name'].'</h4><p>' . $item ['our_team_designation']. '</p>';
